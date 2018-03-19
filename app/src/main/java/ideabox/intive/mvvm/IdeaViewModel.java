@@ -12,13 +12,9 @@ import java.util.Observable;
 public class IdeaViewModel extends Observable {
 
     public IdeaModel Idea;
-    public boolean id;
-    ObservableBoolean ideaItem;
 
     public IdeaViewModel(boolean idea) {
         this.Idea = new IdeaModel(idea);
-        this.ideaItem = new ObservableBoolean(idea);
-        this.id=idea;
-
     }
+
 }

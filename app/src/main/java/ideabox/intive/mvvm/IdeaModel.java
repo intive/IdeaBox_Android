@@ -15,4 +15,11 @@ public class IdeaModel {
         this.IdeaItem = ideaItem;
     }
 
+    public Boolean getIdeaItem() {
+        return IdeaItem;
+    }
+
+    public void setIdeaItem(Boolean ideaItem) {
+        IdeaItem = ideaItem;
+    }
 }
