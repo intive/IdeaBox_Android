@@ -13,13 +13,12 @@ public class IdeaViewModel extends Observable {
 
     public IdeaModel Idea;
     public boolean id;
-    ObservableBoolean ideaItem = new ObservableBoolean(Idea != null ? Idea.IdeaItem : null);
+    ObservableBoolean ideaItem;
 
     public IdeaViewModel(boolean idea) {
         this.Idea = new IdeaModel(idea);
-        ideaItem.set(this.Idea.IdeaItem);
-        id=false;
-      //  boolean b = ideaItem.get();
+        this.ideaItem = new ObservableBoolean(idea);
+        this.id=idea;
 
     }
 }
