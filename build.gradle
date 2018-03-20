@@ -8,9 +8,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        //--> IBPPFIP-17 add dependencies to project
         classpath 'com.google.gms:google-services:3.2.0'
-        //--< IBPPFIP-17 add dependencies to project
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -21,11 +19,9 @@ allprojects {
     repositories {
         google()
         jcenter()
-        //--> IBPPFIP-17 add dependencies to project
         maven {
             url "https://maven.google.com" // Google's Maven repository
         }
-        //--< IBPPFIP-17 add dependencies to project
     }
 }
 
