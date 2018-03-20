@@ -1,8 +1,8 @@
 package ideabox.intive.mvvm;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -16,9 +16,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding activityBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        IdeaViewModel ideaViewModel = new IdeaViewModel(false);
+        IdeaViewModel ideaViewModel = new IdeaViewModel(new IdeaModel(false));
         activityBinding.setIdeaViewModel(ideaViewModel);
-        ideaViewModel.addObserver(this);
+        activityBinding.executePendingBindings();
     }
 
 
