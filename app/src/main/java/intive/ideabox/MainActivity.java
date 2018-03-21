@@ -21,9 +21,5 @@ public class MainActivity extends AppCompatActivity implements Observer {
         activityBinding.executePendingBindings();
     }
 
-
-    @Override
-    public void update(Observable observable, Object o) {
-
-    }
+    
 }
