@@ -1,26 +1,19 @@
 package intive.ideabox.models;
 
 import android.app.Fragment;
-import ideabox.intive.viewmodels.IdeaViewModel;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
-import java.util.Observable;
-import java.util.Observer;
+import intive.ideabox.R;
 
-public class View extends Fragment implements Observer {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        IdeaViewModel vm = ViewModelProviders.of(this, new IdeaViewModel.Factory(getApplication())).get(IdeaViewModel.class);
-
-    }
-
+public class View extends Fragment  {
 
     @Override
-    public void update(Observable observable, Object o) {
-
+    public android.view.View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                          Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_view, container, false);
     }
+
 }
