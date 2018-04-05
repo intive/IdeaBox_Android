@@ -1,4 +1,4 @@
-package intive.ideabox.models;
+package intive.ideabox;
 
 import android.app.Fragment;
 import android.os.Bundle;
