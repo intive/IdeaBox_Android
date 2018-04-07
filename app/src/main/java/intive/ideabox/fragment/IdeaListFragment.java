@@ -6,6 +6,8 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +19,11 @@ import intive.ideabox.viewmodel.IdeaListViewModel;
 
 public class IdeaListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
 
-    private IdeaListViewModel mIdeaListViewModel;
+    private RecyclerView mRecyclerView;
     private IdeaListAdapter mIdeaListAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    private IdeaListViewModel mIdeaListViewModel;
 
     public IdeaListFragment() {
         // Required empty public constructor
@@ -36,12 +41,21 @@ public class IdeaListFragment extends Fragment implements LoaderManager.LoaderCa
 
         FragmentIdeaListBinding fragmentIdeaListBinding = FragmentIdeaListBinding.bind(view);
         fragmentIdeaListBinding.setViewModel(mIdeaListViewModel);
+
+        mRecyclerView = view.findViewById(R.id.idea_recycler);
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mIdeaListAdapter = new IdeaListAdapter();
+        mRecyclerView.setAdapter(mIdeaListAdapter);
+
         return view;
     }
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        //Update this after getting data interface
+        //Update this later
         return new CursorLoader(getContext(), null, null, null, null, null);
     }
 

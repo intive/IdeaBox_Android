@@ -6,7 +6,7 @@ public class IdeaListViewModel{
 
     }
 
-    public void onFabClickListener(){
-        //To do: implement fragment replacement
+    public void onFabClick() {
+
     }
 }
