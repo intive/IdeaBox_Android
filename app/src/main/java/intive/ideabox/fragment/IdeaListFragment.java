@@ -23,8 +23,6 @@ public class IdeaListFragment extends Fragment implements LoaderManager.LoaderCa
     private IdeaListAdapter mIdeaListAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private IdeaListViewModel mIdeaListViewModel;
-
     public IdeaListFragment() {
         // Required empty public constructor
     }
@@ -40,7 +38,8 @@ public class IdeaListFragment extends Fragment implements LoaderManager.LoaderCa
         View view = inflater.inflate(R.layout.fragment_idea_list, container, false);
 
         FragmentIdeaListBinding fragmentIdeaListBinding = FragmentIdeaListBinding.bind(view);
-        fragmentIdeaListBinding.setViewModel(mIdeaListViewModel);
+        IdeaListViewModel ideaListViewModel = new IdeaListViewModel();
+        fragmentIdeaListBinding.setViewModel(ideaListViewModel);
 
         mRecyclerView = view.findViewById(R.id.idea_recycler);
 
@@ -50,7 +49,7 @@ public class IdeaListFragment extends Fragment implements LoaderManager.LoaderCa
         mIdeaListAdapter = new IdeaListAdapter();
         mRecyclerView.setAdapter(mIdeaListAdapter);
 
-        return view;
+        return fragmentIdeaListBinding.getRoot();
     }
 
     @Override

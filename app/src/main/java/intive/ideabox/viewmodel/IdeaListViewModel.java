@@ -1,6 +1,8 @@
 package intive.ideabox.viewmodel;
 
-public class IdeaListViewModel{
+import android.arch.lifecycle.ViewModel;
+
+public class IdeaListViewModel extends ViewModel{
 
     public IdeaListViewModel(){
 
@@ -9,4 +11,6 @@ public class IdeaListViewModel{
     public void onFabClick() {
 
     }
+
+
 }
