@@ -13,6 +13,12 @@ public class IdeaData {
         this.ideaTime = new Date().getTime();
     }
 
+    public IdeaData(String ideaText, String ideaUser, long ideaTime) {
+        this.ideaText = ideaText;
+        this.ideaUser = ideaUser;
+        this.ideaTime = ideaTime;
+    }
+
     public String getIdeaText() {
         return ideaText;
     }
