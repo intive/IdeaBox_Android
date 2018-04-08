@@ -1,28 +1,22 @@
 package intive.ideabox.adapter;
 
-import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import intive.ideabox.R;
 import intive.ideabox.databinding.RowIdeaListBinding;
 import intive.ideabox.model.IdeaData;
+import io.reactivex.annotations.NonNull;
 
 public class IdeaListAdapter extends RecyclerView.Adapter<ViewHolder>  {
-    private List<IdeaData> mData = new ArrayList<>();
+    private List<IdeaData> mData;
 
-    private Cursor mCursor;
-
-    public void setCursor(Cursor cursor){
-        if(cursor != null){
-            mCursor = cursor;
-        }
-        notifyDataSetChanged();
+    public IdeaListAdapter(@NonNull List<IdeaData> data){
+        mData = data;
     }
 
     @Override

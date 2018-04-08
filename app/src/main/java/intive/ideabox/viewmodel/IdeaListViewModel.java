@@ -2,15 +2,22 @@ package intive.ideabox.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
-public class IdeaListViewModel extends ViewModel{
+import java.util.List;
 
-    public IdeaListViewModel(){
+import intive.ideabox.model.IdeaData;
 
+public class IdeaListViewModel extends ViewModel {
+
+    public IdeaListViewModel() {
+
+    }
+
+    public List<IdeaData> LoadIdeaData() {
+        //Implement getting data from data provider
+        return null;
     }
 
     public void onFabClick() {
-
+        //Implement changing fragments
     }
-
-
 }
