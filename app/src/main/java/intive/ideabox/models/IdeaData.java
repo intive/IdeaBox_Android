@@ -3,42 +3,42 @@ package intive.ideabox.models;
 import java.util.Date;
 
 public class IdeaData {
-    private String ideaText;
-    private String ideaUser;
-    private long ideaTime;
+    public String ideatext;
+    public String ideauser;
+    public long ideatime;
 
     public IdeaData(String ideaText, String ideaUser) {
-        this.ideaText = ideaText;
-        this.ideaUser = ideaUser;
-        this.ideaTime = new Date().getTime();
+        this.ideatext = ideaText;
+        this.ideauser = ideaUser;
+        this.ideatime = new Date().getTime();
     }
     public IdeaData(String ideaText, String ideaUser, long ideaTime ) {
-        this.ideaText = ideaText;
-        this.ideaUser = ideaUser;
-        this.ideaTime = ideaTime;
+        this.ideatext = ideaText;
+        this.ideauser = ideaUser;
+        this.ideatime = ideaTime;
+    }
+    public IdeaData() {}
+    public String getIdeatext() {
+        return ideatext;
     }
 
-    public String getIdeaText() {
-        return ideaText;
+    public void setIdeatext(String ideatext) {
+        this.ideatext = ideatext;
     }
 
-    public void setIdeaText(String ideaText) {
-        this.ideaText = ideaText;
+    public String getIdeauser() {
+        return ideauser;
     }
 
-    public String getIdeaUser() {
-        return ideaUser;
+    public void setIdeauser(String ideauser) {
+        this.ideauser = ideauser;
     }
 
-    public void setIdeaUser(String ideaUser) {
-        this.ideaUser = ideaUser;
+    public long getIdeatime() {
+        return ideatime;
     }
 
-    public long getIdeaTime() {
-        return ideaTime;
-    }
-
-    public void setIdeaTime(long ideaTime) {
-        this.ideaTime = ideaTime;
+    public void setIdeatime(long ideatime) {
+        this.ideatime = ideatime;
     }
 }

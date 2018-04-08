@@ -30,37 +30,34 @@ public class DataProvider implements Data {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         IdeaData ideaData = new IdeaData(idea, "user");
         DatabaseReference myRef = database.getReference();
-        myRef.child("ideas").child(ideaData.getIdeaUser()+ideaData.getIdeaTime()).setValue(ideaData);
+        myRef.child("ideas").child(ideaData.ideauser+ideaData.ideatime).setValue(ideaData);
         return true;
 
     }
 
     @Override
     public List<IdeaData> loadIdea() {
+        final List<IdeaData> ideaData = new ArrayList<>();
 
-        final List<IdeaData> ideaDataList = new ArrayList<>();
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference();
-        ref.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-                    IdeaData post = dataSnapshot.getValue(IdeaData.class);
-                    ideaDataList.add(new IdeaData(post.getIdeaText(),post.getIdeaUser(),post.getIdeaTime()));
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference();
+
+        myRef.child("ideas").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    IdeaData data = snapshot.getValue(IdeaData.class);
+                    ideaData.add(data);
                 }
+                //To do: implement the way to notify adapter about changes
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                }
+        });
 
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {}
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {}
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {}
-            });
-        return ideaDataList;
+        return ideaData;
     }
 }
+
 
