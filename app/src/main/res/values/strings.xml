@@ -2,4 +2,10 @@
     <string name="app_name">IdeaBox</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+    <string name="added_idea">Idea has been added!</string>
+    <string name="addIdea_back_button_text">BACK</string>
+    <string name="idea_greetings_text">Add Your idea here:</string>
+    <string name="to_short_idea">The text is to short, please provide a longer idea.</string>
+    <string name="to_long_idea">The text is to short, please provide a longer idea.</string>
+    <string name="idea_proccessing">Idea is being sent... please wait for verification...</string>
 </resources>
