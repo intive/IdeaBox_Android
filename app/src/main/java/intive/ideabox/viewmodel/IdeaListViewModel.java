@@ -1,16 +1,20 @@
 package intive.ideabox.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
+import android.support.v4.app.FragmentActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import intive.ideabox.R;
 import intive.ideabox.model.IdeaData;
 
 public class IdeaListViewModel extends ViewModel {
 
-    public IdeaListViewModel() {
+    private FragmentActivity fragmentActivity;
 
+    public IdeaListViewModel(FragmentActivity fragmentActivity) {
+        this.fragmentActivity = fragmentActivity;
     }
 
     public List<IdeaData> LoadIdeaData() {
@@ -20,10 +24,7 @@ public class IdeaListViewModel extends ViewModel {
     }
 
     public void onFabClick() {
-
-    }
-
-    public void showSnackBar(){
-        //Implement showing snackbar
+        //Todo: change to add idea fragment after integration
+        //fragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new BlankFragment()).commit();
     }
 }

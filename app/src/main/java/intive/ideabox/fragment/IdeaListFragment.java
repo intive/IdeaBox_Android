@@ -26,7 +26,7 @@ public class IdeaListFragment extends Fragment{
                              Bundle savedInstanceState) {
 
         FragmentIdeaListBinding fragmentIdeaListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_idea_list, container, false);
-        IdeaListViewModel ideaListViewModel = new IdeaListViewModel();
+        IdeaListViewModel ideaListViewModel = new IdeaListViewModel(getActivity());
         fragmentIdeaListBinding.setViewModel(ideaListViewModel);
 
         RecyclerView mRecyclerView = fragmentIdeaListBinding.ideaRecycler;
@@ -42,4 +42,6 @@ public class IdeaListFragment extends Fragment{
 
         return fragmentIdeaListBinding.getRoot();
     }
+
+
 }
