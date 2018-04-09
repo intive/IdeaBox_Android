@@ -1,13 +1,9 @@
 package intive.ideabox.viewmodel;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.widget.Toast;
 
 import intive.ideabox.R;
-import intive.ideabox.activity.MainActivity;
-import intive.ideabox.fragment.IdeaListFragment;
 
 
 public class AddIdeaViewModel {
@@ -32,11 +28,13 @@ public class AddIdeaViewModel {
 
     }
     public void goToMainScreen(Context context){
-        try {
-            FragmentManager fragmentManager = ((MainActivity) context).getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.fragmentContainer,new IdeaListFragment()).commit();
-        } catch (ClassCastException e) {
-            Log.e(TAG, "Can't get fragment manager");
-        }
+        return;
+        // will be added in making whole project into once
+        //try {
+          //  FragmentManager fragmentManager = ((MainActivity) context).getSupportFragmentManager();
+            //fragmentManager.beginTransaction().replace(R.id.fragmentContainer,new IdeaListFragment()).commit();
+       // } catch (ClassCastException e) {
+         //   Log.e(TAG, "Can't get fragment manager");
+        //}
     }
 }
