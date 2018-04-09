@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        IdeaListFragment.setShowSnackBarFlag(true);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new IdeaListFragment()).commit();
     }
 }

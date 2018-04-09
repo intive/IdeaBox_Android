@@ -2,6 +2,7 @@ package intive.ideabox.fragment;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,12 @@ import intive.ideabox.databinding.FragmentIdeaListBinding;
 import intive.ideabox.viewmodel.IdeaListViewModel;
 
 public class IdeaListFragment extends Fragment{
+
+    private static boolean mShowSnackBarFlag = false;
+
+    public static void setShowSnackBarFlag(boolean flag){
+        mShowSnackBarFlag = flag;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,8 +47,14 @@ public class IdeaListFragment extends Fragment{
 
         mIdeaListAdapter.setData(ideaListViewModel.LoadIdeaData());
 
+        if (mShowSnackBarFlag)
+            showSnackBar(fragmentIdeaListBinding.getRoot());
+
         return fragmentIdeaListBinding.getRoot();
     }
 
-
+    private void showSnackBar(View view){
+        Snackbar snackbar = Snackbar.make(view, R.string.added_idea, Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
 }
