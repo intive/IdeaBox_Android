@@ -1,21 +1,22 @@
 package intive.ideabox.adapter;
 
+import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 
-import intive.ideabox.databinding.RowIdeaListBinding;
-import intive.ideabox.model.IdeaData;
+import com.android.databinding.library.baseAdapters.BR;
+
 import io.reactivex.annotations.NonNull;
 
 public class ViewHolder extends RecyclerView.ViewHolder {
-    private RowIdeaListBinding mBinding;
+    private final ViewDataBinding binding;
 
-    public ViewHolder(RowIdeaListBinding binding){
+    public ViewHolder(ViewDataBinding binding){
         super(binding.getRoot());
-        mBinding = binding;
+        this.binding = binding;
     }
 
-    public void bind(@NonNull IdeaData object){
-        mBinding.setObject(object);
-        mBinding.executePendingBindings();
+    public void bind(@NonNull Object object){
+        binding.setVariable(BR.object, object);
+        binding.executePendingBindings();
     }
 }

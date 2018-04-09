@@ -1,7 +1,7 @@
 package intive.ideabox.fragment;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,14 +16,6 @@ import intive.ideabox.viewmodel.IdeaListViewModel;
 
 public class IdeaListFragment extends Fragment{
 
-    private RecyclerView mRecyclerView;
-    private IdeaListAdapter mIdeaListAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
-    public IdeaListFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,20 +24,21 @@ public class IdeaListFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_idea_list, container, false);
 
-        FragmentIdeaListBinding fragmentIdeaListBinding = FragmentIdeaListBinding.bind(view);
+        FragmentIdeaListBinding fragmentIdeaListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_idea_list, container, false);
         IdeaListViewModel ideaListViewModel = new IdeaListViewModel();
         fragmentIdeaListBinding.setViewModel(ideaListViewModel);
 
-        mRecyclerView = view.findViewById(R.id.idea_recycler);
+        RecyclerView mRecyclerView = fragmentIdeaListBinding.ideaRecycler;
 
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-        mIdeaListAdapter = new IdeaListAdapter(ideaListViewModel.LoadIdeaData());
+        IdeaListAdapter mIdeaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);
         mRecyclerView.setAdapter(mIdeaListAdapter);
+
+        mIdeaListAdapter.setData(ideaListViewModel.LoadIdeaData());
 
         return fragmentIdeaListBinding.getRoot();
     }

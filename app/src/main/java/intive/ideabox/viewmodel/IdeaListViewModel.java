@@ -2,9 +2,9 @@ package intive.ideabox.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import intive.ideabox.model.DataProvider;
 import intive.ideabox.model.IdeaData;
 
 public class IdeaListViewModel extends ViewModel {
@@ -14,13 +14,13 @@ public class IdeaListViewModel extends ViewModel {
     }
 
     public List<IdeaData> LoadIdeaData() {
-        DataProvider provider = DataProvider.getInstance();
-        List<IdeaData> list = provider.loadIdea();
+        List<IdeaData> list = new ArrayList<>();
+        list.add(new IdeaData("testk", "dsa"));
         return list;
     }
 
     public void onFabClick() {
-        //Implement changing fragments
+
     }
 
     public void showSnackBar(){
