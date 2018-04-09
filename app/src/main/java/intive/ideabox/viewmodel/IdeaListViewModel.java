@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import intive.ideabox.R;
+import intive.ideabox.fragment.AddIdeaFragment;
 import intive.ideabox.model.IdeaData;
 
 public class IdeaListViewModel extends ViewModel {
@@ -26,6 +27,6 @@ public class IdeaListViewModel extends ViewModel {
 
     public void onFabClick() {
         //Todo: change to addIdeaFragment after integration
-        //fragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new BlankFragment()).commit();
+        fragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new AddIdeaFragment()).commit();
     }
 }

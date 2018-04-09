@@ -34,6 +34,7 @@ ext {
     gsonVersion = '2.8.2'
     uiautomatorVersion = '2.1.3'
     viewModelVersion = '1.1.1'
+    mockitoCoreVersion = '2.7.22'
 }
 
 dependencies {
@@ -67,6 +68,8 @@ dependencies {
     compile "com.facebook.stetho:stetho-urlconnection:$stethoVersion"
     compile "com.facebook.stetho:stetho-js-rhino:$stethoVersion"
     compile "com.google.code.gson:gson:$gsonVersion"
+    testCompile "org.mockito:mockito-core:$mockitoCoreVersion"
+    androidTestCompile "org.mockito:mockito-android:$mockitoCoreVersion"
 
 }
 apply plugin: 'com.google.gms.google-services'
