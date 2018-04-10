@@ -8,6 +8,7 @@ import java.util.List;
 
 import intive.ideabox.R;
 import intive.ideabox.fragment.AddIdeaFragment;
+import intive.ideabox.model.FirebaseProvider;
 import intive.ideabox.model.IdeaData;
 
 public class IdeaListViewModel extends ViewModel {
@@ -19,11 +20,8 @@ public class IdeaListViewModel extends ViewModel {
     }
 
     public List<IdeaData> LoadIdeaData() {
-        //Todo: delete this temporary list and connect to data provider after integration
-        List<IdeaData> list = new ArrayList<>();
-        list.add(new IdeaData("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", "dsa"));
-        list.add(new IdeaData("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam", "dsa"));
-        return list;
+        FirebaseProvider firebaseProvider = FirebaseProvider.getInstance();
+        return firebaseProvider.loadIdea();
     }
 
     public void onFabClick() {

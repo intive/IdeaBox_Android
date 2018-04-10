@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import intive.ideabox.R;
+import intive.ideabox.model.FirebaseProvider;
 
 /**
  * Created by Pc on 09.04.2018.
@@ -23,21 +24,8 @@ public class AddIdeaViewModel {
         }
         else{
             Toast.makeText(context, R.string.idea_proccessing, Toast.LENGTH_SHORT).show();
-            // Todo: add sending data to firebase mechanism;
-            //DataProvider dataProvider = DataProvider.getInstance();
-            //dataProvider.saveIdea(userIdea);
+            FirebaseProvider dataProvider = FirebaseProvider.getInstance();
+            dataProvider.saveIdea(userIdea);
         }
-
-
-    }
-    public void goToMainScreen(Context context){
-        return;
-        // will be added in making whole project into once
-        //try {
-        //  FragmentManager fragmentManager = ((MainActivity) context).getSupportFragmentManager();
-        //fragmentManager.beginTransaction().replace(R.id.fragmentContainer,new IdeaListFragment()).commit();
-        // } catch (ClassCastException e) {
-        //   Log.e(TAG, "Can't get fragment manager");
-        //}
     }
 }

@@ -1,4 +1,4 @@
-package intive.ideabox.models;
+package intive.ideabox.model;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,10 +14,11 @@ public class FirebaseProvider implements CloudProvider {
 
     private static FirebaseProvider instance = null;
 
-    protected FirebaseProvider(){}
+    protected FirebaseProvider() {
+    }
 
-    public static FirebaseProvider getInstance(){
-        if (instance == null){
+    public static FirebaseProvider getInstance() {
+        if (instance == null) {
             instance = new FirebaseProvider();
         }
         return instance;
@@ -28,7 +29,7 @@ public class FirebaseProvider implements CloudProvider {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         IdeaData ideaData = new IdeaData(idea, "user");
         DatabaseReference myRef = database.getReference();
-        myRef.child("ideas").child(ideaData.ideauser+ideaData.ideatime).setValue(ideaData);
+        myRef.child("ideas").child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).setValue(ideaData);
         return true;
 
     }
@@ -43,15 +44,15 @@ public class FirebaseProvider implements CloudProvider {
         myRef.child("ideas").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     IdeaData data = snapshot.getValue(IdeaData.class);
                     ideaData.add(data);
                 }
-                //To do: implement the way to notify adapter about changes
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                }
+            }
         });
 
         return ideaData;

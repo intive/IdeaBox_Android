@@ -7,16 +7,12 @@ public class IdeaData {
     private String ideaUser;
     private long ideaTime;
 
+    public IdeaData() {}
+
     public IdeaData(String ideaText, String ideaUser) {
         this.ideaText = ideaText;
         this.ideaUser = ideaUser;
         this.ideaTime = new Date().getTime();
-    }
-
-    public IdeaData(String ideaText, String ideaUser, long ideaTime) {
-        this.ideaText = ideaText;
-        this.ideaUser = ideaUser;
-        this.ideaTime = ideaTime;
     }
 
     public String getIdeaText() {
