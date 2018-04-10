@@ -8,6 +8,14 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
+      - run:
+         name: post checkout check
+         command: |
+                  echo $PWD
+                  ls -aslh
+      - run:
+          name: Fetch google-services.json file
+          command: echo $GOOGLE_SERVICES | base64 --decode > ~/$PWD/app/google-services.json
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
@@ -20,9 +28,6 @@ jobs:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Fetch google-services.json file
-          command: echo $GOOGLE_SERVICES | base64 --decode > /app/google-services.json
       - run:
           name: Run Tests
           command: ./gradlew lint test
