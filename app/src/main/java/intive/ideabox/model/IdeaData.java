@@ -2,10 +2,6 @@ package intive.ideabox.model;
 
 import java.util.Date;
 
-/**
- * Created by Pc on 09.04.2018.
- */
-
 public class IdeaData {
     private String ideaText;
     private String ideaUser;

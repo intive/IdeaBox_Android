@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">IdeaBox</string>
+  
+    <string name="added_idea">Idea has been added!</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
     <string name="added_idea">Idea has been added!</string>
