@@ -15,12 +15,14 @@ import intive.ideabox.adapter.IdeaListAdapter;
 import intive.ideabox.databinding.FragmentIdeaListBinding;
 import intive.ideabox.viewmodel.IdeaListViewModel;
 
-public class IdeaListFragment extends Fragment{
+public class IdeaListFragment extends Fragment {
 
-    private static boolean mShowSnackBarFlag = false;
-
-    public static void setShowSnackBarFlag(boolean flag){
-        mShowSnackBarFlag = flag;
+    public static IdeaListFragment newInstance(boolean showSnackBar) {
+        IdeaListFragment fragment = new IdeaListFragment();
+        Bundle args = new Bundle();
+        args.putBoolean("KEY_SHOULD_SHOW_SNACK", showSnackBar);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -32,6 +34,9 @@ public class IdeaListFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Bundle args = getArguments();
+        boolean showSnackBar = args.getBoolean("KEY_SHOULD_SHOW_SNACK", false);
+
         FragmentIdeaListBinding fragmentIdeaListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_idea_list, container, false);
         IdeaListViewModel ideaListViewModel = new IdeaListViewModel(getActivity());
         fragmentIdeaListBinding.setViewModel(ideaListViewModel);
@@ -41,19 +46,18 @@ public class IdeaListFragment extends Fragment{
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-
         IdeaListAdapter mIdeaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);
         mRecyclerView.setAdapter(mIdeaListAdapter);
 
         mIdeaListAdapter.setData(ideaListViewModel.LoadIdeaData());
 
-        if (mShowSnackBarFlag)
+        if (showSnackBar)
             showSnackBar(fragmentIdeaListBinding.getRoot());
 
         return fragmentIdeaListBinding.getRoot();
     }
 
-    private void showSnackBar(View view){
+    private void showSnackBar(View view) {
         Snackbar snackbar = Snackbar.make(view, R.string.added_idea, Snackbar.LENGTH_LONG);
         snackbar.show();
     }
