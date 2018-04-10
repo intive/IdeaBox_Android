@@ -12,6 +12,7 @@ jobs:
          name: post checkout check
          command: |
                   cd ~/$CIRCLE_PROJECT_REPONAME/
+                  echo ${HOME}
                   ls -aslh
       - run:
           name: Fetch google-services.json file
