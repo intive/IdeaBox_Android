@@ -7,6 +7,9 @@ jobs:
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
+      - run:
+          name: Fetch google-services.json file
+          command: echo $GOOGLE_SERVICES | base64 --decode > ~/$CIRCLE_PROJECT_REPONAME/app/google-services.json
       - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
