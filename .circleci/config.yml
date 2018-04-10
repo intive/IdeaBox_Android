@@ -11,7 +11,7 @@ jobs:
       - run:
          name: post checkout check
          command: |
-                  echo $PWD
+                  cd ~/$CIRCLE_PROJECT_REPONAME/app/
                   ls -aslh
       - run:
           name: Fetch google-services.json file
