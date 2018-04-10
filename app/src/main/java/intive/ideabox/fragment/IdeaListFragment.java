@@ -17,10 +17,12 @@ import intive.ideabox.viewmodel.IdeaListViewModel;
 
 public class IdeaListFragment extends Fragment {
 
+    private static final String mSnackBarKey = "KEY_SHOULD_SHOW_SNACK";
+
     public static IdeaListFragment newInstance(boolean showSnackBar) {
         IdeaListFragment fragment = new IdeaListFragment();
         Bundle args = new Bundle();
-        args.putBoolean("KEY_SHOULD_SHOW_SNACK", showSnackBar);
+        args.putBoolean(mSnackBarKey, showSnackBar);
         fragment.setArguments(args);
         return fragment;
     }
@@ -35,7 +37,7 @@ public class IdeaListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         Bundle args = getArguments();
-        boolean showSnackBar = args.getBoolean("KEY_SHOULD_SHOW_SNACK", false);
+        boolean showSnackBar = args.getBoolean(mSnackBarKey, false);
 
         FragmentIdeaListBinding fragmentIdeaListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_idea_list, container, false);
         IdeaListViewModel ideaListViewModel = new IdeaListViewModel(getActivity());
