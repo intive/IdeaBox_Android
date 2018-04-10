@@ -1,7 +1,5 @@
 package intive.ideabox.models;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,15 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DataProvider implements Data {
+public class FirebaseProvider implements CloudProvider {
 
-    private static DataProvider instance = null;
+    private static FirebaseProvider instance = null;
 
-    protected DataProvider(){}
+    protected FirebaseProvider(){}
 
-    public static DataProvider getInstance(){
+    public static FirebaseProvider getInstance(){
         if (instance == null){
-            instance = new DataProvider();
+            instance = new FirebaseProvider();
         }
         return instance;
     }

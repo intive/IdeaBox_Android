@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import intive.ideabox.models.DataProvider;
+import intive.ideabox.models.FirebaseProvider;
 import intive.ideabox.models.IdeaData;
 
 import static org.junit.Assert.*;
@@ -16,14 +16,14 @@ import static org.mockito.Mockito.when;
 
 public class ExampleUnitTest {
 
-    private static DataProvider mockedDataProvider;
+    private static FirebaseProvider mockedDataProvider;
     private static IdeaData ideaData1;
     private static IdeaData ideaData2;
 
 
     @BeforeClass
     public static void setUp(){
-        mockedDataProvider = mock(DataProvider.class);
+        mockedDataProvider = mock(FirebaseProvider.class);
 
         ideaData1 = new IdeaData("pierwsza idea", "pierwszy user");
         ideaData2 = new IdeaData("druga idea", "drugi user");
