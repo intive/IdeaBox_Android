@@ -1,4 +1,4 @@
-package intive.ideabox.models;
+package intive.ideabox.model;
 
 import java.util.List;
 
