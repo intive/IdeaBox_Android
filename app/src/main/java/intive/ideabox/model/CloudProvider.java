@@ -1,10 +1,12 @@
 package intive.ideabox.model;
 
-import java.util.List;
+import io.reactivex.Observable;
 
 public interface CloudProvider {
 
     Boolean saveIdea(String idea);
-    List<IdeaData> loadIdea();
 
+    void loadIdea(OnDataReadyListener callback);
+
+    Observable<IdeaData> getIdeas();
 }

@@ -1,5 +1,7 @@
 package intive.ideabox.model;
 
+import android.support.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -9,10 +11,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
+
 
 public class FirebaseProvider implements CloudProvider {
-
     private static FirebaseProvider instance = null;
+    private PublishSubject<IdeaData> publishSubject = PublishSubject.create();
 
     protected FirebaseProvider() {
     }
@@ -34,28 +39,54 @@ public class FirebaseProvider implements CloudProvider {
 
     }
 
-    @Override
-    public List<IdeaData> loadIdea() {
-        final List<IdeaData> ideaData = new ArrayList<>();
-
+    private DatabaseReference getDBRef() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference();
+        return database.getReference();
+    }
+
+    @Override
+    public void loadIdea(@NonNull final OnDataReadyListener callback) {
+        final DatabaseReference myRef = getDBRef();
+
+        myRef.child("ideas").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final List<IdeaData> ideaData = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    IdeaData data = snapshot.getValue(IdeaData.class);
+                    ideaData.add(data);
+                }
+
+                callback.onDataReady(ideaData);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                callback.onError(databaseError.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public Observable<IdeaData> getIdeas() {
+        final DatabaseReference myRef = getDBRef();
 
         myRef.child("ideas").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    IdeaData data = snapshot.getValue(IdeaData.class);
-                    ideaData.add(data);
+                    publishSubject.onNext(snapshot.getValue(IdeaData.class));
                 }
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                publishSubject.onError(new Throwable(databaseError.getMessage()));
             }
         });
 
-        return ideaData;
+        return publishSubject;
     }
 }
 

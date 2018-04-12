@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.support.v4.app.FragmentActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import intive.ideabox.R;
@@ -21,7 +22,7 @@ public class IdeaListViewModel extends ViewModel {
 
     public List<IdeaData> LoadIdeaData() {
         FirebaseProvider firebaseProvider = FirebaseProvider.getInstance();
-        return firebaseProvider.loadIdea();
+        return Collections.emptyList();
     }
 
     public void onFabClick() {

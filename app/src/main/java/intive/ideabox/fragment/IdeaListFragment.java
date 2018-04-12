@@ -10,14 +10,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import intive.ideabox.R;
 import intive.ideabox.adapter.IdeaListAdapter;
 import intive.ideabox.databinding.FragmentIdeaListBinding;
+import intive.ideabox.model.FirebaseProvider;
+import intive.ideabox.model.IdeaData;
+import intive.ideabox.model.OnDataReadyListener;
 import intive.ideabox.viewmodel.IdeaListViewModel;
+import io.reactivex.functions.BiConsumer;
+import io.reactivex.functions.Consumer;
 
 public class IdeaListFragment extends Fragment {
 
     private static final String mSnackBarKey = "KEY_SHOULD_SHOW_SNACK";
+    private IdeaListAdapter mIdeaListAdapter;
 
     public static IdeaListFragment newInstance(boolean showSnackBar) {
         IdeaListFragment fragment = new IdeaListFragment();
@@ -48,10 +56,9 @@ public class IdeaListFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        IdeaListAdapter mIdeaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);
+        mIdeaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);
         mRecyclerView.setAdapter(mIdeaListAdapter);
 
-        mIdeaListAdapter.setData(ideaListViewModel.LoadIdeaData());
 
         if (showSnackBar)
             showSnackBar(fragmentIdeaListBinding.getRoot());
@@ -62,5 +69,37 @@ public class IdeaListFragment extends Fragment {
     private void showSnackBar(View view) {
         Snackbar snackbar = Snackbar.make(view, R.string.added_idea, Snackbar.LENGTH_LONG);
         snackbar.show();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseProvider.getInstance().loadIdea(new OnDataReadyListener() {
+            @Override
+            public void onDataReady(List<IdeaData> ideaData) {
+                mIdeaListAdapter.setData(ideaData);
+            }
+
+            @Override
+            public void onError(String errorMsg) {
+                //TODO display error dialog
+            }
+        });
+
+//TODO or this
+//        FirebaseProvider.getInstance()
+//                .getIdeas()
+//                .toList()
+//                .subscribe(new Consumer<List<IdeaData>>() {
+//                    @Override
+//                    public void accept(List<IdeaData> ideaData) throws Exception {
+//                        mIdeaListAdapter.setData(ideaData);
+//                    }
+//                }, new Consumer<Throwable>() {
+//                    @Override
+//                    public void accept(Throwable throwable) throws Exception {
+//                        //TODO display error dialog
+//                    }
+//                });
     }
 }
