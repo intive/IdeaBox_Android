@@ -9,6 +9,9 @@ import intive.ideabox.model.FirebaseProvider;
 
 public class AddIdeaViewModel {
 
+    private static final int MIN_IDEA_TEXT_LENGTH = 3;
+    private static final int MAX_IDEA_TEXT_LENGTH = 256;
+
     private FragmentActivity mFragmentActivity;
 
     public AddIdeaViewModel(FragmentActivity fragmentActivity) {
@@ -16,9 +19,9 @@ public class AddIdeaViewModel {
     }
 
     public void saveIdea(String userIdea) {
-        if (userIdea.length() < 3) {
+        if (userIdea.length() < MIN_IDEA_TEXT_LENGTH) {
             Toast.makeText(mFragmentActivity.getApplicationContext(), R.string.to_short_idea, Toast.LENGTH_SHORT).show();
-        } else if (userIdea.length() > 256) {
+        } else if (userIdea.length() > MAX_IDEA_TEXT_LENGTH) {
             Toast.makeText(mFragmentActivity.getApplicationContext(), R.string.to_long_idea, Toast.LENGTH_SHORT).show();
         } else {
             FirebaseProvider dataProvider = FirebaseProvider.getInstance();
