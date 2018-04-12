@@ -15,9 +15,6 @@
             name="ideaViewModel"
             type="intive.ideabox.viewmodel.AddIdeaViewModel" />
 
-        <variable
-            name="mainContext"
-            type="android.support.v4.app.FragmentActivity" />
     </data>
 
     <RelativeLayout
@@ -60,7 +57,7 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom|center_vertical|end"
             android:layout_marginBottom="39dp"
-            android:onClick="@{()->ideaViewModel.saveIdea(userIdea.getIdeaText(),mainContext)}"
+            android:onClick="@{()->ideaViewModel.saveIdea(userIdea.getIdeaText())}"
             app:srcCompat="@android:drawable/ic_menu_add" />
 
     </RelativeLayout>
