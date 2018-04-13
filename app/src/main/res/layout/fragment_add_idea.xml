@@ -8,8 +8,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="userIdea"
-            type="intive.ideabox.model.IdeaData" />
+            name="idea"
+            type="String" />
 
         <variable
             name="ideaViewModel"
@@ -47,7 +47,8 @@
             android:gravity="end|center_vertical"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLength="2000"
-            android:text="@={userIdea.ideaText}" />
+            android:text="@={idea}"
+            />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
@@ -57,7 +58,7 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom|center_vertical|end"
             android:layout_marginBottom="39dp"
-            android:onClick="@{()->ideaViewModel.saveIdea(userIdea.getIdeaText())}"
+            android:onClick="@{()->ideaViewModel.saveIdea(idea)}"
             app:srcCompat="@android:drawable/ic_menu_add" />
 
     </RelativeLayout>
