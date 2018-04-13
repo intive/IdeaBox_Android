@@ -21,7 +21,7 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         FragmentAddIdeaBinding binding= DataBindingUtil.inflate(inflater, R.layout.fragment_add_idea, container, false);
-        IdeaData ideaData = new IdeaData("default idea text", "defUser");
+        IdeaData ideaData = new IdeaData("", "defUser");
         AddIdeaViewModel viewModel = new AddIdeaViewModel(getActivity());
         binding.setIdeaViewModel(viewModel);
         binding.setUserIdea(ideaData);
