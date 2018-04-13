@@ -9,4 +9,5 @@
     <string name="to_short_idea">The text is to short, please provide a longer idea.</string>
     <string name="to_long_idea">The text is to long, please provide a shorter idea.</string>
     <string name="idea_proccessing">Idea is being sent... please wait for verification...</string>
+    <string name="idea_default_text">default idea text</string>
 </resources>
