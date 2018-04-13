@@ -47,6 +47,7 @@
             android:gravity="end|center_vertical"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLength="2000"
+            android:hint="@string/idea_default_text"
             android:text="@={userIdea.ideaText}" />
 
         <android.support.design.widget.FloatingActionButton
