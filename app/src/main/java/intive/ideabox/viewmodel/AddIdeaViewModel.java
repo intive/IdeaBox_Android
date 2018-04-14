@@ -16,7 +16,6 @@ import intive.ideabox.model.FirebaseProvider;
 public class AddIdeaViewModel {
 
     private static final int MIN_IDEA_TEXT_LENGTH = 3;
-    private static final int MAX_IDEA_TEXT_LENGTH = 256;
 
     private FragmentActivity mFragmentActivity;
 
@@ -27,9 +26,7 @@ public class AddIdeaViewModel {
     public void saveIdea(String userIdea) {
         if (userIdea.length() < MIN_IDEA_TEXT_LENGTH) {
             Toast.makeText(mFragmentActivity.getApplicationContext(), R.string.to_short_idea, Toast.LENGTH_SHORT).show();
-        } else if (userIdea.length() > MAX_IDEA_TEXT_LENGTH) {
-            Toast.makeText(mFragmentActivity.getApplicationContext(), R.string.to_long_idea, Toast.LENGTH_SHORT).show();
-        } else {
+         } else {
             FirebaseProvider dataProvider = FirebaseProvider.getInstance();
             dataProvider.saveIdea(userIdea);
             mFragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, IdeaListFragment.newInstance(true)).commit();
@@ -54,7 +51,10 @@ public class AddIdeaViewModel {
 
     private void hideSoftKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) mFragmentActivity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(mFragmentActivity.getCurrentFocus().getWindowToken(), 0);
-    }
+        View focusedView = mFragmentActivity.getCurrentFocus();
 
+        if (focusedView != null) {
+            inputMethodManager.hideSoftInputFromWindow(mFragmentActivity.getCurrentFocus().getWindowToken(), 0);
+        }
+    }
 }
