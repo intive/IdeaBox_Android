@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             tools:context="intive.ideabox.activity.MainActivity">
             <ScrollView
-                android:id="@+id/scroll"
+                android:id="@+id/back"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
@@ -78,6 +78,14 @@
                 android:tint="@color/colorAccent"
                 app:backgroundTint="@color/colorPrimary"
                 app:srcCompat="@android:drawable/ic_menu_add" />
+            <Button
+                android:id="@+id/button_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/fab"
+                android:layout_alignParentStart="true"
+                android:onClick="sendMessage"
+                android:text="BACK" />
         </RelativeLayout>
 
 
