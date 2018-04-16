@@ -26,5 +26,4 @@ public class AddIdeaViewModel {
             mFragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, IdeaListFragment.newInstance(true)).commit();
         }
     }
-
 }
