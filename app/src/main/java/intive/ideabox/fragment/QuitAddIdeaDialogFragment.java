@@ -2,29 +2,24 @@ package intive.ideabox.fragment;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.DialogInterface;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 
 import intive.ideabox.R;
+import intive.ideabox.activity.MainActivity;
+import intive.ideabox.databinding.FragmentQuitAddIdeaBinding;
+import intive.ideabox.viewmodel.QuitAddIdeaViewModel;
+
 public class QuitAddIdeaDialogFragment  extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.fragment_quit_add_idea, null));
-        builder.setMessage("blabla")
-                .setPositiveButton("BLABLA1", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                    }
-                })
-                .setNegativeButton("BLABLA", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                    }
-                });
-        return builder.create();
+        FragmentQuitAddIdeaBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.fragment_quit_add_idea, null, false);
+        QuitAddIdeaViewModel quitAddIdeaViewModel = new QuitAddIdeaViewModel(((MainActivity)getActivity()));
+        binding.setDialogViewModel(quitAddIdeaViewModel);
+        return new AlertDialog.Builder(getActivity(), R.style.ThemeOverlay_AppCompat_Dialog)
+                .setView(binding.getRoot()).setMessage("Warning")
+                .create();
     }
 }

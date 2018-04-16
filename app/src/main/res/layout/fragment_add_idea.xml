@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/fab"
                 android:layout_alignParentStart="true"
-                android:onClick="sendMessage"
+                android:onClick="@{()->ideaViewModel.quitAddScreen()}"
                 android:text="BACK" />
         </RelativeLayout>
 

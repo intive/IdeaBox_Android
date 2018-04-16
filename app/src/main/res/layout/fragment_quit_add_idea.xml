@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="dialogViewModel"
+            type="intive.ideabox.viewmodel.QuitAddIdeaViewModel" />
+    </data>
+<LinearLayout
     android:layout_width="fill_parent"
     android:layout_height="80dp"
     android:background="@color/colorPrimary"
@@ -12,11 +19,39 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:text="Do You want to quit without saving?"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorAccent"
         android:textSize="15dp"
         android:textStyle="bold" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        >
 
+        <Button
+            android:id="@+id/btn_yes"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@android:color/white"
+            android:clickable="true"
+            android:text="Yes"
+            android:onClick="@{()->dialogViewModel.positiveHandling()}"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold" />
 
-
+        <Button
+            android:id="@+id/btn_no"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:background="@android:color/white"
+            android:clickable="true"
+            android:text="No"
+            android:onClick="@{()->dialogViewModel.negativeHandling()}"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold" />
+    </LinearLayout>
 </LinearLayout>
+</layout>
