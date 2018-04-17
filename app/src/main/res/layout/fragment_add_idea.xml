@@ -75,11 +75,9 @@
                 android:layout_marginBottom="16dp"
                 android:elevation="12dp"
                 android:onClick="@{()->ideaViewModel.saveIdea(idea)}"
-                android:src="@android:drawable/ic_input_add"
+                android:src="@drawable/ic_checkmark"
                 android:tint="@color/colorAccent"
                 app:backgroundTint="@color/colorPrimary"
-                app:srcCompat="@android:drawable/ic_menu_add" />
+                app:fabSize="normal" />
         </RelativeLayout>
-
-
 </layout>
