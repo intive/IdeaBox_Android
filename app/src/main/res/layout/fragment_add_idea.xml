@@ -45,9 +45,9 @@
             android:layout_marginTop="71dp"
             android:ems="10"
             android:gravity="end|center_vertical"
+            android:hint="@string/idea_default_text"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLength="2000"
-            android:hint="@string/idea_default_text"
             android:text="@={userIdea.ideaText}" />
 
         <android.support.design.widget.FloatingActionButton
@@ -56,10 +56,12 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/editText"
             android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom|center_vertical|end"
-            android:layout_marginBottom="39dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="20sp"
             android:onClick="@{()->ideaViewModel.saveIdea(userIdea.getIdeaText())}"
-            app:srcCompat="@android:drawable/ic_menu_add" />
+            android:src="@drawable/ic_checkmark"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="normal" />
 
     </RelativeLayout>
 </layout>
