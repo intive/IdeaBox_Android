@@ -8,8 +8,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="userIdea"
-            type="intive.ideabox.model.IdeaData" />
+            name="idea"
+            type="String" />
 
         <variable
             name="ideaViewModel"
@@ -17,11 +17,22 @@
 
     </data>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="intive.ideabox.activity.MainActivity">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            tools:context="intive.ideabox.activity.MainActivity">
+            <ScrollView
+                android:id="@+id/backgroundLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/patronage_background"/>
 
+            </ScrollView>
 
         <TextView
             android:id="@+id/textView"
@@ -30,38 +41,43 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:text="@string/idea_greetings_text"
-            android:textSize="18sp" />
+            android:textColor="#BCBCBC"
+            android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/editText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="71dp"
-            android:ems="10"
-            android:gravity="end|center_vertical"
-            android:hint="@string/idea_default_text"
-            android:inputType="textCapSentences|textMultiLine"
-            android:maxLength="2000"
-            android:text="@={userIdea.ideaText}" />
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:ems="10"
+                android:foregroundTint="@color/colorText"
+                android:backgroundTint="@color/colorText"
+                android:gravity="top|start"
+                android:inputType="textMultiLine|textCapCharacters"
+                android:lines="6"
+                android:maxLength="256"
+                android:scrollHorizontally="false"
+                android:text="@={idea}"
+                android:textColor="@color/colorText" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/editText"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="20sp"
-            android:onClick="@{()->ideaViewModel.saveIdea(userIdea.getIdeaText())}"
-            android:src="@drawable/ic_checkmark"
-            app:backgroundTint="@color/colorPrimary"
-            app:fabSize="normal" />
-
-    </RelativeLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/editText"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom|center_vertical|end"
+                android:layout_marginBottom="16dp"
+                android:elevation="12dp"
+                android:onClick="@{()->ideaViewModel.saveIdea(idea)}"
+                android:src="@drawable/ic_checkmark"
+                android:tint="@color/colorAccent"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="normal" />
+        </RelativeLayout>
 </layout>

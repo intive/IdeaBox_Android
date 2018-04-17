@@ -60,7 +60,7 @@ dependencies {
     compile "io.reactivex.rxjava2:rxjava:$rxjava2Version"
     androidTestCompile "com.android.support:support-annotations:$supportLibraryVersion"
     testCompile "com.android.support.test:rules:$supportTestVersion"
-    androidTestCompile "com.android.support.test.uiautomator:uiautomator-v18:$uiautomatorVersion"
+    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiautomatorVersion"
     testCompile "org.mockito:mockito-core:$mockitoVersion"
     compile "com.facebook.stetho:stetho:$stethoVersion"
     compile "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
