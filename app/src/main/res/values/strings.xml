@@ -6,7 +6,9 @@
     <string name="no">no</string>
     <string name="addIdea_back_button_text">BACK</string>
     <string name="idea_greetings_text">Add Your idea here:</string>
-    <string name="to_short_idea">The text is to short, please provide a longer idea.</string>
-    <string name="to_long_idea">The text is to short, please provide a longer idea.</string>
+    <string name="to_short_idea">The text is too short, please provide a longer idea.</string>
+    <string name="to_long_idea">The text is too long, please provide a shorter idea.</string>
     <string name="idea_proccessing">Idea is being sent... please wait for verification...</string>
+    <string name="idea_default_text">default idea text</string>
+    <string name="back_button">BACK</string>
 </resources>
