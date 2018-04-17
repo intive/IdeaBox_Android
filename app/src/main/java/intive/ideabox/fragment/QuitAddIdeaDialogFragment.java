@@ -16,10 +16,12 @@ public class QuitAddIdeaDialogFragment  extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         FragmentQuitAddIdeaBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.fragment_quit_add_idea, null, false);
-        QuitAddIdeaViewModel quitAddIdeaViewModel = new QuitAddIdeaViewModel(((MainActivity)getActivity()));
-        binding.setDialogViewModel(quitAddIdeaViewModel);
-        return new AlertDialog.Builder(getActivity(), R.style.ThemeOverlay_AppCompat_Dialog)
-                .setView(binding.getRoot()).setMessage("Warning")
+        Dialog dialog  = new AlertDialog.Builder(getActivity())
+                .setView(binding.getRoot())
                 .create();
+        QuitAddIdeaViewModel quitAddIdeaViewModel = new QuitAddIdeaViewModel(((MainActivity)getActivity()),dialog);
+        binding.setDialogViewModel(quitAddIdeaViewModel);
+        return dialog;
+
     }
 }
