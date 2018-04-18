@@ -1,9 +1,9 @@
 package intive.ideabox.viewmodel;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 import android.support.v4.app.FragmentActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import intive.ideabox.R;
@@ -19,9 +19,8 @@ public class IdeaListViewModel extends ViewModel {
         this.fragmentActivity = fragmentActivity;
     }
 
-    public List<IdeaData> LoadIdeaData() {
-        FirebaseProvider firebaseProvider = FirebaseProvider.getInstance();
-        return firebaseProvider.loadIdea();
+    public LiveData<List<IdeaData>> getIdeas(){
+        return FirebaseProvider.getInstance().getIdeas();
     }
 
     public void onFabClick() {

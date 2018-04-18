@@ -19,6 +19,8 @@ public class IdeaListFragment extends Fragment {
 
     private static final String mSnackBarKey = "KEY_SHOULD_SHOW_SNACK";
 
+    private IdeaListAdapter mIdeaListAdapter;
+
     public static IdeaListFragment newInstance(boolean showSnackBar) {
         IdeaListFragment fragment = new IdeaListFragment();
         Bundle args = new Bundle();
@@ -48,10 +50,12 @@ public class IdeaListFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        IdeaListAdapter mIdeaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);
+        mIdeaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);
         mRecyclerView.setAdapter(mIdeaListAdapter);
 
-        mIdeaListAdapter.setData(ideaListViewModel.LoadIdeaData());
+        ideaListViewModel.getIdeas().observe(this, ideas -> {
+           mIdeaListAdapter.setData(ideas);
+        });
 
         if (showSnackBar)
             showSnackBar(fragmentIdeaListBinding.getRoot());
