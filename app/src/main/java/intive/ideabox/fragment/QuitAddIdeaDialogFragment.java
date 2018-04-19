@@ -13,13 +13,16 @@ import intive.ideabox.databinding.FragmentQuitAddIdeaBinding;
 import intive.ideabox.viewmodel.QuitAddIdeaViewModel;
 
 public class QuitAddIdeaDialogFragment  extends DialogFragment{
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        FragmentQuitAddIdeaBinding binding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.fragment_quit_add_idea, null, false);
-        Dialog dialog  = new AlertDialog.Builder(getActivity())
-                .setView(binding.getRoot()).setMessage("Warning")
+        MainActivity mainActivity = ((MainActivity)getActivity());
+        FragmentQuitAddIdeaBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mainActivity),
+                R.layout.fragment_quit_add_idea, null, false);
+        Dialog dialog  = new AlertDialog.Builder(mainActivity)
+                .setView(binding.getRoot()).setMessage(R.string.dialog_header)
                 .create();
-        QuitAddIdeaViewModel quitAddIdeaViewModel = new QuitAddIdeaViewModel(((MainActivity)getActivity()),dialog);
+        QuitAddIdeaViewModel quitAddIdeaViewModel = new QuitAddIdeaViewModel(mainActivity,dialog);
         binding.setDialogViewModel(quitAddIdeaViewModel);
         return dialog;
 

@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import intive.ideabox.R;
 import intive.ideabox.fragment.IdeaListFragment;
-import intive.ideabox.fragment.QuitAddIdeaDialogFragment;
 import intive.ideabox.model.FirebaseProvider;
 
 public class AddIdeaViewModel {
@@ -20,15 +19,13 @@ public class AddIdeaViewModel {
 
     public void saveIdea(String userIdea) {
         if (userIdea.length() < MIN_IDEA_TEXT_LENGTH) {
-            Toast.makeText(mFragmentActivity.getApplicationContext(), R.string.to_short_idea, Toast.LENGTH_SHORT).show();
+            Toast.makeText(mFragmentActivity.getApplicationContext(), R.string.to_short_idea,
+                    Toast.LENGTH_SHORT).show();
          } else {
             FirebaseProvider dataProvider = FirebaseProvider.getInstance();
             dataProvider.saveIdea(userIdea);
-            mFragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, IdeaListFragment.newInstance(true)).commit();
+            mFragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                    IdeaListFragment.newInstance(true)).commit();
         }
-    }
-    public void quitAddScreen(){
-        QuitAddIdeaDialogFragment dialog = new QuitAddIdeaDialogFragment ();
-        dialog.show(mFragmentActivity.getFragmentManager(), "example");
     }
 }

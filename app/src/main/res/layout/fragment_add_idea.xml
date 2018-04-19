@@ -30,7 +30,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/patronage_background"/>
+                    android:src="@drawable/patro2"/>
 
             </ScrollView>
 
@@ -43,7 +43,7 @@
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/idea_greetings_text"
-            android:textColor="#BCBCBC"
+            android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
             <EditText
@@ -55,15 +55,16 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:ems="10"
+                android:imeOptions="flagNoExtractUi"
                 android:foregroundTint="@color/colorText"
-                android:backgroundTint="@color/colorText"
+                android:backgroundTint="@color/colorAccent"
                 android:gravity="top|start"
                 android:inputType="textMultiLine|textCapCharacters"
                 android:lines="6"
                 android:maxLength="256"
                 android:scrollHorizontally="false"
                 android:text="@={idea}"
-                android:textColor="@color/colorText" />
+                android:textColor="@color/colorAccent" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
@@ -79,17 +80,6 @@
                 android:tint="@color/colorAccent"
                 app:backgroundTint="@color/colorPrimary"
                 app:fabSize="normal"/>
-
-            <Button
-                android:id="@+id/button_send"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/fab"
-                android:layout_alignStart="@+id/editText"
-                android:background="@color/colorPrimary"
-                android:elevation="12dp"
-                android:onClick="@{()->ideaViewModel.quitAddScreen()}"
-                android:text="@string/back_button" />
 
         </RelativeLayout>
 </layout>
