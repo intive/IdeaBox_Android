@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment addIdeaFragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.add_idea_tag));
         if (addIdeaFragment != null && addIdeaFragment.isVisible()){
             QuitAddIdeaDialogFragment dialog = new QuitAddIdeaDialogFragment();
-            dialog.show(this.getFragmentManager(), "example");
+            dialog.show(this.getFragmentManager(), getString(R.string.dialog_tag));
         }else{
             super.onBackPressed();
         }

@@ -16,4 +16,5 @@
     <string name="dialog_warning">Do You want to quit without saving?</string>
     <string name="dialog_header">Warning</string>
     <string name="add_idea_tag">addIdeaFragment</string>
+    <string name="dialog_tag">dialog_tag</string>
 </resources>
