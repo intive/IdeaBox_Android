@@ -45,4 +45,5 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
             inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         }
     }
+
 }
