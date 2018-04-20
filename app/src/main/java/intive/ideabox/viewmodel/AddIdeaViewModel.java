@@ -11,19 +11,19 @@ public class AddIdeaViewModel {
 
     private static final int MIN_IDEA_TEXT_LENGTH = 3;
 
-    private FragmentActivity mFragmentActivity;
+    private FragmentActivity fragmentActivity;
 
     public AddIdeaViewModel(FragmentActivity fragmentActivity) {
-        mFragmentActivity = fragmentActivity;
+        this.fragmentActivity = fragmentActivity;
     }
 
     public void saveIdea(String userIdea) {
         if (userIdea.length() < MIN_IDEA_TEXT_LENGTH) {
-            Toast.makeText(mFragmentActivity.getApplicationContext(), R.string.to_short_idea, Toast.LENGTH_SHORT).show();
+            Toast.makeText(fragmentActivity.getApplicationContext(), R.string.to_short_idea, Toast.LENGTH_SHORT).show();
          } else {
             FirebaseProvider dataProvider = FirebaseProvider.getInstance();
             dataProvider.saveIdea(userIdea);
-            mFragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, IdeaListFragment.newInstance(true)).commit();
+            fragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, IdeaListFragment.newInstance(true)).commit();
         }
     }
 }

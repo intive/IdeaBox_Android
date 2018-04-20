@@ -17,14 +17,14 @@ import intive.ideabox.viewmodel.IdeaListViewModel;
 
 public class IdeaListFragment extends Fragment {
 
-    private static final String mSnackBarKey = "KEY_SHOULD_SHOW_SNACK";
+    private static final String SNACK_BAR_KEY = "KEY_SHOULD_SHOW_SNACK";
 
-    private IdeaListAdapter mIdeaListAdapter;
+    private IdeaListAdapter ideaListAdapter;
 
     public static IdeaListFragment newInstance(boolean showSnackBar) {
         IdeaListFragment fragment = new IdeaListFragment();
         Bundle args = new Bundle();
-        args.putBoolean(mSnackBarKey, showSnackBar);
+        args.putBoolean(SNACK_BAR_KEY, showSnackBar);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,22 +39,22 @@ public class IdeaListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         Bundle args = getArguments();
-        boolean showSnackBar = args.getBoolean(mSnackBarKey, false);
+        boolean showSnackBar = args.getBoolean(SNACK_BAR_KEY, false);
 
         FragmentIdeaListBinding fragmentIdeaListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_idea_list, container, false);
         IdeaListViewModel ideaListViewModel = new IdeaListViewModel(getActivity());
         fragmentIdeaListBinding.setViewModel(ideaListViewModel);
 
-        RecyclerView mRecyclerView = fragmentIdeaListBinding.ideaRecycler;
+        RecyclerView recyclerView = fragmentIdeaListBinding.ideaRecycler;
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setLayoutManager(mLayoutManager);
 
-        mIdeaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);
-        mRecyclerView.setAdapter(mIdeaListAdapter);
+        ideaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);
+        recyclerView.setAdapter(ideaListAdapter);
 
         ideaListViewModel.getIdeas().observe(this, ideas -> {
-           mIdeaListAdapter.setData(ideas);
+           ideaListAdapter.setData(ideas);
         });
 
         if (showSnackBar)

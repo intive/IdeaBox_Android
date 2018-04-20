@@ -15,17 +15,17 @@ import java.util.List;
 
 public class FirebaseProvider implements CloudProvider {
 
-    private static FirebaseProvider sInstance = null;
-    private MutableLiveData<List<IdeaData>> mIdeaMutableLiveData = new MutableLiveData<>();
+    private static FirebaseProvider instance = null;
+    private MutableLiveData<List<IdeaData>> ideaMutableLiveData = new MutableLiveData<>();
 
     protected FirebaseProvider() {
     }
 
     public static FirebaseProvider getInstance() {
-        if (sInstance == null) {
-            sInstance = new FirebaseProvider();
+        if (instance == null) {
+            instance = new FirebaseProvider();
         }
-        return sInstance;
+        return instance;
     }
 
     private DatabaseReference getDBRef() {
@@ -54,7 +54,7 @@ public class FirebaseProvider implements CloudProvider {
                     IdeaData data = snapshot.getValue(IdeaData.class);
                     ideaData.add(data);
                 }
-                mIdeaMutableLiveData.postValue(ideaData);
+                ideaMutableLiveData.postValue(ideaData);
             }
 
             @Override
@@ -63,7 +63,7 @@ public class FirebaseProvider implements CloudProvider {
             }
         });
 
-        return mIdeaMutableLiveData;
+        return ideaMutableLiveData;
     }
 }
 
