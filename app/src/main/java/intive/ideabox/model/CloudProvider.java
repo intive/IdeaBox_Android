@@ -1,10 +1,12 @@
 package intive.ideabox.model;
 
+import android.arch.lifecycle.LiveData;
+
 import java.util.List;
 
 public interface CloudProvider {
 
     Boolean saveIdea(String idea);
-    List<IdeaData> loadIdea();
 
+    LiveData<List<IdeaData>> getIdeas();
 }
