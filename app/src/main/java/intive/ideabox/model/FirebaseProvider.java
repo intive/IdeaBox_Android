@@ -1,5 +1,8 @@
 package intive.ideabox.model;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,6 +16,7 @@ import java.util.List;
 public class FirebaseProvider implements CloudProvider {
 
     private static FirebaseProvider instance = null;
+    private MutableLiveData<List<IdeaData>> ideaMutableLiveData = new MutableLiveData<>();
 
     protected FirebaseProvider() {
     }
@@ -24,38 +28,42 @@ public class FirebaseProvider implements CloudProvider {
         return instance;
     }
 
+    private DatabaseReference getDBRef() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        return database.getReference();
+    }
+
     @Override
     public Boolean saveIdea(String idea) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
         IdeaData ideaData = new IdeaData(idea, "user");
-        DatabaseReference myRef = database.getReference();
+        DatabaseReference myRef = getDBRef();
         myRef.child("ideas").child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).setValue(ideaData);
         return true;
 
     }
 
     @Override
-    public List<IdeaData> loadIdea() {
-        final List<IdeaData> ideaData = new ArrayList<>();
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference();
+    public LiveData<List<IdeaData>> getIdeas() {
+        final DatabaseReference myRef = getDBRef();
 
         myRef.child("ideas").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                final List<IdeaData> ideaData = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     IdeaData data = snapshot.getValue(IdeaData.class);
                     ideaData.add(data);
                 }
+                ideaMutableLiveData.postValue(ideaData);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
             }
         });
 
-        return ideaData;
+        return ideaMutableLiveData;
     }
 }
 

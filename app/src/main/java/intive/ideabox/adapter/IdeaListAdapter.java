@@ -6,7 +6,7 @@ import intive.ideabox.model.IdeaData;
 
 public class IdeaListAdapter extends SingleLayoutAdapter{
 
-    private List<IdeaData> mIdeaData = null;
+    private List<IdeaData> ideaData = null;
 
     public IdeaListAdapter(int layoutId) {
         super(layoutId);
@@ -14,18 +14,18 @@ public class IdeaListAdapter extends SingleLayoutAdapter{
 
     @Override
     public int getItemCount() {
-        if (mIdeaData == null)
+        if (ideaData == null)
             return 0;
-        return mIdeaData.size();
+        return ideaData.size();
     }
 
     public void setData(List<IdeaData> data){
-        mIdeaData = data;
+        ideaData = data;
         notifyDataSetChanged();
     }
 
     @Override
     protected Object getObjForPosition(int position) {
-        return mIdeaData.get(position);
+        return ideaData.get(position);
     }
 }
