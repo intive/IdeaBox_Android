@@ -3,7 +3,6 @@ package intive.ideabox.viewmodel;
 import android.arch.lifecycle.ViewModel;
 import android.support.v4.app.FragmentActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import intive.ideabox.R;
@@ -25,6 +24,7 @@ public class IdeaListViewModel extends ViewModel {
     }
 
     public void onFabClick() {
-        fragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new AddIdeaFragment()).addToBackStack(null).commit();
+        fragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                new AddIdeaFragment(),fragmentActivity.getString(R.string.add_idea_tag)).addToBackStack(null).commit();
     }
 }

@@ -10,4 +10,11 @@
     <string name="to_long_idea">The text is too long, please provide a shorter idea.</string>
     <string name="idea_proccessing">Idea is being sent... please wait for verification...</string>
     <string name="idea_default_text">default idea text</string>
+    <string name="back_button">BACK</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+    <string name="dialog_warning">Do You want to quit without saving?</string>
+    <string name="dialog_header">Warning</string>
+    <string name="add_idea_tag">addIdeaFragment</string>
+    <string name="dialog_tag">dialog_tag</string>
 </resources>
