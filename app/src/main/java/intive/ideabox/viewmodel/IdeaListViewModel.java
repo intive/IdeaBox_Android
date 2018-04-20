@@ -24,6 +24,7 @@ public class IdeaListViewModel extends ViewModel {
     }
 
     public void onFabClick() {
-        fragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new AddIdeaFragment()).addToBackStack(null).commit();
+        fragmentActivity.getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer,
+                new AddIdeaFragment(),fragmentActivity.getString(R.string.add_idea_tag)).addToBackStack(null).commit();
     }
 }
