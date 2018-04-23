@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import intive.ideabox.R;
 import intive.ideabox.adapter.IdeaListAdapter;
 import intive.ideabox.databinding.FragmentIdeaListBinding;
+import intive.ideabox.utility.NavigationUtils;
 import intive.ideabox.viewmodel.IdeaListViewModel;
 
 public class IdeaListFragment extends Fragment {
@@ -42,7 +43,7 @@ public class IdeaListFragment extends Fragment {
         boolean showSnackBar = args.getBoolean(SNACK_BAR_KEY, false);
 
         FragmentIdeaListBinding fragmentIdeaListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_idea_list, container, false);
-        IdeaListViewModel ideaListViewModel = new IdeaListViewModel(getActivity());
+        IdeaListViewModel ideaListViewModel = new IdeaListViewModel();
         fragmentIdeaListBinding.setViewModel(ideaListViewModel);
 
         RecyclerView recyclerView = fragmentIdeaListBinding.ideaRecycler;
@@ -54,7 +55,7 @@ public class IdeaListFragment extends Fragment {
         recyclerView.setAdapter(ideaListAdapter);
 
         ideaListViewModel.getIdeas().observe(this, ideas -> {
-           ideaListAdapter.setData(ideas);
+            ideaListAdapter.setData(ideas);
         });
 
         if (showSnackBar)
