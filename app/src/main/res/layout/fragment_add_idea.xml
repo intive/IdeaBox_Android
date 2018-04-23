@@ -26,11 +26,6 @@
                 android:id="@+id/backgroundLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/patronage_background"/>
 
             </ScrollView>
 
@@ -59,8 +54,8 @@
                 android:foregroundTint="@color/colorText"
                 android:backgroundTint="@color/colorAccent"
                 android:gravity="top|start"
-                android:inputType="textMultiLine|textCapCharacters"
-                android:lines="6"
+                android:inputType="textMultiLine"
+                android:maxLines="6"
                 android:maxLength="256"
                 android:scrollHorizontally="false"
                 android:text="@={idea}"
