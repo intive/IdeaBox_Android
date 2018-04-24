@@ -8,6 +8,7 @@
         <variable
             name="viewModel"
             type="intive.ideabox.viewmodel.IdeaListViewModel" />
+
     </data>
 
     <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
