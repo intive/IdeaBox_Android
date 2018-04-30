@@ -2,6 +2,7 @@ package intive.ideabox.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,13 @@ import intive.ideabox.viewmodel.AddIdeaViewModel;
 
 public class AddIdeaFragment extends android.support.v4.app.Fragment {
 
+private android.content.Context _context;
+
+   @Override
+   public void onAttach(Context context) {
+       super.onAttach(context);
+       _context = context;
+   }
     public static AddIdeaFragment newInstance(){
         AddIdeaFragment fragment = new AddIdeaFragment();
         return fragment;
@@ -28,7 +36,7 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         FragmentAddIdeaBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_idea, container, false);
         String idea = "";
-        AddIdeaViewModel viewModel = new AddIdeaViewModel();
+        AddIdeaViewModel viewModel = new AddIdeaViewModel(_context);
         binding.setIdeaViewModel(viewModel);
         binding.setIdea(idea);
         binding.backgroundLayout.setOnTouchListener(new View.OnTouchListener() {
