@@ -1,7 +1,9 @@
 package intive.ideabox.model;
 
-import java.util.Date;
+import android.arch.persistence.room.Entity;
 
+import java.util.Date;
+@Entity(tableName = "ideas")
 public class IdeaData {
     private String ideaText;
     private String ideaUser;
