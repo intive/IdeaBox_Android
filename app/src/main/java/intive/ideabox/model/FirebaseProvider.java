@@ -38,6 +38,9 @@ public class FirebaseProvider implements CloudProvider {
         IdeaData ideaData = new IdeaData(idea, "user");
         DatabaseReference myRef = getDBRef();
         myRef.child("ideas").child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).setValue(ideaData);
+        myRef.child("ideas").child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).child("votes").
+                child(String.valueOf(ideaData.getIdeaTime()).concat(ideaData.getIdeaUser())).
+                setValue(new IdeaVote(ideaData.getIdeaTime(),ideaData.getIdeaUser()));
         return true;
 
     }
