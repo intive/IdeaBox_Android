@@ -9,7 +9,7 @@ public class AbstractEntity implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Long id;
 
     public Long getId() {

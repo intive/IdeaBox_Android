@@ -17,7 +17,7 @@ public class FirebaseProvider implements CloudProvider {
 
     private static FirebaseProvider instance = null;
     private MutableLiveData<List<IdeaData>> ideaMutableLiveData = new MutableLiveData<>();
-
+    private DatabaseReference firebaseReference;
     protected FirebaseProvider() {
     }
 
@@ -28,7 +28,7 @@ public class FirebaseProvider implements CloudProvider {
         return instance;
     }
 
-    private DatabaseReference getDBRef() {
+    public DatabaseReference getDBRef() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         return database.getReference();
     }
@@ -45,8 +45,7 @@ public class FirebaseProvider implements CloudProvider {
     @Override
     public LiveData<List<IdeaData>> getIdeas() {
         final DatabaseReference myRef = getDBRef();
-
-        myRef.child("ideas").addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.child("ideas").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final List<IdeaData> ideaData = new ArrayList<>();
@@ -65,6 +64,7 @@ public class FirebaseProvider implements CloudProvider {
 
         return ideaMutableLiveData;
     }
+
 }
 
 

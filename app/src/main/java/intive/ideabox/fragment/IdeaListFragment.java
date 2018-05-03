@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import intive.ideabox.R;
 import intive.ideabox.adapter.IdeaListAdapter;
 import intive.ideabox.databinding.FragmentIdeaListBinding;
-import intive.ideabox.utility.NavigationUtils;
 import intive.ideabox.viewmodel.IdeaListViewModel;
 
 public class IdeaListFragment extends Fragment {
@@ -53,11 +52,9 @@ public class IdeaListFragment extends Fragment {
 
         ideaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);
         recyclerView.setAdapter(ideaListAdapter);
-
         ideaListViewModel.getIdeas().observe(this, ideas -> {
             ideaListAdapter.setData(ideas);
         });
-
         if (showSnackBar)
             showSnackBar(fragmentIdeaListBinding.getRoot());
 
