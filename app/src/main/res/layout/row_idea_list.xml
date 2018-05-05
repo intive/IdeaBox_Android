@@ -2,10 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
             name="object"
             type="intive.ideabox.model.IdeaData" />
+
     </data>
 
     <LinearLayout
@@ -16,11 +16,11 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:background="@color/colorPrimary"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/idea_message"
-            android:layout_width="match_parent"
+            android:layout_width="345dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:ellipsize="end"
@@ -28,6 +28,16 @@
             android:text="@{object.ideaText}"
             android:textColor="@color/colorAccent"
             android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/buttonVote"
+            android:layout_width="31dp"
+            android:layout_height="22dp"
+            android:layout_margin="5dp"
+            android:layout_marginStart="20dp"
+            android:background="@{object.getSingleIdeaVote(object.ideaUser) != true ? @drawable/thumb_novote : @drawable/thumb_vote}"
+
+          />
     </LinearLayout>
 
 </layout>

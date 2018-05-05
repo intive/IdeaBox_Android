@@ -19,4 +19,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         binding.setVariable(BR.object, object);
         binding.executePendingBindings();
     }
+    public ViewDataBinding getBinding(){
+        return binding;
+    }
 }

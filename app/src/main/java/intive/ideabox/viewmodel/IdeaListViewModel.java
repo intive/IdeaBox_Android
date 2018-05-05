@@ -16,7 +16,12 @@ public class IdeaListViewModel extends ViewModel {
     public LiveData<List<IdeaData>> getIdeas() {
         return FirebaseProvider.getInstance().getIdeas();
     }
+
     public void onFabClick() {
         NavigationUtils.getInstance().setAddIdeaState();
+    }
+
+    public void addVote(IdeaData ideaData) {
+        FirebaseProvider.getInstance().addVoteForIdea(ideaData);
     }
 }
