@@ -87,7 +87,7 @@ public class MainActivityTest {
         onView(withId(R.id.add_fab))
                 .perform(click());
         onView(withId(R.id.editText))
-                .perform(click(), typeText("Lor"));
+                .perform(click(), typeText("Lorem"));
 
         onView(withId(R.id.fab))
                 .perform(click());
