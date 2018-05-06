@@ -5,17 +5,17 @@ import android.arch.lifecycle.MutableLiveData;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 
-import com.google.common.hash.Hashing;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import intive.ideabox.utility.HashDataUtils;
 
 
 public class FirebaseProvider implements CloudProvider {
@@ -40,9 +40,7 @@ public class FirebaseProvider implements CloudProvider {
 
     @Override
     public Boolean saveIdea(String idea) {
-        IdeaData ideaData = new IdeaData(idea, Hashing.sha256()
-                .hashString("user", StandardCharsets.UTF_8)
-                .toString());
+        IdeaData ideaData = new IdeaData(idea, HashDataUtils.getHashedData("user"));
         DatabaseReference myRef = getDBRef();
         myRef.child("ideas").child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).setValue(ideaData);
         return true;
@@ -81,7 +79,8 @@ public class FirebaseProvider implements CloudProvider {
 
     public void addVoteForIdea(IdeaData ideaData) {
         DatabaseReference myRef = getDBRef();
-        DatabaseReference voteTemplate = myRef.child("ideas").child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).child("votes").
+        DatabaseReference voteTemplate = myRef.child("ideas").
+                child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).child("votes").
                 child(String.valueOf(ideaData.getIdeaTime()).concat(ideaData.getIdeaUser()));
         myRef.child("ideas").child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).child("votes").
                 addListenerForSingleValueEvent(new ValueEventListener() {

@@ -15,11 +15,9 @@ import intive.ideabox.adapter.IdeaListAdapter;
 import intive.ideabox.databinding.FragmentIdeaListBinding;
 import intive.ideabox.viewmodel.IdeaListViewModel;
 
-public class IdeaListFragment extends Fragment {//implements AdapterListener{
+public class IdeaListFragment extends Fragment {
 
     private static final String SNACK_BAR_KEY = "KEY_SHOULD_SHOW_SNACK";
-    RecyclerView recyclerView;
-    IdeaListViewModel ideaListViewModel;
     private IdeaListAdapter ideaListAdapter;
 
     public static IdeaListFragment newInstance(boolean showSnackBar) {
@@ -43,9 +41,9 @@ public class IdeaListFragment extends Fragment {//implements AdapterListener{
         boolean showSnackBar = args.getBoolean(SNACK_BAR_KEY, false);
 
         FragmentIdeaListBinding fragmentIdeaListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_idea_list, container, false);
-        ideaListViewModel = new IdeaListViewModel();
+        IdeaListViewModel ideaListViewModel = new IdeaListViewModel();
         fragmentIdeaListBinding.setViewModel(ideaListViewModel);
-        recyclerView = fragmentIdeaListBinding.ideaRecycler;
+        RecyclerView recyclerView = fragmentIdeaListBinding.ideaRecycler;
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         ideaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);

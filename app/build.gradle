@@ -42,8 +42,6 @@ ext {
 }
 
 dependencies {
-    implementation "android.arch.persistence.room:runtime:1.1.0-beta3"
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.0-beta3"
     implementation"com.google.guava:guava:25.0-android"
     implementation "android.arch.lifecycle:extensions:$viewModelVersion"
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -11,37 +11,38 @@
             type="intive.ideabox.viewmodel.IdeaListViewModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/row_idea_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal">
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/idea_message"
-            android:layout_width="345dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:ellipsize="end"
             android:maxLines="2"
+            android:layout_alignParentStart="true"
             android:text="@{object.ideaText}"
             android:textColor="@color/colorAccent"
             android:textSize="18sp" />
 
         <Button
             android:id="@+id/buttonVote"
-            android:layout_width="31dp"
+            android:layout_width="40dp"
             android:layout_height="22dp"
-            android:layout_margin="5dp"
-            android:layout_marginStart="20dp"
-            android:onClick="@{()->listViewModel.addVote(object)}"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
             android:background="@{object.getSingleIdeaVote(object.ideaUser) != true ? @drawable/thumb_novote : @drawable/thumb_vote}"
-
-          />
-    </LinearLayout>
+            android:onClick="@{()->listViewModel.addVote(object)}" />
+    </RelativeLayout>
 
 </layout>
