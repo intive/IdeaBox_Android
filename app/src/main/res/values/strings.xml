@@ -17,6 +17,4 @@
     <string name="dialog_header">Warning</string>
     <string name="add_idea_tag">addIdeaFragment</string>
     <string name="dialog_tag">dialog_tag</string>
-    <string name="firebase_ideas">ideas</string>
-    <string name="firebase_votes">votes</string>
 </resources>
