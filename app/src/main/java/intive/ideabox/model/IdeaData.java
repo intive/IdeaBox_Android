@@ -11,14 +11,25 @@ public class IdeaData {
     private String ideaText;
     private String ideaUser;
     private long ideaTime;
-    public HashMap<String,IdeaVote> getVotes() {
-        return votes;
-    }
-    public void setVotes(HashMap<String,IdeaVote> votes) {
-        this.votes = votes;
+    private HashMap<String, IdeaVote> votes;
+
+    public IdeaData() {
     }
 
-    private HashMap<String,IdeaVote> votes;
+    public IdeaData(String ideaText, String ideaUser) {
+        this.ideaText = ideaText;
+        this.ideaUser = ideaUser;
+        this.ideaTime = new Date().getTime();
+        this.votes = new HashMap<String, IdeaVote>();
+    }
+
+    public HashMap<String, IdeaVote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(HashMap<String, IdeaVote> votes) {
+        this.votes = votes;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public boolean getSingleIdeaVote(String userName) {
@@ -28,14 +39,6 @@ public class IdeaData {
             }
         }
         return false;
-    }
-    public IdeaData() {}
-
-    public IdeaData(String ideaText, String ideaUser) {
-        this.ideaText = ideaText;
-        this.ideaUser = ideaUser;
-        this.ideaTime = new Date().getTime();
-        this.votes = new HashMap<String,IdeaVote>();
     }
 
     public String getIdeaText() {
