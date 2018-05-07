@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,6 +58,8 @@ public class IdeaListFragment extends Fragment {
         ideaListViewModel.getIdeas().observe(this, ideas -> {
             ideaListAdapter.setData(ideas);
         });
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
         if (showSnackBar)
             showSnackBar(fragmentIdeaListBinding.getRoot());
