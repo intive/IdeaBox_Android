@@ -7,7 +7,7 @@ import intive.ideabox.utility.NavigationUtils;
 
 public class AddIdeaViewModel {
 
-    private static final int MIN_IDEA_TEXT_LENGTH = 3;
+    private static final int MIN_IDEA_TEXT_LENGTH = 5;
 
 
     public AddIdeaViewModel() {
