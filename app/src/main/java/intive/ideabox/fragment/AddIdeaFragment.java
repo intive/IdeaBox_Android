@@ -19,13 +19,6 @@ import intive.ideabox.viewmodel.AddIdeaViewModel;
 
 public class AddIdeaFragment extends android.support.v4.app.Fragment {
 
-private android.content.Context _context;
-
-   @Override
-   public void onAttach(Context context) {
-       super.onAttach(context);
-       _context = context;
-   }
     public static AddIdeaFragment newInstance(){
         AddIdeaFragment fragment = new AddIdeaFragment();
         return fragment;
@@ -36,7 +29,7 @@ private android.content.Context _context;
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         FragmentAddIdeaBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_idea, container, false);
         String idea = "";
-        AddIdeaViewModel viewModel = new AddIdeaViewModel(_context);
+        AddIdeaViewModel viewModel = new AddIdeaViewModel();
         binding.setIdeaViewModel(viewModel);
         binding.setIdea(idea);
         binding.backgroundLayout.setOnTouchListener(new View.OnTouchListener() {
