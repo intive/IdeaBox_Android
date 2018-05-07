@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import intive.ideabox.R;
 import intive.ideabox.adapter.IdeaListAdapter;
 import intive.ideabox.databinding.FragmentIdeaListBinding;
-import intive.ideabox.utility.NavigationUtils;
 import intive.ideabox.viewmodel.IdeaListViewModel;
 
 public class IdeaListFragment extends Fragment {

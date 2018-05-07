@@ -12,15 +12,15 @@
         android:id="@+id/row_idea_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp">
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp">
 
         <TextView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginLeft="16dp"
             android:background="@drawable/ic_idea_letter"
-            android:backgroundTint="#b8bcc8"
+            android:backgroundTint="@{object.letterIconColor}"
             android:gravity="center"
             android:maxLength="1"
             android:text="@{object.ideaText}"
@@ -35,7 +35,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:paddingLeft="72dp"
-            android:paddingRight="42dp"
+            android:paddingRight="48dp"
             android:text="@{object.ideaText}"
             android:textSize="16sp" />
 

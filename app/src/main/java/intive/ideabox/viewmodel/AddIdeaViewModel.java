@@ -19,8 +19,8 @@ public class AddIdeaViewModel {
             FirebaseProvider dataProvider = FirebaseProvider.getInstance();
             dataProvider.saveIdea(userIdea);
             NavigationUtils.getInstance().setIdeaListState(true);
-        }else
-            android.widget.Toast.makeText( view.getContext(), intive.ideabox.R.string.to_short_idea,
+        } else
+            android.widget.Toast.makeText(view.getContext(), intive.ideabox.R.string.to_short_idea,
                     android.widget.Toast.LENGTH_SHORT).show();
     }
 }
