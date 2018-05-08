@@ -7,13 +7,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import intive.ideabox.utility.RandomColorGenerator;
+
 public class IdeaData {
     private String ideaText;
     private String ideaUser;
     private long ideaTime;
     private HashMap<String, IdeaVote> votes;
 
+    private int letterIconColor;
+
     public IdeaData() {
+        letterIconColor = RandomColorGenerator.getInstance().getRandomColor();
     }
 
     public IdeaData(String ideaText, String ideaUser) {
@@ -21,6 +26,7 @@ public class IdeaData {
         this.ideaUser = ideaUser;
         this.ideaTime = new Date().getTime();
         this.votes = new HashMap<String, IdeaVote>();
+        letterIconColor = RandomColorGenerator.getInstance().getRandomColor();
     }
 
     public HashMap<String, IdeaVote> getVotes() {
@@ -63,5 +69,13 @@ public class IdeaData {
 
     public void setIdeaTime(long ideaTime) {
         this.ideaTime = ideaTime;
+    }
+
+    public int getLetterIconColor() {
+        return letterIconColor;
+    }
+
+    public void setLetterIconColor(int letterIconColor) {
+        this.letterIconColor = letterIconColor;
     }
 }
