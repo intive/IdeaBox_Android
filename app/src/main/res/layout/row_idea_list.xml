@@ -8,26 +8,46 @@
             type="intive.ideabox.model.IdeaData" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/row_idea_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical">
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp">
+
+        <TextView
+            android:id="@+id/letter_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/ic_idea_letter"
+            android:backgroundTint="@{object.letterIconColor}"
+            android:gravity="center"
+            android:maxLength="1"
+            android:text="@{object.ideaText}"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="24dp" />
 
         <TextView
             android:id="@+id/idea_message"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:ellipsize="end"
             android:maxLines="2"
+            android:paddingLeft="72dp"
+            android:paddingRight="48dp"
             android:text="@{object.ideaText}"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp" />
-    </LinearLayout>
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/vote_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/thumb_novote" />
+
+    </RelativeLayout>
 
 </layout>
