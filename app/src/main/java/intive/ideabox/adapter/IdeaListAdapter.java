@@ -24,7 +24,7 @@ public class IdeaListAdapter extends SingleLayoutAdapter{
     }
 
     @Override
-    protected Object getObjForPosition(int position) {
+    public Object getObjForPosition(int position) {
         return ideaData.get(position);
     }
 }

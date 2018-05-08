@@ -6,6 +6,12 @@
         <variable
             name="object"
             type="intive.ideabox.model.IdeaData" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="listViewModel"
+            type="intive.ideabox.viewmodel.IdeaListViewModel" />
     </data>
 
     <RelativeLayout
@@ -46,8 +52,8 @@
             android:layout_height="24dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
-            android:background="@drawable/thumb_novote" />
-
+            android:background="@{object.getSingleIdeaVote(object.ideaUser) != true ? @drawable/thumb_novote : @drawable/thumb_vote}"
+            android:onClick="@{()->listViewModel.addVote(object)}" />
     </RelativeLayout>
 
 </layout>
