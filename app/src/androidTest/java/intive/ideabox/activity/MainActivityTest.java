@@ -30,14 +30,14 @@ import static org.hamcrest.CoreMatchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(MethodSorters.JVM)
 public class MainActivityTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void A_basicScreen() {
+    public void mainScreen() {
 
         onView(withId(R.id.idea_recycler))
         .check(matches(isDisplayed()));
@@ -61,7 +61,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void B_addingIdea() {
+    public void addingIdeaScreen() {
 
         onView(allOf(withId(R.id.add_fab)))
                 .perform(click());
@@ -72,7 +72,6 @@ public class MainActivityTest {
 
        onView(withId(R.id.fab))
                .perform(click());
-        //it's working
         onView(allOf(withText(R.string.added_idea)))
                .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
                .check(matches(isDisplayed()))
@@ -83,98 +82,117 @@ public class MainActivityTest {
     }
 
     @Test
-    public void C_charCountPositiveValidation_a(){
+    public void positiveCharCountValidation_1(){
+        //Boundary value test. Checking if I can add idea with minimal char count - 5
+        //Steps to add idea
         onView(withId(R.id.add_fab))
                 .perform(click());
         onView(withId(R.id.editText))
-                .perform(click(), typeText("Lorem"));
-
+                .perform(click(), typeText("Lorem"), closeSoftKeyboard());
         onView(withId(R.id.fab))
                 .perform(click());
-        //it's working
+
+        //Asserting that the right toast message appears and idea is added
         onView(withText(R.string.added_idea))
                 .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
+                //double assertion to make sure that toast message is displayed and has the right message
                 .check(matches(isDisplayed()))
                 .check(matches(withText("Idea has been added!")));
     }
 
     @Test
-    public void C_charCountPositiveValidation_b(){
+    public void positiveCharCountValidation_2(){
+        //Boundary value test. Checking if I can add idea with above minimal char count
+        //Steps to add idea
         onView(withId(R.id.add_fab))
                 .perform(click());
         onView(withId(R.id.editText))
-                .perform(click(), typeText("Lorem Ipsum"));
-
+                .perform(click(), typeText("Lorem Ipsum"), closeSoftKeyboard());
         onView(withId(R.id.fab))
                 .perform(click());
-        //it's working
+
+        //Asserting that the right toast message appears and idea is added
         onView(withText(R.string.added_idea))
                 .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
+                //double assertion to make sure that toast message is displayed and has the right message
                 .check(matches(isDisplayed()))
                 .check(matches(withText("Idea has been added!")));
     }
     @Test
-    public void C_charCountPositiveValidation_c(){
+    public void positiveCharCountValidation_3(){
+        //Boundary value test. Checking if I can add idea with maximal char count
+        //Steps to add idea
         onView(withId(R.id.add_fab))
                 .perform(click());
         onView(withId(R.id.editText))
-                .perform(click(), typeText("uC9siDxSebwtOvH681J54Y6Sb9WHXkipsrA7WBJ45yleiYaZw0AoJzQNpuPOp6cl9AqUEgm8bGCd2MRP5eIs0MLJf3sWTAGkBfXmygm42rO8PpWLW7N1rhRNG3UxLfJXShQNuMab60WIAeuJzAlaFmQRO4WXhWD6MCkT45wc2qxgbqGqC3HP6yu0MiIaAnJjYzuHMjN5BLviBcBRZUtPrcFjMxGxkDMtWMypfFQZfW5QGqqtQ8MpzngqcXO3elQh"));
-
+                .perform(click(), typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis sollicitudin ligula, tincidunt tincidunt turpis interdum eget. Etiam magna turpis, elementum vel congue ut, dictum in velit. Integer euismod diam id rutrum sagittis. Aenean massa leo, pulvinar nec laoreet at, aliquam sit a"),
+                        closeSoftKeyboard());
         onView(withId(R.id.fab))
                 .perform(click());
-        //it's working
+
+        //Asserting that the right toast message appears and idea is added
         onView(withText(R.string.added_idea))
                 .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
+                //double assertion to make sure that toast message is displayed and has the right message
                 .check(matches(isDisplayed()))
                 .check(matches(withText("Idea has been added!")));
     }
 
     @Test
-    public void D_charCountNegativeValidation_a(){
+    public void negativeCharCountValidation_1(){
+        //Boundary value test. Asserts that user can't add idea which does not meet minimal requirements.
+        //Steps to add idea
         onView(withId(R.id.add_fab))
                 .perform(click());
         onView(withId(R.id.editText))
-                .perform(click(), typeText("1"));
-
+                .perform(click(), typeText("L"), closeSoftKeyboard());
         onView(withId(R.id.fab))
                 .perform(click());
-        //it's working
+
+        //Asserting that the right toast message appears and idea is added
         onView(withText(R.string.to_short_idea))
                 .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
+                //double assertion to make sure that toast message is displayed and has the right message
                 .check(matches(isDisplayed()))
                 .check(matches(withText("The text is too short, please provide a longer idea.")));
     }
 
     @Test
-    public void D_charCountNegativeValidation_b(){
+    public void negativeCharCountValidation_2(){
+        //Boundary value test. Asserts that user can't add idea which does not meet minimal requirements.
+        //Steps to add idea
         onView(withId(R.id.add_fab))
                 .perform(click());
         onView(withId(R.id.editText))
-                .perform(click(), typeText("kk"));
-
+                .perform(click(), typeText("Lo"), closeSoftKeyboard());
         onView(withId(R.id.fab))
                 .perform(click());
-        //it's working
+
+        //Asserting that the right toast message appears and idea is added
         onView(withText(R.string.to_short_idea))
                 .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
+                //double assertion to make sure that toast message is displayed and has the right message
                 .check(matches(isDisplayed()))
                 .check(matches(withText("The text is too short, please provide a longer idea.")));
     }
-
-    @Test
-    public void D_charCountNegativeValidation_c(){
-        onView(withId(R.id.add_fab))
-                .perform(click());
-        onView(withId(R.id.editText))
-                .perform(click(), typeText("dddwv271IeiP6POvOud2FC0hlCzqVqz7Ay3jJEAGlJcxLq8RbttgNdHi8K5sjx5GcCIDnfdsAApS8XeDSc9UQOBDqEYBythj0ATLeAdRwY8xhajP3z15IPcSbUozVMMCQPed5k3eaQkmDdlntnmUqITzz5AzAKNfXm2Z3ovoyq2FITVfU3cVgbVswDJ8nmsJGrOBJYoZWJ5sZqfMQ7bY6fgrLvyfDRWxZ2YJIYVjoRic3R3pMkfkBEBEoe2c3pYHKXx"));
-
-        onView(withId(R.id.fab))
-                .perform(click());
-        //it's working
-        onView(withText(R.string.to_long_idea))
-                .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
-                .check(matches(isDisplayed()))
-                .check(matches(withText("The text is too long, please provide a shorter idea.")));
-    }
+// ToDo: find out how to test this with new requirements
+//    @Test
+//    public void D_charCountNegativeValidation_c(){
+//        //Boundary value test. Asserts that user can't add idea which does not meet minimal requirements.
+//        //Steps to add idea
+//        onView(withId(R.id.add_fab))
+//                .perform(click());
+//        onView(withId(R.id.editText))
+//                .perform(click(), typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis sollicitudin ligula, tincidunt tincidunt turpis interdum eget. Etiam magna turpis, elementum vel congue ut, dictum in velit. Integer euismod diam id rutrum sagittis. Aenean massa leo, pulvinar nec laoreet at, aliquam sit amet nibh. Sed vel nisl ante. Nullam rutrum felis at augue ullamcorper, ac pretium mauris euismod. Nam augue leo, blandit sed ipsum eu, aliquet blandit justo. Pellentesque fringilla pretium nisi at maximus."),
+//                        closeSoftKeyboard());
+//        onView(withId(R.id.fab))
+//                .perform(click());
+//
+//        //it's working
+//        onView(withText(R.string.to_long_idea))
+//                .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
+//                .check(matches(isDisplayed()))
+//                .check(matches(withText("The text is too long, please provide a shorter idea.")));
+//    }
 
 }
