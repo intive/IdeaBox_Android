@@ -3,8 +3,8 @@ package intive.ideabox.activity;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.test.uiautomator.UiDevice;
 
-import junit.framework.AssertionFailedError;
 
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -14,6 +14,7 @@ import org.junit.runners.MethodSorters;
 
 import intive.ideabox.R;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -37,27 +38,26 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void mainScreen() {
-
+    public void basicFlow() {
+//test if I can view main screen and go to add idea screen
+        //asserting that idea recycler on main screen is visible
         onView(withId(R.id.idea_recycler))
         .check(matches(isDisplayed()));
-
+        //go to add idea screen
         onView(allOf(withId(R.id.add_fab)))
                 .perform(click());
-
-        try {onView(allOf(withId(R.id.backgroundLayout)))
+        //on idea screen assert that the correct screen is visible
+        onView(allOf(withId(R.id.backgroundLayout)))
                 .check(matches(isDisplayed()))
                 .check(matches(withText("Add your idea here")));
-
+        //check if editText is visible
             onView(withId(R.id.editText))
                 .check(matches(isDisplayed()));
-
+        //check if fab to add idea is visible and clickable
             onView(withId(R.id.fab))
                 .check(matches(isDisplayed()))
                 .check(matches((isClickable())));
-        } catch (AssertionFailedError error){
 
-        }
     }
 
     @Test
@@ -125,8 +125,7 @@ public class MainActivityTest {
         onView(withId(R.id.add_fab))
                 .perform(click());
         onView(withId(R.id.editText))
-                .perform(click(), typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis sollicitudin ligula, tincidunt tincidunt turpis interdum eget. Etiam magna turpis, elementum vel congue ut, dictum in velit. Integer euismod diam id rutrum sagittis. Aenean massa leo, pulvinar nec laoreet at, aliquam sit a"),
-                        closeSoftKeyboard());
+                .perform(click(), typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis sollicitudin ligula, tincidunt tincidunt turpis interdum eget. Etiam magna turpis, elementum vel congue ut, dictum in velit. Integer euismod diam id rutrum sagittis. Aenean massa leo, pulvinar nec laoreet at, aliquam sit a"), closeSoftKeyboard());
         onView(withId(R.id.fab))
                 .perform(click());
 
@@ -195,4 +194,73 @@ public class MainActivityTest {
 //                .check(matches(withText("The text is too long, please provide a shorter idea.")));
 //    }
 
+    @Test
+    public void exitWithoutSaving(){
+
+        // steps to prepare app to test
+        onView(withId(R.id.add_fab))
+                .perform(click());
+        onView(withId(R.id.editText))
+                .perform(click(), typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis sollicitudin ligula, tincidunt tincidunt turpis interdum eget. Etiam magna turpis, elementum vel congue ut, dictum in velit."), closeSoftKeyboard());
+
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        device.pressBack();
+
+        onView(allOf(withId(R.id.dialog_text)))
+        .check(matches(isDisplayed()));
+        //buttons are showing
+        onView(allOf(withId(R.id.dialog_buttons_background)))
+                .check(matches(isDisplayed()));
+        //are two buttons
+        onView(allOf(withId(R.id.dialog_btn_no)))
+                .check(matches(isClickable()));
+        onView(allOf(withId(R.id.dialog_btn_yes)))
+                .check(matches(isClickable()));
+
+    }
+
+    @Test
+    public void quitWithoutSavingPositiveHandling(){
+        //what will happen when I click "yes" button
+
+        // steps to prepare app to test
+        onView(withId(R.id.add_fab))
+                .perform(click());
+        onView(withId(R.id.editText))
+                .perform(click(), typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis sollicitudin ligula, tincidunt tincidunt turpis interdum eget. Etiam magna turpis, elementum vel congue ut, dictum in velit."), closeSoftKeyboard());
+
+//pressing back button
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        device.pressBack();
+
+        onView(withId(R.id.dialog_btn_yes))
+                .perform(click());
+
+        //asserting that user lands on main screen
+        onView(withId(R.id.idea_recycler))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void quitWithoutSavingNegativeHandling(){
+        //what will happen when I click "no" button
+
+        // steps to prepare app to test
+        onView(withId(R.id.add_fab))
+                .perform(click());
+        onView(withId(R.id.editText))
+                .perform(click(), typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis sollicitudin ligula, tincidunt tincidunt turpis interdum eget. Etiam magna turpis, elementum vel congue ut, dictum in velit."), closeSoftKeyboard());
+
+//pressing back button
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        device.pressBack();
+
+        onView(withId(R.id.dialog_btn_no))
+                .perform(click());
+
+        //asserting that user stays on current page
+        onView(withId(R.id.editText))
+                .check(matches(isDisplayed()));
+        //ToDo: checking if idea message want's deleted
+    }
 }
