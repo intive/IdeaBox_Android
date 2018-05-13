@@ -6,12 +6,19 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.Selection;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import intive.ideabox.R;
 import intive.ideabox.databinding.FragmentAddIdeaBinding;
@@ -44,7 +51,28 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
 
         return binding.getRoot();
     }
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        final EditText edt = (EditText) getView().findViewById(R.id.editText);
+        final TextView countCharakters = (TextView) getView().findViewById(R.id.counterTextCharakters);
+        edt.addTextChangedListener(new TextWatcher() {
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                countCharakters.setText(String.valueOf(s.length())+"/256");
+            }
+        });
+    }
     private void hideSoftKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
         View focusedView = getActivity().getCurrentFocus();
