@@ -1,5 +1,6 @@
 package intive.ideabox.viewmodel;
 
+import intive.ideabox.model.CloudProvider;
 import intive.ideabox.model.FirebaseProvider;
 import intive.ideabox.utility.NavigationUtils;
 
@@ -12,7 +13,7 @@ public class AddIdeaViewModel {
 
     public void saveIdea(String userIdea) {
         if (userIdea.length() >= MIN_IDEA_TEXT_LENGTH) {
-            FirebaseProvider dataProvider = FirebaseProvider.getInstance();
+            CloudProvider dataProvider = FirebaseProvider.getInstance();
             dataProvider.saveIdea(userIdea);
             NavigationUtils.getInstance().setIdeaListState(true);
         }

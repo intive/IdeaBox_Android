@@ -17,12 +17,26 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            sourceSets.release
+        }
+        mock {
+            debuggable true
+            minifyEnabled false
+            signingConfig signingConfigs.debug
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        debug {
+            java.srcDirs = ["src/main/java", "src/shared/java"]
+        }
+
+        release {
+            java.srcDirs = ["src/main/java", "src/shared/java"]
+        }
     }
 }
 ext {
@@ -43,7 +57,7 @@ ext {
 
 dependencies {
     implementation "android.arch.lifecycle:extensions:$viewModelVersion"
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation "com.android.support:support-v4:$supportLibraryVersion"
     testImplementation "junit:junit:$junitVersion"
@@ -66,7 +80,7 @@ dependencies {
     androidTestCompile "com.android.support:support-annotations:$supportLibraryVersion"
     testCompile "com.android.support.test:rules:$supportTestVersion"
     androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$uiautomatorVersion"
-    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    implementation "org.mockito:mockito-core:$mockitoVersion"
     compile "com.facebook.stetho:stetho:$stethoVersion"
     compile "com.facebook.stetho:stetho-okhttp3:$stethoVersion"
     compile "com.facebook.stetho:stetho-urlconnection:$stethoVersion"
@@ -74,7 +88,6 @@ dependencies {
     compile "com.google.code.gson:gson:$gsonVersion"
     compile "com.google.firebase:firebase-database:$firebaseVersion"
     compile "com.google.firebase:firebase-auth:$firebaseVersion"
-
     implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta6'
 }
 apply plugin: 'com.google.gms.google-services'
