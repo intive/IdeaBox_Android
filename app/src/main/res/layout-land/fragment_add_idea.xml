@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="idea"
+            type="String" />
+
+        <variable
+            name="ideaViewModel"
+            type="intive.ideabox.viewmodel.AddIdeaViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        tools:context="intive.ideabox.activity.MainActivity">
+        <ScrollView
+            android:id="@+id/backgroundLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/idea_greetings_text"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:layout_alignParentStart="true"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_weight="0.9"
+                android:backgroundTint="@color/colorAccent"
+                android:ems="10"
+                android:foregroundTint="@color/colorText"
+                android:gravity="top|start"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="textMultiLine"
+                android:maxLength="256"
+                android:maxLines="6"
+                android:scrollHorizontally="false"
+                android:text="@={idea}"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/counterTextCharakters"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginRight="16dp"
+                android:layout_weight="0.1"
+                android:ems="7"
+                android:text="@string/counter_character_num" />
+        </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|center_vertical|end"
+            android:layout_marginBottom="16dp"
+            android:elevation="12dp"
+            android:onClick="@{(v)->ideaViewModel.saveIdea(v, idea)}"
+            android:src="@drawable/ic_checkmark"
+            android:tint="@color/colorAccent"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="normal"/>
+
+    </RelativeLayout>
+</layout>
