@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import intive.ideabox.R;
 import intive.ideabox.fragment.AddIdeaFragment;
+import intive.ideabox.fragment.DetailIdeaFragment;
 import intive.ideabox.fragment.IdeaListFragment;
 import intive.ideabox.fragment.QuitAddIdeaDialogFragment;
 import intive.ideabox.utility.FragmentState;
@@ -42,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
                                 "addIdeaFragment")
                         .commit();
                 break;
+            case DetailIdea:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer,
+                                DetailIdeaFragment.newInstance(),
+                                "detailIdeaFragment")
+                        .commit();
         }
     }
 

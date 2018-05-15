@@ -13,7 +13,7 @@ public class NavigationUtils {
 
     private NavigationUtils() {
         state = new MutableLiveData<>();
-        state.setValue(FragmentState.IdeaList);
+        state.setValue(FragmentState.DetailIdea);
         ideaListSnackBarState = false;
     }
 
