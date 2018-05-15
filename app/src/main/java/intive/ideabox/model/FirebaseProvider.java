@@ -28,7 +28,7 @@ public class FirebaseProvider implements CloudProvider {
     private static FirebaseProvider instance = null;
     private MutableLiveData<List<IdeaData>> ideaMutableLiveData = new MutableLiveData<>();
 
-    protected FirebaseProvider() {
+    public FirebaseProvider() {
     }
 
     public static FirebaseProvider getInstance() {
