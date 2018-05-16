@@ -17,4 +17,6 @@
     <string name="dialog_header">Warning</string>
     <string name="add_idea_tag">addIdeaFragment</string>
     <string name="dialog_tag">dialog_tag</string>
+    <string name="internet_lost">You have lost the internet connection in Your device.</string>
+    <string name="connection_lost_message">Connection lost, please try again later</string>
 </resources>

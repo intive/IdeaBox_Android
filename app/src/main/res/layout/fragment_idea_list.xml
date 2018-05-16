@@ -8,6 +8,9 @@
         <variable
             name="viewModel"
             type="intive.ideabox.viewmodel.IdeaListViewModel" />
+        <variable
+            name="status"
+            type="intive.ideabox.model.NetworkStatus" />
 
     </data>
 
@@ -36,6 +39,7 @@
             android:tint="@color/colorAccent"
             app:backgroundTint="@color/colorPrimary"
             app:fabSize="normal"
+            android:clickable="@{status.isConnected}"
             app:layout_behavior="intive.ideabox.fragment.ScrollFABBehavior" />
     </android.support.design.widget.CoordinatorLayout>
 </layout>
