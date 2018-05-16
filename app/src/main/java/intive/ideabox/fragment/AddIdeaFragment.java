@@ -20,11 +20,17 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.Formatter;
+import java.util.Locale;
+
 import intive.ideabox.R;
 import intive.ideabox.databinding.FragmentAddIdeaBinding;
 import intive.ideabox.viewmodel.AddIdeaViewModel;
+import intive.ideabox.viewmodel.IdeaCountCharacters;
 
 public class AddIdeaFragment extends android.support.v4.app.Fragment {
+    private IdeaCountCharacters ideaCountCharacters;
+    private String str;
 
     public static AddIdeaFragment newInstance(){
         AddIdeaFragment fragment = new AddIdeaFragment();
@@ -36,9 +42,14 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         FragmentAddIdeaBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_idea, container, false);
         String idea = "";
+        str = "00";
+        ideaCountCharacters = new IdeaCountCharacters("0");
         AddIdeaViewModel viewModel = new AddIdeaViewModel();
         binding.setIdeaViewModel(viewModel);
         binding.setIdea(idea);
+        binding.setIdeaCountCharacters(ideaCountCharacters);
+binding.setStr(str);
+
         binding.backgroundLayout.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             public boolean onTouch(View v, MotionEvent event) {
@@ -55,7 +66,6 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         final EditText edt = (EditText) getView().findViewById(R.id.editText);
-        final TextView countCharakters = (TextView) getView().findViewById(R.id.counterTextCharakters);
         edt.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -69,7 +79,8 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                countCharakters.setText(String.valueOf(s.length())+"/256");
+                str = String.valueOf(s.length());
+                ideaCountCharacters.setNumberOfCharacters( String.valueOf(s.length()) );
             }
         });
     }
