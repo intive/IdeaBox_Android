@@ -40,6 +40,7 @@ ext {
     uiautomatorVersion = '2.1.3'
     viewModelVersion = '1.1.1'
     guavaVersion = '25.0-android'
+    daggerVersion = '2.4'
 }
 
 dependencies {
@@ -78,5 +79,7 @@ dependencies {
     implementation "com.google.firebase:firebase-database:$firebaseVersion"
     implementation "com.google.firebase:firebase-auth:$firebaseVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 }
 apply plugin: 'com.google.gms.google-services'
