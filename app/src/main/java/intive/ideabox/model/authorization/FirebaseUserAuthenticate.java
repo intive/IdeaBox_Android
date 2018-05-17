@@ -13,12 +13,14 @@ public class FirebaseUserAuthenticate implements UserAuthenticate {
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
 
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
-                Log.d(TAG, "signInWithEmail:success");
-            } else {
-                Log.w(TAG, "signInWithEmail:failure", task.getException());
-            }
-        });
+        if (auth.getCurrentUser() == null) {
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "signInWithEmail:success");
+                } else {
+                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                }
+            });
+        }
     }
 }
