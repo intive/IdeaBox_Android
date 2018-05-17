@@ -43,7 +43,7 @@ ext {
 }
 
 dependencies {
-    implementation"com.google.guava:guava:$guavaVersion"
+    implementation "com.google.guava:guava:$guavaVersion"
     implementation "android.arch.lifecycle:extensions:$viewModelVersion"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
