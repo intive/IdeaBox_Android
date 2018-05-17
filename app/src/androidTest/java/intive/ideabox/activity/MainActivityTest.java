@@ -63,22 +63,20 @@ public class MainActivityTest {
     @Test
     public void addingIdeaScreen() {
 
-        onView(allOf(withId(R.id.add_fab)))
+        onView(withId(R.id.add_fab))
                 .perform(click());
 
-       onView(allOf(withId(R.id.editText)))
+       onView(withId(R.id.editText))
                 .perform(click(),typeText("My brilliant idea"),closeSoftKeyboard());
         //I have to close keyboard to find add button, scrollTo doesn't work
 
        onView(withId(R.id.fab))
                .perform(click());
-        onView(allOf(withText(R.string.added_idea)))
+        onView(withText(R.string.added_idea))
                .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
                .check(matches(isDisplayed()))
                .check(matches(withText("Idea has been added!")));
 
-        onView(allOf(withId(R.id.idea_message)))
-        .check(matches(isDisplayed()));
     }
 
     @Test
@@ -206,15 +204,15 @@ public class MainActivityTest {
         UiDevice device = UiDevice.getInstance(getInstrumentation());
         device.pressBack();
 
-        onView(allOf(withId(R.id.dialog_text)))
+        onView(withId(R.id.dialog_text))
         .check(matches(isDisplayed()));
         //buttons are showing
-        onView(allOf(withId(R.id.dialog_buttons_background)))
+        onView(withId(R.id.dialog_buttons_background))
                 .check(matches(isDisplayed()));
         //are two buttons
-        onView(allOf(withId(R.id.dialog_btn_no)))
+        onView(withId(R.id.dialog_btn_no))
                 .check(matches(isClickable()));
-        onView(allOf(withId(R.id.dialog_btn_yes)))
+        onView(withId(R.id.dialog_btn_yes))
                 .check(matches(isClickable()));
 
     }
@@ -261,6 +259,6 @@ public class MainActivityTest {
         //asserting that user stays on current page
         onView(withId(R.id.editText))
                 .check(matches(isDisplayed()));
-        //ToDo: checking if idea message want's deleted
+        //ToDo: checking if idea message wasn't deleted
     }
 }

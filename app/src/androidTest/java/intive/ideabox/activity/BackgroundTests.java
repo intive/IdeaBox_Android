@@ -24,7 +24,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(MethodSorters.JVM)
 public class BackgroundTests {
 
     @Rule
@@ -37,7 +37,7 @@ public class BackgroundTests {
         onView(withId(R.id.idea_recycler))
                 .check(matches(isDisplayed()));
 
-        //reach device's controller go to backgound and back
+        //reach device's controller go to background and back
         UiDevice device = UiDevice.getInstance(getInstrumentation());
         device.pressHome();
         device.pressRecentApps();
