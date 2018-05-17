@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import intive.ideabox.viewmodel.IdeaListViewModel;
+
 public abstract class BaseAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
@@ -18,9 +20,9 @@ public abstract class BaseAdapter extends RecyclerView.Adapter<ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Object object = getObjForPosition(position);
-        holder.bind(object);
+        IdeaListViewModel listViewModel = new IdeaListViewModel();
+        holder.bind(object,listViewModel);
     }
-
     @Override
     public int getItemViewType(int position) {
         return getLayoutIdForPosition(position);

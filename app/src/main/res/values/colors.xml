@@ -1,8 +1,8 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
-  <color name="colorPrimary">#fade42</color>
-  <color name="colorPrimaryDark">#c3ad00</color>
-  <color name="colorAccent">#000000</color>
-  <color name="colorText">#BCBCBC</color>
-  <color name="colorAddIdeaBackground">#202020</color>
+    <color name="colorPrimary">#fade42</color>
+    <color name="colorPrimaryDark">#c3ad00</color>
+    <color name="colorAccent">#000000</color>
+    <color name="colorText">#BCBCBC</color>
+    <color name="colorAddIdeaBackground">#202020</color>
 </resources>

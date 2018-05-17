@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout>
 
     <data>
 
@@ -11,7 +11,9 @@
 
     </data>
 
-    <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
@@ -28,11 +30,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_margin="20sp"
+            android:layout_margin="20dp"
             android:onClick="@{() -> viewModel.onFabClick()}"
             android:src="@android:drawable/ic_input_add"
             android:tint="@color/colorAccent"
             app:backgroundTint="@color/colorPrimary"
-            app:fabSize="normal" />
-    </FrameLayout>
+            app:fabSize="normal"
+            app:layout_behavior="intive.ideabox.fragment.ScrollFABBehavior" />
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,13 +14,11 @@ import android.view.ViewGroup;
 import intive.ideabox.R;
 import intive.ideabox.adapter.IdeaListAdapter;
 import intive.ideabox.databinding.FragmentIdeaListBinding;
-import intive.ideabox.utility.NavigationUtils;
 import intive.ideabox.viewmodel.IdeaListViewModel;
 
 public class IdeaListFragment extends Fragment {
 
     private static final String SNACK_BAR_KEY = "KEY_SHOULD_SHOW_SNACK";
-
     private IdeaListAdapter ideaListAdapter;
 
     public static IdeaListFragment newInstance(boolean showSnackBar) {
@@ -45,18 +44,14 @@ public class IdeaListFragment extends Fragment {
         FragmentIdeaListBinding fragmentIdeaListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_idea_list, container, false);
         IdeaListViewModel ideaListViewModel = new IdeaListViewModel();
         fragmentIdeaListBinding.setViewModel(ideaListViewModel);
-
         RecyclerView recyclerView = fragmentIdeaListBinding.ideaRecycler;
-
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(mLayoutManager);
-
         ideaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);
         recyclerView.setAdapter(ideaListAdapter);
+        ideaListViewModel.getIdeas().observe(this, ideas -> ideaListAdapter.setData(ideas));
 
-        ideaListViewModel.getIdeas().observe(this, ideas -> {
-            ideaListAdapter.setData(ideas);
-        });
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
         if (showSnackBar)
             showSnackBar(fragmentIdeaListBinding.getRoot());

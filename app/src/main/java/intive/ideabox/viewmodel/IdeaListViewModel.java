@@ -3,7 +3,6 @@ package intive.ideabox.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
-
 import java.util.List;
 
 import intive.ideabox.model.FirebaseProvider;
@@ -20,5 +19,9 @@ public class IdeaListViewModel extends ViewModel {
 
     public void onFabClick() {
         NavigationUtils.getInstance().setAddIdeaState();
+    }
+
+    public void addVote(IdeaData ideaData) {
+        FirebaseProvider.getInstance().addVoteForIdea(ideaData);
     }
 }
