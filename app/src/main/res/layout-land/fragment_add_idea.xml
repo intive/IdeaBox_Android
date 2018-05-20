@@ -2,22 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
 
         <import type="android.view.View" />
-
-        <variable
-            name="idea"
-            type="String" />
-
-        <variable
-            name="str"
-            type="String" />
-
-        <variable
-            name="ideaCountCharacters"
-            type="intive.ideabox.viewmodel.IdeaCountCharacters" />
 
         <variable
             name="ideaViewModel"
@@ -26,6 +13,7 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/myFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusableInTouchMode="true"
@@ -35,6 +23,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_vertical|end"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:elevation="12dp"
+                android:onClick="@{(v)->ideaViewModel.saveIdea(v, ideaViewModel.idea)}"
+                android:src="@drawable/ic_checkmark"
+                android:tint="@color/colorAccent"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="normal" />
         </ScrollView>
 
         <TextView
@@ -58,12 +59,12 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editText"
-                android:layout_width="0dp"
+                android:id="@+id/editTextLand"
+                android:layout_width="91dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                app:addTextChangedListener="@{ideaViewModel.ideaTextWatcher}"
                 android:layout_weight="0.9"
                 android:backgroundTint="@color/colorAccent"
                 android:ems="10"
@@ -74,7 +75,7 @@
                 android:maxLength="256"
                 android:maxLines="6"
                 android:scrollHorizontally="false"
-                android:text="@={idea}"
+                android:text="@={ideaViewModel.idea}"
                 android:textColor="@color/colorAccent" />
 
             <TextView
@@ -82,25 +83,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_weight="0.1"
                 android:ems="7"
-                android:text="@{str}" />
+                android:text='@{ideaViewModel.charactersRemaining + @string/counter_character_num}'/>
         </LinearLayout>
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom|center_vertical|end"
-            android:layout_marginBottom="16dp"
-            android:elevation="12dp"
-            android:onClick="@{(v)->ideaViewModel.saveIdea(v, idea)}"
-            android:src="@drawable/ic_checkmark"
-            android:tint="@color/colorAccent"
-            app:backgroundTint="@color/colorPrimary"
-            app:fabSize="normal"/>
 
     </RelativeLayout>
 </layout>
+
+
+

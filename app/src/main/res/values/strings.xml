@@ -17,7 +17,7 @@
     <string name="dialog_header">Warning</string>
     <string name="add_idea_tag">addIdeaFragment</string>
     <string name="dialog_tag">dialog_tag</string>
-    <string name="counter_character_num">0/256</string>
+    <string name="counter_character_num">/256</string>
     <string name="maxIdeaLength">/256</string>
 
 </resources>
