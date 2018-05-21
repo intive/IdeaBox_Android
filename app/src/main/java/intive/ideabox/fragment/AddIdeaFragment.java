@@ -16,6 +16,9 @@ import intive.ideabox.databinding.FragmentAddIdeaBinding;
 import intive.ideabox.viewmodel.AddIdeaViewModel;
 
 public class AddIdeaFragment extends android.support.v4.app.Fragment {
+    AddIdeaViewModel viewModel;
+    String idea;
+    int mCount = 0;
     public static AddIdeaFragment newInstance() {
         return new AddIdeaFragment();
     }
@@ -24,7 +27,11 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         FragmentAddIdeaBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_idea, container, false);
-        AddIdeaViewModel viewModel = new AddIdeaViewModel("");
+        if(savedInstanceState!= null){
+            viewModel = new AddIdeaViewModel(savedInstanceState.getString("Idea"));
+        }else {
+            viewModel = new AddIdeaViewModel("");
+        }
         binding.setIdeaViewModel(viewModel);
         binding.backgroundLayout.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
@@ -45,6 +52,11 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
         if (focusedView != null) {
             inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         }
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("Idea",viewModel.idea.get());
     }
 
 }

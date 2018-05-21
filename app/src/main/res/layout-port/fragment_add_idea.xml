@@ -9,6 +9,9 @@
         <variable
             name="ideaViewModel"
             type="intive.ideabox.viewmodel.AddIdeaViewModel" />
+        <variable
+            name="idea"
+            type="String"/>
     </data>
 
         <RelativeLayout
@@ -32,12 +35,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/idea_greetings_text"
+            android:text="@={idea}"
             android:textColor="@color/colorAccent"
             android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editTextPort"
+                android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -45,6 +48,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:ems="10"
+                android:text="@={ideaViewModel.idea}"
                 app:addTextChangedListener="@{ideaViewModel.ideaTextWatcher}"
                 android:imeOptions="flagNoExtractUi"
                 android:foregroundTint="@color/colorText"
@@ -54,19 +58,17 @@
                 android:maxLines="6"
                 android:maxLength="256"
                 android:scrollHorizontally="false"
-                android:text="@={ideaViewModel.idea}"
                 android:textColor="@color/colorAccent" />
 
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/editTextPort"
+                android:layout_alignEnd="@+id/editText"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="bottom|center_vertical|end"
                 android:layout_marginBottom="16dp"
                 android:elevation="12dp"
-                android:onClick="@{(v)->ideaViewModel.saveIdea(v, ideaViewModel.idea)}"
                 android:src="@drawable/ic_checkmark"
                 android:tint="@color/colorAccent"
                 app:backgroundTint="@color/colorPrimary"
@@ -75,11 +77,18 @@
             android:id="@+id/counterTextCharacters"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editTextPort"
+            android:layout_below="@+id/editText"
             android:layout_marginEnd="16dp"
             android:ems="7"
+                android:text='@{ideaViewModel.charactersRemaining + @string/counter_character_num}'
             android:gravity="end"
-            android:text='@{ideaViewModel.charactersRemaining + @string/counter_character_num}'
+
             />
         </RelativeLayout>
 </layout>
+
+    <!--
+        android:onClick="@{(v)->ideaViewModel.saveIdea(v, ideaViewModel.idea)}"
+
+
+    -->
