@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import intive.ideabox.R;
 import intive.ideabox.fragment.AddIdeaFragment;
+import intive.ideabox.fragment.DetailIdeaFragment;
 import intive.ideabox.fragment.IdeaListFragment;
 import intive.ideabox.fragment.QuitAddIdeaDialogFragment;
 import intive.ideabox.utility.FragmentState;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             case AddIdea:
                 changeFragment(AddIdeaFragment.newInstance(), "addIdeaFragment");
                 break;
+
            /* case DetailIdea:
                 changeFragment(DetailIdeaFragment.newInstance(), "detailIdeaFragment");
                 break;
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(AuthenticationFragment.newInstance(), "authenticationFragment");
                 break;
                 */
+
         }
     }
 
