@@ -17,8 +17,6 @@ import intive.ideabox.viewmodel.AddIdeaViewModel;
 
 public class AddIdeaFragment extends android.support.v4.app.Fragment {
     AddIdeaViewModel viewModel;
-    String idea;
-    int mCount = 0;
     public static AddIdeaFragment newInstance() {
         return new AddIdeaFragment();
     }

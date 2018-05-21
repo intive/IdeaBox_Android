@@ -11,12 +11,18 @@ import intive.ideabox.utility.NavigationUtils;
 
 public class AddIdeaViewModel  extends BaseObservable{
 
-    private static final int MIN_IDEA_TEXT_LENGTH = 3;
+    private static final int MIN_IDEA_TEXT_LENGTH = 5;
     private static Integer TOTAL_IDEA_LENGTH = 256;
     public ObservableField<Integer> charactersRemaining = new ObservableField<>(TOTAL_IDEA_LENGTH);
     public ObservableField<String> idea = new ObservableField<>("");
     public AddIdeaViewModel(String idea) {
         this.idea.set(idea);
+
+
+    }
+
+    public AddIdeaViewModel() {
+
     }
 
 
@@ -25,8 +31,8 @@ public class AddIdeaViewModel  extends BaseObservable{
             FirebaseProvider dataProvider = FirebaseProvider.getInstance();
             dataProvider.saveIdea(userIdea.get());
             NavigationUtils.getInstance().setIdeaListState(true);
-        }else
-            android.widget.Toast.makeText( view.getContext(), intive.ideabox.R.string.to_short_idea,
+        } else
+            android.widget.Toast.makeText(view.getContext(), intive.ideabox.R.string.to_short_idea,
                     android.widget.Toast.LENGTH_SHORT).show();
     }
     public TextWatcher ideaTextWatcher = new TextWatcher() {
