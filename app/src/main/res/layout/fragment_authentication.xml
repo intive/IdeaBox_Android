@@ -2,14 +2,6 @@
 <layout>
 
     <data>
-        
-        <variable
-            name="email"
-            type="String" />
-
-        <variable
-            name="password"
-            type="String" />
 
         <variable
             name="viewModel"
@@ -19,6 +11,7 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/background_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
@@ -38,7 +31,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/input_hint_email"
                 android:inputType="textEmailAddress"
-                android:text="@={email}"/>
+                android:singleLine="true"
+                android:text="@={viewModel.userEmail}" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -53,7 +47,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/input_hint_password"
                 android:inputType="textPassword"
-                android:text="@={password}"/>
+                android:singleLine="true"
+                android:text="@={viewModel.userPassword}" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
@@ -61,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:onClick="@{() -> viewModel.signIn(email, password)}"
+            android:onClick="@{() -> viewModel.signIn()}"
             android:text="@string/login_button_text" />
 
         <android.support.v7.widget.AppCompatButton
@@ -70,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:onClick="@{() -> viewModel.signOut()}"
-            android:text="@string/login_button_text" />
+            android:text="Signout" />
 
     </LinearLayout>
 </layout>

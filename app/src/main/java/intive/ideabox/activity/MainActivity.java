@@ -16,22 +16,33 @@ import intive.ideabox.utility.NavigationUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String CURRENT_FRAGMENT = "CURRENT_FRAGMENT";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setFragmentStatusObserver();
+        if (savedInstanceState != null) {
+            setFragmentStatusObserver(savedInstanceState.getString(CURRENT_FRAGMENT));
+        } else {
+            setFragmentStatusObserver(null);
+        }
+
         setSnackBarObserver();
     }
 
     private void setSnackBarObserver() {
-
+        NavigationUtils.getInstance().getSnackBar().observe(this, s -> {
+            showSnackBar(s);
+        });
     }
 
-    private void setFragmentStatusObserver() {
+    private void setFragmentStatusObserver(String lastUsedState) {
         NavigationUtils.getInstance().getState().observe(this, state -> {
-            setFragment(state);
+
+            if (!state.toString().equals(lastUsedState))
+                setFragment(state);
         });
     }
 
@@ -52,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showSnackBar(int text) {
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity_layout), text, Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
     private void changeFragment(Fragment fragment, String tag) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
     }
@@ -65,5 +81,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString(CURRENT_FRAGMENT, NavigationUtils.getInstance().getState().getValue().toString());
     }
 }

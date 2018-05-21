@@ -1,6 +1,8 @@
 package intive.ideabox.fragment;
 
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +16,7 @@ import intive.ideabox.viewmodel.AuthenticationViewModel;
 
 public class AuthenticationFragment extends Fragment {
 
-    AuthenticationViewModel viewModel;
+    FragmentAuthenticationBinding binding;
 
     public static AuthenticationFragment newInstance() {
         AuthenticationFragment authenticationFragment = new AuthenticationFragment();
@@ -24,8 +26,11 @@ public class AuthenticationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentAuthenticationBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_authentication, container, false);
-        viewModel = new AuthenticationViewModel();
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_authentication, container, false);
+
+        ViewModelProvider provider = ViewModelProviders.of(this);
+        AuthenticationViewModel viewModel = provider.get(AuthenticationViewModel.class);
+
         binding.setViewModel(viewModel);
 
         return binding.getRoot();

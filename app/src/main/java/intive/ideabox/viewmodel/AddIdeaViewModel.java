@@ -2,6 +2,7 @@ package intive.ideabox.viewmodel;
 
 import android.view.View;
 
+import intive.ideabox.R;
 import intive.ideabox.model.FirebaseProvider;
 import intive.ideabox.utility.FragmentState;
 import intive.ideabox.utility.NavigationUtils;
@@ -19,6 +20,7 @@ public class AddIdeaViewModel {
         if (userIdea.length() >= MIN_IDEA_TEXT_LENGTH) {
             FirebaseProvider dataProvider = FirebaseProvider.getInstance();
             dataProvider.saveIdea(userIdea);
+            NavigationUtils.getInstance().setSnackBar(R.string.added_idea);
             NavigationUtils.getInstance().setState(FragmentState.IdeaList);
         } else
             android.widget.Toast.makeText(view.getContext(), intive.ideabox.R.string.to_short_idea,
