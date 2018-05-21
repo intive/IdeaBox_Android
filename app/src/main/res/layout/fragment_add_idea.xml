@@ -6,11 +6,13 @@
     <data>
 
         <import type="android.view.View" />
-
         <variable
             name="idea"
             type="String" />
 
+        <variable
+            name="status"
+            type="intive.ideabox.model.NetworkStatus" />
         <variable
             name="ideaViewModel"
             type="intive.ideabox.viewmodel.AddIdeaViewModel" />
@@ -74,6 +76,7 @@
                 android:src="@drawable/ic_checkmark"
                 android:tint="@color/colorAccent"
                 app:backgroundTint="@color/colorPrimary"
+                android:clickable="@{status.isConnected}"
                 app:fabSize="normal"/>
 
         </RelativeLayout>
