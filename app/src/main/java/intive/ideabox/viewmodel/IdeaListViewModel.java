@@ -7,6 +7,7 @@ import java.util.List;
 
 import intive.ideabox.model.FirebaseProvider;
 import intive.ideabox.model.IdeaData;
+import intive.ideabox.utility.FragmentState;
 import intive.ideabox.utility.NavigationUtils;
 
 public class IdeaListViewModel extends ViewModel {
@@ -18,7 +19,7 @@ public class IdeaListViewModel extends ViewModel {
     }
 
     public void onFabClick() {
-        NavigationUtils.getInstance().setAddIdeaState();
+        NavigationUtils.getInstance().setState(FragmentState.AddIdea);
     }
 
     public void addVote(IdeaData ideaData) {

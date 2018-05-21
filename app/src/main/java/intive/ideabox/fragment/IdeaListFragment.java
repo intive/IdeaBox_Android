@@ -18,14 +18,10 @@ import intive.ideabox.viewmodel.IdeaListViewModel;
 
 public class IdeaListFragment extends Fragment {
 
-    private static final String SNACK_BAR_KEY = "KEY_SHOULD_SHOW_SNACK";
     private IdeaListAdapter ideaListAdapter;
 
-    public static IdeaListFragment newInstance(boolean showSnackBar) {
+    public static IdeaListFragment newInstance() {
         IdeaListFragment fragment = new IdeaListFragment();
-        Bundle args = new Bundle();
-        args.putBoolean(SNACK_BAR_KEY, showSnackBar);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -38,8 +34,6 @@ public class IdeaListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Bundle args = getArguments();
-        boolean showSnackBar = args.getBoolean(SNACK_BAR_KEY, false);
 
         FragmentIdeaListBinding fragmentIdeaListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_idea_list, container, false);
         IdeaListViewModel ideaListViewModel = new IdeaListViewModel();
@@ -53,14 +47,6 @@ public class IdeaListFragment extends Fragment {
 
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
-        if (showSnackBar)
-            showSnackBar(fragmentIdeaListBinding.getRoot());
-
         return fragmentIdeaListBinding.getRoot();
-    }
-
-    private void showSnackBar(View view) {
-        Snackbar snackbar = Snackbar.make(view, R.string.added_idea, Snackbar.LENGTH_LONG);
-        snackbar.show();
     }
 }

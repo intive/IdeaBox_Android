@@ -3,6 +3,7 @@ package intive.ideabox.viewmodel;
 import android.view.View;
 
 import intive.ideabox.model.FirebaseProvider;
+import intive.ideabox.utility.FragmentState;
 import intive.ideabox.utility.NavigationUtils;
 
 public class AddIdeaViewModel {
@@ -18,7 +19,7 @@ public class AddIdeaViewModel {
         if (userIdea.length() >= MIN_IDEA_TEXT_LENGTH) {
             FirebaseProvider dataProvider = FirebaseProvider.getInstance();
             dataProvider.saveIdea(userIdea);
-            NavigationUtils.getInstance().setIdeaListState(true);
+            NavigationUtils.getInstance().setState(FragmentState.IdeaList);
         } else
             android.widget.Toast.makeText(view.getContext(), intive.ideabox.R.string.to_short_idea,
                     android.widget.Toast.LENGTH_SHORT).show();

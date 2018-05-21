@@ -3,5 +3,6 @@ package intive.ideabox.utility;
 public enum FragmentState {
     IdeaList,
     AddIdea,
-    DetailIdea
+    DetailIdea,
+    UserAuthenticate
 }

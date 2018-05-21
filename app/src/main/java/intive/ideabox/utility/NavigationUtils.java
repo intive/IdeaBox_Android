@@ -5,16 +5,13 @@ import android.arch.lifecycle.MutableLiveData;
 
 public class NavigationUtils {
 
-    private boolean ideaListSnackBarState;
-
     private MutableLiveData<FragmentState> state;
 
     private static NavigationUtils instance = null;
 
     private NavigationUtils() {
         state = new MutableLiveData<>();
-        state.setValue(FragmentState.IdeaList);
-        ideaListSnackBarState = false;
+        state.setValue(FragmentState.UserAuthenticate);
     }
 
     public synchronized static NavigationUtils getInstance() {
@@ -24,20 +21,11 @@ public class NavigationUtils {
         return instance;
     }
 
-    public void setIdeaListState(boolean ideaListSnackBarState) {
-        this.ideaListSnackBarState = ideaListSnackBarState;
-        state.setValue(FragmentState.IdeaList);
-    }
-
-    public void setAddIdeaState() {
-        state.setValue(FragmentState.AddIdea);
+    public void setState(FragmentState state) {
+        this.state.setValue(state);
     }
 
     public LiveData<FragmentState> getState() {
         return state;
-    }
-
-    public boolean getIdeaListSnackBarState() {
-        return ideaListSnackBarState;
     }
 }

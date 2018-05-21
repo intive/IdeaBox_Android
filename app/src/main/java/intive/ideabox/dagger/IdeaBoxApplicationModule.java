@@ -2,8 +2,8 @@ package intive.ideabox.dagger;
 
 import dagger.Module;
 import dagger.Provides;
-import intive.ideabox.model.authorization.FirebaseUserAuthenticate;
-import intive.ideabox.model.authorization.UserAuthenticate;
+import intive.ideabox.authentication.FirebaseUserAuthenticate;
+import intive.ideabox.authentication.UserAuthenticate;
 
 @Module
 public class IdeaBoxApplicationModule {
