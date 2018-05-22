@@ -1,6 +1,7 @@
 package intive.ideabox.fragment;
 
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -51,11 +52,13 @@ public class IdeaListFragment extends Fragment {
                 .subscribe(data -> {
                     if (RxBroadcastReceiver.isConnection(getActivity())) {
                         status.isConnected.set(true);
+                        fragmentIdeaListBinding.getRoot().findViewById(R.id.add_fab).setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
 
 
                     } else {
                         showConnectionSnackBar(fragmentIdeaListBinding.getRoot());
                         status.isConnected.set(false);
+                        fragmentIdeaListBinding.getRoot().findViewById(R.id.add_fab).setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorDisconnected)));
                     }
 
                 });

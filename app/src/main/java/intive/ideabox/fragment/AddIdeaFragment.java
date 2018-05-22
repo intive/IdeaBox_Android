@@ -3,6 +3,7 @@ package intive.ideabox.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -46,12 +47,18 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
                 .subscribe(data -> {
                     if (RxBroadcastReceiver.isConnection(getActivity())) {
                         status.isConnected.set(true);
+                        if(binding != null){
+                            binding.getRoot().findViewById(R.id.fab).setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
 
+                        }
 
                     } else {
                         showSnackBar(binding.getRoot());
                         status.isConnected.set(false);
+                        if(binding != null){
+                            binding.getRoot().findViewById(R.id.fab).setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorDisconnected)));
 
+                        }
                     }
 
                 });
