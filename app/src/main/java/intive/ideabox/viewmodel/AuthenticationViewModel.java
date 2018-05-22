@@ -13,8 +13,8 @@ public class AuthenticationViewModel extends ViewModel {
     @Inject
     UserAuthenticate userAuthenticate;
 
-    MutableLiveData<String> userEmail;
-    MutableLiveData<String> userPassword;
+    private MutableLiveData<String> userEmail;
+    private MutableLiveData<String> userPassword;
 
     public AuthenticationViewModel() {
         IdeaBoxApplication.applicationComponent.inject(this);

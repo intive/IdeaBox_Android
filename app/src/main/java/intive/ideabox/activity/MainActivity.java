@@ -16,19 +16,12 @@ import intive.ideabox.utility.NavigationUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String CURRENT_FRAGMENT = "CURRENT_FRAGMENT";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState != null) {
-            setFragmentStatusObserver(savedInstanceState.getString(CURRENT_FRAGMENT));
-        } else {
-            setFragmentStatusObserver(null);
-        }
-
+        setFragmentStatusObserver();
         setSnackBarObserver();
     }
 
@@ -38,11 +31,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setFragmentStatusObserver(String lastUsedState) {
+    private void setFragmentStatusObserver() {
         NavigationUtils.getInstance().getState().observe(this, state -> {
-
-            if (!state.toString().equals(lastUsedState))
-                setFragment(state);
+            setFragment(state);
         });
     }
 
@@ -63,13 +54,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void changeFragment(Fragment fragment, String tag) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
+    }
+
     private void showSnackBar(int text) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity_layout), text, Snackbar.LENGTH_LONG);
         snackbar.show();
-    }
-
-    private void changeFragment(Fragment fragment, String tag) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
     }
 
     @Override
@@ -81,12 +72,5 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putString(CURRENT_FRAGMENT, NavigationUtils.getInstance().getState().getValue().toString());
     }
 }
