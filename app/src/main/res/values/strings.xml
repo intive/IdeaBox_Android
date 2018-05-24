@@ -17,11 +17,9 @@
     <string name="dialog_header">Warning</string>
     <string name="add_idea_tag">addIdeaFragment</string>
     <string name="dialog_tag">dialog_tag</string>
-<<<<<<< HEAD
     <string name="counter_character_num">/256</string>
     <string name="maxIdeaLength">/256</string>
 
-=======
     <string name="connection_lost_message">Connection lost, please try again later</string>
     <string-array name="idea_status_array">
         <item>To do</item>
@@ -32,5 +30,4 @@
         <item>Duplicate</item>
         <item>Need more information</item>
     </string-array>
->>>>>>> master
 </resources>

@@ -28,15 +28,15 @@ public class MainActivity extends AppCompatActivity {
             setFragmentStatusObserver(null);
         }
 
-        //setSnackBarObserver();
+        setSnackBarObserver();
     }
 
-   /* private void setSnackBarObserver() {
+    private void setSnackBarObserver() {
         NavigationUtils.getInstance().getSnackBar().observe(this, s -> {
             showSnackBar(s);
         });
     }
-*/
+
     private void setFragmentStatusObserver(String lastUsedState) {
         NavigationUtils.getInstance().getState().observe(this, state -> {
 
@@ -54,13 +54,10 @@ public class MainActivity extends AppCompatActivity {
                 changeFragment(AddIdeaFragment.newInstance(), "addIdeaFragment");
                 break;
 
-           /* case DetailIdea:
+            case DetailIdea:
                 changeFragment(DetailIdeaFragment.newInstance(), "detailIdeaFragment");
                 break;
-            case UserAuthenticate:
-                changeFragment(AuthenticationFragment.newInstance(), "authenticationFragment");
-                break;
-                */
+
 
         }
     }
