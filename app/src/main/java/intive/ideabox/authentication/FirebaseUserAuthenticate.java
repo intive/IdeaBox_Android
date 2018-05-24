@@ -33,10 +33,4 @@ public class FirebaseUserAuthenticate implements UserAuthenticate {
             });
         }
     }
-
-    @Override
-    public void signOut() {
-        firebaseAuth.signOut();
-        Log.d(TAG, "signOut");
-    }
 }

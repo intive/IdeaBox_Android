@@ -28,10 +28,6 @@ public class AuthenticationViewModel extends ViewModel {
         }
     }
 
-    public void signOut() {
-        userAuthenticate.signOut();
-    }
-
     public String getUserEmail() {
         return userEmail.getValue();
     }

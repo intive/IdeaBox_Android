@@ -3,9 +3,13 @@ package intive.ideabox.activity;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import intive.ideabox.R;
+import intive.ideabox.authentication.UserAuthenticate;
 import intive.ideabox.fragment.AddIdeaFragment;
 import intive.ideabox.fragment.AuthenticationFragment;
 import intive.ideabox.fragment.DetailIdeaFragment;
@@ -20,9 +24,25 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setSupportActionBar(findViewById(R.id.app_bar));
 
         setFragmentStatusObserver();
         setSnackBarObserver();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.appbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.appbar_item_login) {
+            NavigationUtils.getInstance().setState(FragmentState.UserAuthenticate);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setSnackBarObserver() {
@@ -40,22 +60,31 @@ public class MainActivity extends AppCompatActivity {
     private void setFragment(FragmentState state) {
         switch (state) {
             case IdeaList:
-                changeFragment(IdeaListFragment.newInstance(), "ideaListFragment");
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, IdeaListFragment.newInstance(), "ideaListFragment")
+                        .commit();
                 break;
             case AddIdea:
-                changeFragment(AddIdeaFragment.newInstance(), "addIdeaFragment");
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, AddIdeaFragment.newInstance(), "addIdeaFragment")
+                        .commit();
                 break;
             case DetailIdea:
-                changeFragment(DetailIdeaFragment.newInstance(), "detailIdeaFragment");
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, DetailIdeaFragment.newInstance(), "detailIdeaFragment")
+                        .commit();
                 break;
             case UserAuthenticate:
-                changeFragment(AuthenticationFragment.newInstance(), "authenticationFragment");
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, AuthenticationFragment.newInstance(), "authenticationFragment")
+                        .addToBackStack(null)
+                        .commit();
                 break;
         }
-    }
-
-    private void changeFragment(Fragment fragment, String tag) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
     }
 
     private void showSnackBar(int text) {

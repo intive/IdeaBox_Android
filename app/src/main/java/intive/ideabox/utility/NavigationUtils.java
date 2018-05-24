@@ -14,7 +14,7 @@ public class NavigationUtils {
         state = new MutableLiveData<>();
         snackBarText = new MutableLiveData<>();
 
-        state.setValue(FragmentState.UserAuthenticate);
+        state.setValue(FragmentState.IdeaList);
     }
 
     public synchronized static NavigationUtils getInstance() {
