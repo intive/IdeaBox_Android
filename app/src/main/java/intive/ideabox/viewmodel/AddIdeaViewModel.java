@@ -1,5 +1,6 @@
 package intive.ideabox.viewmodel;
 
+import android.databinding.ObservableField;
 import android.view.View;
 
 import intive.ideabox.model.FirebaseProvider;
@@ -8,7 +9,7 @@ import intive.ideabox.utility.NavigationUtils;
 public class AddIdeaViewModel {
 
     private static final int MIN_IDEA_TEXT_LENGTH = 5;
-
+    public ObservableField<String> idea = new ObservableField<>("");
 
     public AddIdeaViewModel() {
 

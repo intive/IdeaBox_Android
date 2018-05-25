@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.IntentFilter;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import intive.ideabox.R;
 import intive.ideabox.databinding.FragmentAddIdeaBinding;
@@ -26,7 +28,8 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     Disposable disposable;
     NetworkStatus status = new NetworkStatus();
     FragmentAddIdeaBinding binding;
-
+    AddIdeaViewModel viewModel;
+    String idea;
     public static AddIdeaFragment newInstance() {
         AddIdeaFragment fragment = new AddIdeaFragment();
         return fragment;
@@ -66,14 +69,13 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_idea, container, false);
-        String idea = "";
-        AddIdeaViewModel viewModel = new AddIdeaViewModel();
+        viewModel = new AddIdeaViewModel();
         binding.setIdeaViewModel(viewModel);
-        binding.setIdea(idea);
         binding.setStatus(status);
         binding.backgroundLayout.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
@@ -102,6 +104,16 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
             snackbar.show();
         }
 
+    }
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            binding = DataBindingUtil.setContentView(getActivity(),R.layout.fragment_add_idea);
+            binding.setIdeaViewModel(viewModel);
+            binding.setStatus(status);
+            Toast.makeText(getActivity(),viewModel.idea.get(),Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
