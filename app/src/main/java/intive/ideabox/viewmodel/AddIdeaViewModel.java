@@ -1,6 +1,8 @@
 package intive.ideabox.viewmodel;
 
 import android.databinding.ObservableField;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 
 import intive.ideabox.model.FirebaseProvider;
@@ -9,7 +11,25 @@ import intive.ideabox.utility.NavigationUtils;
 public class AddIdeaViewModel {
 
     private static final int MIN_IDEA_TEXT_LENGTH = 5;
+    private static Integer TOTAL_IDEA_LENGTH = 256;
+    public ObservableField<Integer> charactersRemaining = new ObservableField<>(TOTAL_IDEA_LENGTH);
     public ObservableField<String> idea = new ObservableField<>("");
+    public TextWatcher ideaTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            charactersRemaining.set(TOTAL_IDEA_LENGTH - editable.toString().length());
+        }
+    };
 
     public AddIdeaViewModel() {
 

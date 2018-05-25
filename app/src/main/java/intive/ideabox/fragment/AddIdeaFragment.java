@@ -14,7 +14,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Toast;
 
 import intive.ideabox.R;
 import intive.ideabox.databinding.FragmentAddIdeaBinding;
@@ -29,7 +28,7 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     NetworkStatus status = new NetworkStatus();
     FragmentAddIdeaBinding binding;
     AddIdeaViewModel viewModel;
-    String idea;
+    ViewGroup container;
     public static AddIdeaFragment newInstance() {
         AddIdeaFragment fragment = new AddIdeaFragment();
         return fragment;
@@ -50,7 +49,7 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
                 .subscribe(data -> {
                     if (RxBroadcastReceiver.isConnection(getActivity())) {
                         status.isConnected.set(true);
-                        if(binding != null){
+                        if (binding != null) {
                             binding.getRoot().findViewById(R.id.fab).setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
 
                         }
@@ -58,15 +57,12 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
                     } else {
                         showSnackBar(binding.getRoot());
                         status.isConnected.set(false);
-                        if(binding != null){
+                        if (binding != null) {
                             binding.getRoot().findViewById(R.id.fab).setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorDisconnected)));
 
                         }
                     }
-
                 });
-
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -77,6 +73,7 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
         viewModel = new AddIdeaViewModel();
         binding.setIdeaViewModel(viewModel);
         binding.setStatus(status);
+        this.container = container;
         binding.backgroundLayout.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             public boolean onTouch(View v, MotionEvent event) {
@@ -105,15 +102,13 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
         }
 
     }
+
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             binding = DataBindingUtil.setContentView(getActivity(),R.layout.fragment_add_idea);
             binding.setIdeaViewModel(viewModel);
             binding.setStatus(status);
-            Toast.makeText(getActivity(),viewModel.idea.get(),Toast.LENGTH_SHORT).show();
+
         }
     }
 
-}
