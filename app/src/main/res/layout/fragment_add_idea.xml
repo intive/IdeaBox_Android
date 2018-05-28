@@ -6,11 +6,13 @@
     <data>
 
         <import type="android.view.View" />
-
         <variable
             name="idea"
             type="String" />
 
+        <variable
+            name="status"
+            type="intive.ideabox.model.NetworkStatus" />
         <variable
             name="ideaViewModel"
             type="intive.ideabox.viewmodel.AddIdeaViewModel" />
@@ -71,9 +73,10 @@
                 android:layout_marginBottom="16dp"
                 android:elevation="12dp"
                 android:onClick="@{(v)->ideaViewModel.saveIdea(v, idea)}"
-                android:src="@drawable/ic_checkmark"
                 android:tint="@color/colorAccent"
-                app:backgroundTint="@color/colorPrimary"
+                android:src="@drawable/ic_checkmark"
+                app:backgroundTint = "@color/colorPrimary"
+                android:clickable="@{status.isConnected}"
                 app:fabSize="normal"/>
 
         </RelativeLayout>

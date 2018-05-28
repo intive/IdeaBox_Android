@@ -23,7 +23,8 @@
     <string name="appbar_item_login">Login</string>
     <string name="snackbar_text_correct_login">User logged in</string>
     <string name="snackbar_text_incorrect_login">Incorrect credentials</string>
-
+    <string name="connection_lost_message">Connection lost, please try again later</string>
+  
     <string-array name="idea_status_array">
         <item>To do</item>
         <item>In progress</item>
