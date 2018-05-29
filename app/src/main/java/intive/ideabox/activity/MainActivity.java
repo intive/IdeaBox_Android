@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setSnackBarObserver();
     }
 
-    private void setSnackBarObserver() {
+   private void setSnackBarObserver() {
         NavigationUtils.getInstance().getSnackBar().observe(this, s -> {
             showSnackBar(s);
         });

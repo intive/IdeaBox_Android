@@ -73,7 +73,7 @@
                 android:layout_marginBottom="16dp"
                 android:elevation="12dp"
                 android:src="@drawable/ic_checkmark"
-                android:onClick="@{(v)->ideaViewModel.saveIdea(v, idea)}"
+                android:onClick="@{(v)->ideaViewModel.saveIdea(v, ideaViewModel.idea)}"
                 android:tint="@color/colorAccent"
                 app:backgroundTint = "@color/colorPrimary"
                 android:clickable="@{status.isConnected}"
@@ -85,15 +85,9 @@
             android:layout_below="@+id/editText"
             android:layout_marginEnd="16dp"
             android:ems="7"
-                android:text='@{ideaViewModel.charactersRemaining + @string/counter_character_num}'
+                android:text='@{String.valueOf(ideaViewModel.charactersRemaining) + @string/counter_character_num}'
             android:gravity="end"
 
             />
         </RelativeLayout>
 </layout>
-
-    <!--
-        android:onClick="@{(v)->ideaViewModel.saveIdea(v, ideaViewModel.idea)}"
-
-
-    -->
