@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">IdeaBox</string>
-
     <string name="added_idea">Idea has been added!</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
@@ -18,13 +17,20 @@
     <string name="add_idea_tag">addIdeaFragment</string>
     <string name="dialog_tag">dialog_tag</string>
     <string name="connection_lost_message">Connection lost, please try again later</string>
+    <string name="input_hint_email">Email</string>
+    <string name="input_hint_password">Password</string>
+    <string name="login_button_text">Login</string>
+    <string name="appbar_item_login">Login</string>
+    <string name="snackbar_text_correct_login">User logged in</string>
+    <string name="snackbar_text_incorrect_login">Incorrect credentials</string>
+
     <string-array name="idea_status_array">
-        <item>To do</item>
         <item>In progress</item>
         <item>Done</item>
         <item>Blocked/on hold</item>
         <item>Review</item>
         <item>Duplicate</item>
         <item>Need more information</item>
+        <item>To Do</item>
     </string-array>
 </resources>
