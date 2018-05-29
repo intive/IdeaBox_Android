@@ -17,9 +17,7 @@ public class IdeaData {
 
     private int letterIconColor;
 
-    public IdeaData() {
-        letterIconColor = RandomColorGenerator.getInstance().getRandomColor();
-    }
+    public IdeaData() {}
 
     public IdeaData(String ideaText, String ideaUser) {
         this.ideaText = ideaText;

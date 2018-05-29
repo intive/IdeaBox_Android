@@ -3,6 +3,7 @@ package intive.ideabox.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.IntentFilter;
+import android.content.res.ColorStateList;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,15 +24,13 @@ import io.reactivex.disposables.Disposable;
 public class AddIdeaFragment extends android.support.v4.app.Fragment {
 
     AddIdeaViewModel viewModel;
-
-    public static AddIdeaFragment newInstance() {
-        return new AddIdeaFragment();
-    }
-
     Disposable disposable;
     NetworkStatus status = new NetworkStatus();
     FragmentAddIdeaBinding binding;
 
+    public static AddIdeaFragment newInstance() {
+        return new AddIdeaFragment();
+    }
 
     @Override
     public void onPause() {
@@ -48,12 +47,18 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
                 .subscribe(data -> {
                     if (RxBroadcastReceiver.isConnection(getActivity())) {
                         status.isConnected.set(true);
+                        if (binding != null) {
+                            binding.getRoot().findViewById(R.id.fab).setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
 
+                        }
 
                     } else {
                         showSnackBar(binding.getRoot());
                         status.isConnected.set(false);
+                        if (binding != null) {
+                            binding.getRoot().findViewById(R.id.fab).setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorDisconnected)));
 
+                        }
                     }
 
                 });
@@ -66,12 +71,8 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         FragmentAddIdeaBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_idea, container, false);
-
-            viewModel = new AddIdeaViewModel(savedInstanceState.getString("Idea"));
-            viewModel = new AddIdeaViewModel("");
-
+        viewModel = new AddIdeaViewModel("");
         binding.setIdeaViewModel(viewModel);
-
         binding.backgroundLayout.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             public boolean onTouch(View v, MotionEvent event) {
@@ -97,7 +98,6 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
     }
-
 
 
     private void showSnackBar(View view) {
