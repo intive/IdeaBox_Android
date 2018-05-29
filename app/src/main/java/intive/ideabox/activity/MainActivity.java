@@ -3,10 +3,15 @@ package intive.ideabox.activity;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import intive.ideabox.R;
+import intive.ideabox.authentication.UserAuthenticate;
 import intive.ideabox.fragment.AddIdeaFragment;
+import intive.ideabox.fragment.AuthenticationFragment;
 import intive.ideabox.fragment.DetailIdeaFragment;
 import intive.ideabox.fragment.IdeaListFragment;
 import intive.ideabox.fragment.QuitAddIdeaDialogFragment;
@@ -15,60 +20,76 @@ import intive.ideabox.utility.NavigationUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String CURRENT_FRAGMENT = "CURRENT_FRAGMENT";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setSupportActionBar(findViewById(R.id.app_bar));
 
-        if (savedInstanceState != null) {
-            setFragmentStatusObserver(savedInstanceState.getString(CURRENT_FRAGMENT));
-        } else {
-            setFragmentStatusObserver(null);
-        }
-
+        setFragmentStatusObserver();
         setSnackBarObserver();
     }
 
-   private void setSnackBarObserver() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.appbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.appbar_item_login) {
+            NavigationUtils.getInstance().setState(FragmentState.UserAuthenticate);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setSnackBarObserver() {
         NavigationUtils.getInstance().getSnackBar().observe(this, s -> {
             showSnackBar(s);
         });
     }
 
-    private void setFragmentStatusObserver(String lastUsedState) {
+    private void setFragmentStatusObserver() {
         NavigationUtils.getInstance().getState().observe(this, state -> {
-
-            if (state.toString().equals(lastUsedState))
-                setFragment(state);
+            setFragment(state);
         });
     }
 
     private void setFragment(FragmentState state) {
         switch (state) {
             case IdeaList:
-                changeFragment(IdeaListFragment.newInstance(true), "ideaListFragment");
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, IdeaListFragment.newInstance(), "ideaListFragment")
+                        .commit();
                 break;
             case AddIdea:
-                changeFragment(AddIdeaFragment.newInstance(), "addIdeaFragment");
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, AddIdeaFragment.newInstance(), "addIdeaFragment")
+                        .commit();
                 break;
-
             case DetailIdea:
-                changeFragment(DetailIdeaFragment.newInstance(), "detailIdeaFragment");
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, DetailIdeaFragment.newInstance(), "detailIdeaFragment")
+                        .commit();
                 break;
-
-
+            case UserAuthenticate:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, AuthenticationFragment.newInstance(), "authenticationFragment")
+                        .addToBackStack(null)
+                        .commit();
+                break;
         }
     }
 
     private void showSnackBar(int text) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity_layout), text, Snackbar.LENGTH_LONG);
         snackbar.show();
-    }
-
-    private void changeFragment(Fragment fragment, String tag) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment, tag).commit();
     }
 
     @Override
@@ -80,12 +101,5 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putString(CURRENT_FRAGMENT, NavigationUtils.getInstance().getState().getValue().toString());
     }
 }

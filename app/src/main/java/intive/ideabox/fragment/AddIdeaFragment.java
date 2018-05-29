@@ -53,11 +53,10 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
                         }
 
                     } else {
-                        showSnackBar(binding.getRoot());
                         status.isConnected.set(false);
                         if (binding != null) {
                             binding.getRoot().findViewById(R.id.fab).setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorDisconnected)));
-
+                            showSnackBar(binding.getRoot());
                         }
                     }
 
@@ -71,8 +70,11 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         FragmentAddIdeaBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_idea, container, false);
-        viewModel = new AddIdeaViewModel("");
+        String idea = "";
+        AddIdeaViewModel viewModel = new AddIdeaViewModel();
         binding.setIdeaViewModel(viewModel);
+        binding.setIdea(idea);
+        binding.setStatus(status);
         binding.backgroundLayout.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             public boolean onTouch(View v, MotionEvent event) {
