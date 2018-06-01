@@ -1,5 +1,6 @@
 package intive.ideabox.activity;
 
+import android.content.Context;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -25,8 +26,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.IsNot.not;
 
 
 @LargeTest
@@ -44,10 +45,10 @@ public class MainActivityTest {
         onView(withId(R.id.idea_recycler))
         .check(matches(isDisplayed()));
         //go to add idea screen
-        onView(allOf(withId(R.id.add_fab)))
+        onView(withId(R.id.add_fab))
                 .perform(click());
         //on idea screen assert that the correct screen is visible
-        onView(allOf(withId(R.id.backgroundLayout)))
+        onView(withId(R.id.backgroundLayout))
                 .check(matches(isDisplayed()));
                 //.check(matches(withText("Add Your idea here:")));
         //check if editText is visible
@@ -148,16 +149,13 @@ public class MainActivityTest {
 //        onView(withId(R.id.add_fab))
 //                .perform(click());
 //        onView(withId(R.id.editText))
-//                .perform(click(), typeText("L"), closeSoftKeyboard());
+//                .perform(click(), typeText("L"))
+//                .perform(closeSoftKeyboard());
+//
 //        onView(withId(R.id.fab))
 //                .perform(click());
 //
 //        //Asserting that the right toast message appears and idea is added
-//        try {
-//            Thread.sleep(500);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
 //        onView(withText(R.string.to_short_idea))
 //                .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
 //                //double assertion to make sure that toast message is displayed and has the right message

@@ -47,7 +47,6 @@ public class BackgroundTests {
         //asserting that app got back on right screen
         onView(withId(R.id.idea_recycler))
                 .check(matches(isDisplayed()));
-
     }
 
     @Test
@@ -68,8 +67,5 @@ public class BackgroundTests {
         //asserting that app got back on right screen
         onView(withId(R.id.editText))
                 .check(matches(isDisplayed()));
-
     }
-
-
 }
