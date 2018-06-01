@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 
 import android.util.Log;
 
+import intive.ideabox.utility.FragmentState;
 import intive.ideabox.utility.NavigationUtils;
 
 public class QuitAddIdeaViewModel extends ViewModel {
@@ -16,7 +17,7 @@ public class QuitAddIdeaViewModel extends ViewModel {
     }
 
     public void positiveHandling() {
-        NavigationUtils.getInstance().setIdeaListState(false);
+        NavigationUtils.getInstance().setState(FragmentState.IdeaList);
         Log.d("Yes", "Yes pressed.");
         dialog.dismiss();
     }
