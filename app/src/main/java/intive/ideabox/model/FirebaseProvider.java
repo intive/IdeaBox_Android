@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import intive.ideabox.utility.HashDataUtils;
+import intive.ideabox.utility.UserDataUtils;
 
 
 public class FirebaseProvider implements CloudProvider {
@@ -26,9 +26,12 @@ public class FirebaseProvider implements CloudProvider {
     private final String MAIN_DIRECTORY_NAME = "ideas";
     private final String VOTES_FIELD_NAME = "votes";
     private final String USER_FIELD_NAME = "user";
+    private final String IDEA_STATUS_FIELD_NAME = "ideaStatus";
     private final String STATUS_DIRECTORY_NAME = "statuses";
+    private final String STATUS_FIELD_NAME = "status";
     private MutableLiveData<List<IdeaData>> ideaMutableLiveData = new MutableLiveData<>();
     private MutableLiveData<List<String>> ideaStatuses = new MutableLiveData<>();
+    private MutableLiveData<IdeaData> currentIdea = new MutableLiveData<>();
 
     protected FirebaseProvider() {
     }
@@ -46,25 +49,19 @@ public class FirebaseProvider implements CloudProvider {
     }
 
     @Override
-    public Boolean saveIdea(String idea) {
-        IdeaData ideaData = new IdeaData(idea, HashDataUtils.getHashedData(USER_FIELD_NAME));
+    public Boolean saveIdea(String idea, FragmentActivity fragmentActivity) {
+        IdeaData ideaData = new IdeaData(idea, UserDataUtils.getImeiUser());
         DatabaseReference myRef = getDBRef();
         myRef.child(MAIN_DIRECTORY_NAME).child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).setValue(ideaData);
-        Log.d("asd","awdadwa");
         return true;
     }
 
     @Override
-    public Boolean editIdea(IdeaData choosenIdea) {
-        Log.d("awadw",choosenIdea.getIdeaStatus());
-        Log.d("awadw",choosenIdea.getIdeaUser());
-        Log.d("awadw",String.valueOf(choosenIdea.getIdeaTime()));
+    public void editIdea(IdeaData choosenIdea) {
         DatabaseReference myRef = getDBRef();
-        Map<String,Object> taskMap = new HashMap<String,Object>();
-        taskMap.put("ideaStatus", choosenIdea.getIdeaStatus());
+        Map<String, Object> taskMap = new HashMap<>();
+        taskMap.put(IDEA_STATUS_FIELD_NAME, choosenIdea.getIdeaStatus());
         myRef.child(MAIN_DIRECTORY_NAME).child(choosenIdea.getIdeaUser().concat(String.valueOf(choosenIdea.getIdeaTime()))).updateChildren(taskMap);
-        //child("ideaStatus").setValue(choosenIdea.getIdeaStatus());
-        return true;
 
     }
 
@@ -102,16 +99,16 @@ public class FirebaseProvider implements CloudProvider {
         DatabaseReference myRef = getDBRef();
         DatabaseReference voteTemplate = myRef.child(MAIN_DIRECTORY_NAME).
                 child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).child(VOTES_FIELD_NAME).
-                child(String.valueOf(ideaData.getIdeaTime()).concat(ideaData.getIdeaUser()));
+                child(String.valueOf(ideaData.getIdeaTime()).concat(UserDataUtils.getImeiUser()));
         myRef.child(MAIN_DIRECTORY_NAME).child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).child(VOTES_FIELD_NAME).
                 addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
-                        if (snapshot.hasChild(String.valueOf(ideaData.getIdeaTime()).concat(ideaData.getIdeaUser()))) {
+                        if (snapshot.hasChild(String.valueOf(ideaData.getIdeaTime()).concat(UserDataUtils.getImeiUser()))) {
                             voteTemplate.setValue(null);
 
                         } else {
-                            voteTemplate.setValue(new IdeaVote(ideaData.getIdeaTime(), ideaData.getIdeaUser()));
+                            voteTemplate.setValue(new IdeaVote(ideaData.getIdeaTime(), UserDataUtils.getImeiUser()));
                         }
                     }
 
@@ -130,7 +127,7 @@ public class FirebaseProvider implements CloudProvider {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<String> tempIdeaStatuses = new ArrayList<String>();
                 dataSnapshot.getChildren().forEach(snapshot -> {
-                    String status = snapshot.child("status").getValue(String.class);
+                    String status = snapshot.child(STATUS_FIELD_NAME).getValue(String.class);
                     tempIdeaStatuses.add(status);
                 });
                 ideaStatuses.setValue(tempIdeaStatuses);
@@ -147,5 +144,23 @@ public class FirebaseProvider implements CloudProvider {
 
     }
 
+    public MutableLiveData<IdeaData> getCurrentIdea(String ideaUser, long ideaTime) {
+        final DatabaseReference myRef = getDBRef();
+        myRef.child(MAIN_DIRECTORY_NAME).
+                child(ideaUser + ideaTime).addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                currentIdea.setValue(dataSnapshot.getValue(IdeaData.class));
 
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+        return currentIdea;
+    }
 }

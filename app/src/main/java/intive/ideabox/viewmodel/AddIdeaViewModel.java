@@ -1,5 +1,6 @@
 package intive.ideabox.viewmodel;
 
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import intive.ideabox.R;
@@ -10,16 +11,15 @@ import intive.ideabox.utility.NavigationUtils;
 public class AddIdeaViewModel {
 
     private static final int MIN_IDEA_TEXT_LENGTH = 5;
-
-
-    public AddIdeaViewModel() {
-
+    private FragmentActivity fragmentActivity;
+    public AddIdeaViewModel(FragmentActivity appFragment) {
+        this.fragmentActivity = appFragment;
     }
 
     public void saveIdea(View view, String userIdea) {
         if (userIdea.length() >= MIN_IDEA_TEXT_LENGTH) {
             FirebaseProvider dataProvider = FirebaseProvider.getInstance();
-            dataProvider.saveIdea(userIdea);
+            dataProvider.saveIdea(userIdea,fragmentActivity );
             NavigationUtils.getInstance().setSnackBar(R.string.added_idea);
             NavigationUtils.getInstance().setState(FragmentState.IdeaList);
         } else

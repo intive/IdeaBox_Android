@@ -3,7 +3,6 @@ package intive.ideabox.viewmodel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
-import android.util.Log;
 
 import java.util.List;
 
@@ -27,8 +26,7 @@ public class DetailIdeaViewModel extends ViewModel {
     public static MutableLiveData<List<String>> getStatuses() {
         return statuses;
     }
-
-
+    public MutableLiveData<IdeaData> currentIdea = new MutableLiveData<>();
     public ObservableField<String> getIdeaStatus() {
         ideaStatus.set(choosenIdea.get().getIdeaStatus());
         return ideaStatus;
@@ -39,6 +37,10 @@ public class DetailIdeaViewModel extends ViewModel {
 
     }
 
+    public MutableLiveData<IdeaData> getCurrentIdea(String ideaUser, long ideaTime) {
+        return FirebaseProvider.getInstance().getCurrentIdea(ideaUser,ideaTime);
+    }
+
     public boolean getUserRole() {
         return FirebaseUserAuthenticate.isUserAdmin;
     }
@@ -47,14 +49,11 @@ public class DetailIdeaViewModel extends ViewModel {
         return choosenIdea.get();
     }
 
-    public void editIdea(IdeaData choosenIdea) {
+    public void editIdea(IdeaData choosenIdea, String ideaStatus) {
         FirebaseProvider dataProvider = FirebaseProvider.getInstance();
-        choosenIdea.setIdeaStatus(getIdeaStatus().get());
-        Log.d("awadw",choosenIdea.getIdeaStatus());
-        Log.d("awadw",choosenIdea.getIdeaUser());
-        Log.d("awadw",String.valueOf(choosenIdea.getIdeaTime()));
-        boolean getEdited = dataProvider.editIdea(choosenIdea);
-        NavigationUtils.getInstance().setSnackBar(R.string.added_idea);
+        choosenIdea.setIdeaStatus(ideaStatus);
+        dataProvider.editIdea(choosenIdea);
+        NavigationUtils.getInstance().setSnackBar(R.string.edited_idea);
         NavigationUtils.getInstance().setState(FragmentState.IdeaList);
 
     }

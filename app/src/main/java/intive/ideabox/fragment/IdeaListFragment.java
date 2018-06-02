@@ -17,6 +17,7 @@ import intive.ideabox.R;
 import intive.ideabox.adapter.IdeaListAdapter;
 import intive.ideabox.databinding.FragmentIdeaListBinding;
 import intive.ideabox.model.NetworkStatus;
+import intive.ideabox.utility.UserDataUtils;
 import intive.ideabox.utility.RxBroadcastReceiver;
 import intive.ideabox.viewmodel.IdeaListViewModel;
 import io.reactivex.disposables.Disposable;
@@ -87,9 +88,10 @@ public class IdeaListFragment extends Fragment {
         ideaListAdapter = new IdeaListAdapter(R.layout.row_idea_list);
         recyclerView.setAdapter(ideaListAdapter);
         ideaListViewModel.getIdeas().observe(this, ideas -> ideaListAdapter.setData(ideas));
-
+        UserDataUtils.isPermissionGranted.observe(this, permissionGranted -> {
+            ideaListAdapter.setData(ideaListViewModel.getIdeas().getValue());
+        });
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-
         return fragmentIdeaListBinding.getRoot();
     }
 

@@ -14,15 +14,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import intive.ideabox.utility.UserDataUtils;
 import intive.ideabox.utility.RandomColorGenerator;
 
 public class IdeaData extends BaseObservable {
+    public int votesNumber;
     private String ideaText;
     private String ideaUser;
     private long ideaTime;
     private String ideaStatus;
     private HashMap<String, IdeaVote> votes;
-
     private int letterIconColor;
 
     public IdeaData() {
@@ -35,6 +36,8 @@ public class IdeaData extends BaseObservable {
         this.ideaStatus = "To Do";
         this.votes = new HashMap<>();
         letterIconColor = RandomColorGenerator.getInstance().getRandomColor();
+        this.votesNumber = 0;
+
     }
 
     public HashMap<String, IdeaVote> getVotes() {
@@ -48,7 +51,7 @@ public class IdeaData extends BaseObservable {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public boolean getSingleIdeaVote(String userName) {
         for (Map.Entry<String, IdeaVote> entry : votes.entrySet()) {
-            if (entry.getKey().equals(userName)) {
+            if (entry.getKey().equals(UserDataUtils.getImeiUser())) {
                 return true;
             }
         }
@@ -98,7 +101,15 @@ public class IdeaData extends BaseObservable {
     }
 
     public int getVotesNumber() {
-        return votes.size();
+        if (votes != null) {
+            return votes.size();
+        } else {
+            return 0;
+        }
+    }
+
+    public void setVotesNumber(int voteNumber) {
+        this.votesNumber = voteNumber;
     }
 
     public String ideaTimeToDate() {

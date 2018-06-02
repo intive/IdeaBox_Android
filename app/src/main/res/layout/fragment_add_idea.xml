@@ -9,7 +9,9 @@
         <variable
             name="idea"
             type="String" />
-
+        <variable
+            name="ideaUser"
+            type="String" />
         <variable
             name="status"
             type="intive.ideabox.model.NetworkStatus" />

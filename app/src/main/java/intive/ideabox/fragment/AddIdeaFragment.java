@@ -71,7 +71,7 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_idea, container, false);
         String idea = "";
-        AddIdeaViewModel viewModel = new AddIdeaViewModel();
+        AddIdeaViewModel viewModel = new AddIdeaViewModel(getActivity());
         binding.setIdeaViewModel(viewModel);
         binding.setIdea(idea);
         binding.setStatus(status);

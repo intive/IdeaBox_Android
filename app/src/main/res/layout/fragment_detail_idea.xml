@@ -9,6 +9,12 @@
             name="object"
             type="intive.ideabox.model.IdeaData" />
         <variable
+            name="ideaStatus"
+            type="String"/>
+        <variable
+            name="status"
+            type="intive.ideabox.model.NetworkStatus" />
+        <variable
             name="viewModel"
             type="intive.ideabox.viewmodel.DetailIdeaViewModel" />
         <variable
@@ -89,7 +95,7 @@
                     android:id="@+id/status_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Status: " />
+                    android:text="@string/status" />
 
                 <TextView
                     android:id="@+id/idea_status"
@@ -103,9 +109,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:visibility="@{viewModel.getUserRole() ? View.GONE : View.VISIBLE}"
+                android:visibility="@{viewModel.getUserRole() ? View.VISIBLE : View.GONE}"
                 app:adapter="@{spinAdapter}"
-                bind:ideaStatus = "@{viewModel.ideaStatus}" />
+                bind:ideaStatus = "@={ideaStatus}" />
 
             <RelativeLayout
                 android:id="@+id/fab_layout"
@@ -118,10 +124,11 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
+                    android:clickable="@{status.isConnected}"
                     android:layout_margin="20dp"
-                    android:onClick="@{(v)->viewModel.editIdea(object)}"
+                    android:onClick="@{(v)->viewModel.editIdea(object,ideaStatus)}"
                     android:src="@drawable/ic_checkmark"
-                    android:visibility="@{viewModel.getUserRole() ? View.GONE : View.VISIBLE}"
+                    android:visibility="@{viewModel.getUserRole() ? View.VISIBLE : View.GONE}"
                     android:tint="@color/colorAccent"
                     app:backgroundTint="@color/colorPrimary"
                     app:fabSize="normal" />
