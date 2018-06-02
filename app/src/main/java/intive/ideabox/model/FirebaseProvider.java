@@ -2,9 +2,6 @@ package intive.ideabox.model;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.FragmentActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,7 +46,7 @@ public class FirebaseProvider implements CloudProvider {
     }
 
     @Override
-    public Boolean saveIdea(String idea, FragmentActivity fragmentActivity) {
+    public Boolean saveIdea(String idea) {
         IdeaData ideaData = new IdeaData(idea, UserDataUtils.getImeiUser());
         DatabaseReference myRef = getDBRef();
         myRef.child(MAIN_DIRECTORY_NAME).child(ideaData.getIdeaUser() + ideaData.getIdeaTime()).setValue(ideaData);
@@ -69,20 +66,19 @@ public class FirebaseProvider implements CloudProvider {
     public LiveData<List<IdeaData>> getIdeas() {
         final DatabaseReference myRef = getDBRef();
         myRef.child(MAIN_DIRECTORY_NAME).addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<IdeaData> ideaData = new ArrayList<>();
-                dataSnapshot.getChildren().forEach(snapshot -> {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     IdeaData data = snapshot.getValue(IdeaData.class);
                     HashMap<String, IdeaVote> ideaVotes = new HashMap<>();
-                    snapshot.child(VOTES_FIELD_NAME).getChildren().forEach(voteSnapshot -> {
+                    for (DataSnapshot voteSnapshot : snapshot.child(VOTES_FIELD_NAME).getChildren()) {
                         IdeaVote vote = voteSnapshot.getValue(IdeaVote.class);
                         ideaVotes.put(vote.getIdeaUser(), vote);
-                    });
+                    }
                     data.setVotes(ideaVotes);
                     ideaData.add(data);
-                });
+                }
                 ideaMutableLiveData.postValue(ideaData);
             }
 
@@ -122,14 +118,14 @@ public class FirebaseProvider implements CloudProvider {
     public MutableLiveData<List<String>> getStatuses() {
         final DatabaseReference myRef = getDBRef();
         myRef.child(STATUS_DIRECTORY_NAME).addListenerForSingleValueEvent(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<String> tempIdeaStatuses = new ArrayList<String>();
-                dataSnapshot.getChildren().forEach(snapshot -> {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     String status = snapshot.child(STATUS_FIELD_NAME).getValue(String.class);
                     tempIdeaStatuses.add(status);
-                });
+                }
+
                 ideaStatuses.setValue(tempIdeaStatuses);
 
             }
@@ -148,7 +144,6 @@ public class FirebaseProvider implements CloudProvider {
         final DatabaseReference myRef = getDBRef();
         myRef.child(MAIN_DIRECTORY_NAME).
                 child(ideaUser + ideaTime).addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 currentIdea.setValue(dataSnapshot.getValue(IdeaData.class));

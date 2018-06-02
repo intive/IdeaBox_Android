@@ -28,8 +28,7 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     FragmentAddIdeaBinding binding;
 
     public static AddIdeaFragment newInstance() {
-        AddIdeaFragment fragment = new AddIdeaFragment();
-        return fragment;
+        return new AddIdeaFragment();
     }
 
     @Override
@@ -47,17 +46,16 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
                 .subscribe(data -> {
                     if (RxBroadcastReceiver.isConnection(getActivity())) {
                         status.isConnected.set(true);
-                        if(binding != null){
+                        if (binding != null) {
                             binding.getRoot().findViewById(R.id.fab).setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorPrimary)));
 
                         }
 
                     } else {
-                        showSnackBar(binding.getRoot());
                         status.isConnected.set(false);
-                        if(binding != null){
+                        if (binding != null) {
                             binding.getRoot().findViewById(R.id.fab).setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.colorDisconnected)));
-
+                            showSnackBar(binding.getRoot());
                         }
                     }
 
@@ -66,12 +64,13 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_idea, container, false);
+        FragmentAddIdeaBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_idea, container, false);
         String idea = "";
-        AddIdeaViewModel viewModel = new AddIdeaViewModel(getActivity());
+        AddIdeaViewModel viewModel = new AddIdeaViewModel();
         binding.setIdeaViewModel(viewModel);
         binding.setIdea(idea);
         binding.setStatus(status);
@@ -96,6 +95,12 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+
     private void showSnackBar(View view) {
         if (view != null) {
             Snackbar snackbar = Snackbar.make(view, R.string.connection_lost_message, Snackbar.LENGTH_LONG);
@@ -105,3 +110,4 @@ public class AddIdeaFragment extends android.support.v4.app.Fragment {
     }
 
 }
+

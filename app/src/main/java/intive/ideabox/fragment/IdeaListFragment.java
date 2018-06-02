@@ -24,12 +24,9 @@ import io.reactivex.disposables.Disposable;
 
 public class IdeaListFragment extends Fragment {
 
-
-    private static final String SNACK_BAR_KEY = "KEY_SHOULD_SHOW_SNACK";
     Disposable disposable;
     NetworkStatus status = new NetworkStatus();
     FragmentIdeaListBinding fragmentIdeaListBinding;
-
     private IdeaListAdapter ideaListAdapter;
 
     public static IdeaListFragment newInstance() {
@@ -95,12 +92,6 @@ public class IdeaListFragment extends Fragment {
         return fragmentIdeaListBinding.getRoot();
     }
 
-
-    private void showSnackBar(View view) {
-        Snackbar snackbar = Snackbar.make(view, R.string.added_idea, Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
-
     private void showConnectionSnackBar(View view) {
         if (view != null) {
             Snackbar snackbar = Snackbar.make(view, R.string.connection_lost_message, Snackbar.LENGTH_LONG);
@@ -108,5 +99,4 @@ public class IdeaListFragment extends Fragment {
         }
 
     }
-
 }
