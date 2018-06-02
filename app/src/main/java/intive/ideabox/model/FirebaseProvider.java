@@ -60,16 +60,16 @@ public class FirebaseProvider implements CloudProvider {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<IdeaData> ideaData = new ArrayList<>();
-                dataSnapshot.getChildren().forEach(snapshot -> {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     IdeaData data = snapshot.getValue(IdeaData.class);
                     HashMap<String, IdeaVote> ideaVotes = new HashMap<>();
-                    snapshot.child(VOTES_FIELD_NAME).getChildren().forEach(voteSnapshot -> {
+                    for (DataSnapshot voteSnapshot : snapshot.child(VOTES_FIELD_NAME).getChildren()) {
                         IdeaVote vote = voteSnapshot.getValue(IdeaVote.class);
                         ideaVotes.put(vote.getIdeaUser(), vote);
-                    });
+                    }
                     data.setVotes(ideaVotes);
                     ideaData.add(data);
-                });
+                }
                 ideaMutableLiveData.postValue(ideaData);
             }
 
