@@ -32,7 +32,8 @@ ext {
     junitVersion = '4.12'
     espressoCoreVersion = '3.0.1'
     multidexVersion = '1.0.3'
-    firebaseVersion = '15.0.0'
+    firebaseVersion = '16.0.1'
+    firebaseVersionCore = '16.0.0'
     rxandroidVersion = '2.0.2'
     rxjava2Version = '2.1.9'
     mockitoVersion = '2.8.47'
@@ -63,7 +64,7 @@ dependencies {
     implementation "com.android.support:cardview-v7:$supportLibraryVersion"
     implementation "com.android.support:support-v13:$supportLibraryVersion"
     //noinspection GradleCompatible
-    implementation "com.google.firebase:firebase-core:$firebaseVersion"
+    implementation "com.google.firebase:firebase-core:$firebaseVersionCore"
     implementation "com.google.firebase:firebase-database:$firebaseVersion"
     implementation "com.google.firebase:firebase-auth:$firebaseVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
