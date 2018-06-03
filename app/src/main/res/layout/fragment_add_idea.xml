@@ -95,18 +95,14 @@
                 android:textSize="11sp" />
         </LinearLayout>
 
-
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_gravity="bottom|center_vertical|end"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_margin="20dp"
             android:clickable="@{status.isConnected}"
-            android:elevation="12dp"
             android:onClick="@{(v)->ideaViewModel.saveIdea(v, idea)}"
             android:src="@drawable/ic_checkmark"
             android:tint="@color/colorAccent"

@@ -88,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, AuthenticationFragment.newInstance(), "authenticationFragment")
-                        .addToBackStack(null)
                         .commit();
                 break;
         }

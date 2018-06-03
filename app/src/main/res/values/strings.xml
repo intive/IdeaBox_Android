@@ -28,6 +28,7 @@
     <string name="snackbar_text_correct_login">User logged in</string>
     <string name="snackbar_text_incorrect_login">Incorrect credentials</string>
     <string name="status">Status:</string>
+    <string name="likes">Likes: %s</string>
     <string name="permission_denied">Permission denied</string>
     <string name="permission_granted">Permission granted</string>
 </resources>

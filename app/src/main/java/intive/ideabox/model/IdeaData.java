@@ -114,7 +114,7 @@ public class IdeaData extends BaseObservable {
 
     public String ideaTimeToDate() {
         Date date = new Date(ideaTime);
-        @SuppressLint("SimpleDateFormat") Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") Format format = new SimpleDateFormat("dd/MM/yyyy");
         return format.format(date);
     }
 }
