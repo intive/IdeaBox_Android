@@ -12,7 +12,7 @@ public class FirebaseUserAuthenticate implements UserAuthenticate {
 
     private static final String TAG = "$CLASS_NAME$";
     private FirebaseAuth firebaseAuth;
-
+    public static boolean isUserAdmin= false;
     public FirebaseUserAuthenticate() {
         firebaseAuth = FirebaseAuth.getInstance();
     }
@@ -26,6 +26,7 @@ public class FirebaseUserAuthenticate implements UserAuthenticate {
                     Log.d(TAG, "signInWithEmail:success");
                     NavigationUtils.getInstance().setSnackBar(R.string.snackbar_text_correct_login);
                     NavigationUtils.getInstance().setState(FragmentState.IdeaList);
+                    isUserAdmin = true;
                 } else {
                     Log.w(TAG, "signInWithEmail:failure", task.getException());
                     NavigationUtils.getInstance().setSnackBar(R.string.snackbar_text_incorrect_login);

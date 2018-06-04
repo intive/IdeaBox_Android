@@ -36,6 +36,11 @@ public class BackgroundTests {
         //asserting that main screen is loaded
         onView(withId(R.id.idea_recycler))
                 .check(matches(isDisplayed()));
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //reach device's controller go to background and back
         UiDevice device = UiDevice.getInstance(getInstrumentation());
@@ -67,5 +72,11 @@ public class BackgroundTests {
         //asserting that app got back on right screen
         onView(withId(R.id.editText))
                 .check(matches(isDisplayed()));
+
+        //returning to previous screen for test's sake
+        UiDevice phone = UiDevice.getInstance(getInstrumentation());
+        phone.pressBack();
+        onView(withId(R.id.dialog_btn_yes))
+                .perform(click());
     }
 }

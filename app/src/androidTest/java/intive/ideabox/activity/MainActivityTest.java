@@ -102,6 +102,11 @@ public class MainActivityTest {
                 //double assertion to make sure that toast message is displayed and has the right message
                 .check(matches(isDisplayed()))
                 .check(matches(withText("Idea has been added!")));
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -121,6 +126,11 @@ public class MainActivityTest {
                 //double assertion to make sure that toast message is displayed and has the right message
                 .check(matches(isDisplayed()))
                 .check(matches(withText("Idea has been added!")));
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
     @Test
     public void positiveCharCountValidation_3(){
@@ -139,6 +149,11 @@ public class MainActivityTest {
                 //double assertion to make sure that toast message is displayed and has the right message
                 .check(matches(isDisplayed()))
                 .check(matches(withText("Idea has been added!")));
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -158,7 +173,7 @@ public class MainActivityTest {
         onView(withText(R.string.to_short_idea))
                 .inRoot(withDecorView(not(mActivityRule.getActivity().getWindow().getDecorView())))
                 //double assertion to make sure that toast message is displayed and has the right message
-                //.check(matches(isDisplayed()))
+                .check(matches(isDisplayed()))
                 .check(matches(withText("The text is too short, please provide a longer idea.")));
 
         //returning to previous screen for test's sake
@@ -191,24 +206,22 @@ public class MainActivityTest {
         device.pressBack();
         onView(withId(R.id.dialog_btn_yes))
                 .perform(click());}
-// //ToDo: find out how to test this with new requirements
-//
-//    @Test
-//    public void D_charCountNegativeValidation_c(){
-//        //Boundary value test. Asserts that user can't add idea which does not meet minimal requirements.
-//        //Steps to add idea
-//        onView(withId(R.id.add_fab))
-//                .perform(click());
-//        onView(withId(R.id.editText))
-//                .perform(click(), typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis sollicitudin ligula, tincidunt tincidunt turpis interdum eget. Etiam magna turpis, elementum vel congue ut, dictum in velit. Integer euismod diam id rutrum sagittis. Aenean massa leo, pulvinar nec laoreet at, aliquam sit amet nibh. Sed vel nisl ante. Nullam rutrum felis at augue ullamcorper, ac pretium mauris euismod. Nam augue leo, blandit sed ipsum eu, aliquet blandit justo. Pellentesque fringilla pretium nisi at maximus."),
-//                        closeSoftKeyboard());
-//        onView(withId(R.id.fab))
-//                .perform(click());
-//        onView(withText(R.string.to_long_idea))
-//                .inRoot(withDecorView(not(mActivityRule.getActivity().getWindow().getDecorView())))
-//                .check(matches(isDisplayed()))
-//                .check(matches(withText("The text is too long, please provide a shorter idea.")));
-//    }
+    @Test
+    public void counterShowsCharactersLeft(){
+        //Steps to add idea
+        onView(withId(R.id.add_fab))
+                .perform(click());
+        onView(withId(R.id.editText))
+                .perform(click(), typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis sollicitudin ligula, tincidunt tincidunt turpis interdum eget. Etiam magna turpis, elementum vel congue ut, dictum in velit. Integer euismod diam id rutrum sagittis. Aenean massa !"),
+                        closeSoftKeyboard());
+        onView(withId(R.id.counterTextCharacters))
+                .check(matches(withText("0/256")));
+
+        //returning to previous screen for test's sake
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        device.pressBack();
+        onView(withId(R.id.dialog_btn_yes))
+                .perform(click());}
 
 
     @Test

@@ -9,4 +9,6 @@ public interface CloudProvider {
     Boolean saveIdea(String idea);
 
     LiveData<List<IdeaData>> getIdeas();
+
+    void editIdea(IdeaData editedIdea);
 }

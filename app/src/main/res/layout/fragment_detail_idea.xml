@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-
+<layout
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
     <data>
-
+        <import type="android.view.View" />
+        <variable
+            name="object"
+            type="intive.ideabox.model.IdeaData" />
+        <variable
+            name="ideaStatus"
+            type="String"/>
+        <variable
+            name="status"
+            type="intive.ideabox.model.NetworkStatus" />
         <variable
             name="viewModel"
             type="intive.ideabox.viewmodel.DetailIdeaViewModel" />
+        <variable
+            name="spinAdapter"
+            type="android.widget.ArrayAdapter"/>
     </data>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -24,6 +37,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+
                 android:id="@+id/header_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,7 +49,7 @@
                     android:id="@+id/idea_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="01/10/1999"
+                    android:text="@{object.ideaTimeToDate()}"
                     android:textSize="16sp" />
 
                 <TextView
@@ -43,7 +57,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:text="Likes: 45"
+                    android:text="@{String.format(@string/likes, String.valueOf(object.votesNumber))}"
                     android:textSize="16sp" />
             </RelativeLayout>
 
@@ -55,7 +69,7 @@
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="24dp"
                 android:maxLength="255"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                android:text="@{object.ideaText}"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
 
@@ -81,21 +95,24 @@
                     android:id="@+id/status_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Status: " />
+                    android:text="@string/status" />
 
                 <TextView
                     android:id="@+id/idea_status"
+                    android:layout_marginStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="unknown" />
+                    android:text="@{object.ideaStatus}" />
             </LinearLayout>
 
-            <Spinner
+            <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/idea_status_selector"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:entries="@array/idea_status_array" />
+                android:visibility="@{viewModel.getUserRole() ? View.VISIBLE : View.GONE}"
+                app:adapter="@{spinAdapter}"
+                bind:ideaStatus = "@={ideaStatus}" />
 
             <RelativeLayout
                 android:id="@+id/fab_layout"
@@ -108,13 +125,15 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
+                    android:clickable="@{status.isConnected}"
                     android:layout_margin="20dp"
+                    android:onClick="@{(v)->viewModel.editIdea(object,ideaStatus)}"
                     android:src="@drawable/ic_checkmark"
+                    android:visibility="@{viewModel.getUserRole() ? View.VISIBLE : View.GONE}"
                     android:tint="@color/colorAccent"
                     app:backgroundTint="@color/colorPrimary"
                     app:fabSize="normal" />
             </RelativeLayout>
         </LinearLayout>
-
     </ScrollView>
 </layout>

@@ -44,6 +44,7 @@ public class RxBroadcastReceiver implements ObservableOnSubscribe<Intent>, Dispo
     public static boolean isConnection(Context context) {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo info = cm.getActiveNetworkInfo();
         if (info != null && info.isConnected()) {
             boolean wifiConnected = info.getType() == ConnectivityManager.TYPE_WIFI;
@@ -56,7 +57,7 @@ public class RxBroadcastReceiver implements ObservableOnSubscribe<Intent>, Dispo
     }
 
     @Override
-    public void subscribe(ObservableEmitter<Intent> emitter) throws Exception {
+    public void subscribe(ObservableEmitter<Intent> emitter) {
         this.emitter = emitter;
         if (contextWeakReference != null && contextWeakReference.get() != null) {
             contextWeakReference.get().registerReceiver(broadcastReceiver, intentFilter);
