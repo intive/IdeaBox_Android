@@ -1,6 +1,5 @@
 package intive.ideabox.activity;
 
-import android.content.Context;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -142,78 +141,75 @@ public class MainActivityTest {
                 .check(matches(withText("Idea has been added!")));
     }
 
-//    @Test
-//    public void negativeCharCountValidation_1(){
-//        //Boundary value test. Asserts that user can't add idea which does not meet minimal requirements.
-//        //Steps to add idea
-//        onView(withId(R.id.add_fab))
-//                .perform(click());
-//        onView(withId(R.id.editText))
-//                .perform(click(), typeText("L"))
-//                .perform(closeSoftKeyboard());
-//
-//        onView(withId(R.id.fab))
-//                .perform(click());
-//
-//        //Asserting that the right toast message appears and idea is added
-//        onView(withText(R.string.to_short_idea))
-//                .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
-//                //double assertion to make sure that toast message is displayed and has the right message
-//                .check(matches(isDisplayed()))
-//                .check(matches(withText("The text is too short, please provide a longer idea.")));
-//
-//        //returning to previous screen for test's sake
-//        UiDevice device = UiDevice.getInstance(getInstrumentation());
-//        device.pressBack();
-//        onView(withId(R.id.dialog_btn_yes))
-//                .perform(click());
-//    }
-
-//    @Test
-//    public void negativeCharCountValidation_2(){
-//        //Boundary value test. Asserts that user can't add idea which does not meet minimal requirements.
-//        //Steps to add idea
-//        onView(withId(R.id.add_fab))
-//                .perform(click());
-//        onView(withId(R.id.editText))
-//                .perform(click(), typeText("Lo"), closeSoftKeyboard());
-//        onView(withId(R.id.fab))
-//                .perform(click());
-//
-//        //Asserting that the right toast message appears and idea is added
-//        onView(withText(R.string.to_short_idea))
-//                .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
-//                //double assertion to make sure that toast message is displayed and has the right message
-//                .check(matches(isDisplayed()))
-//                .check(matches(withText("The text is too short, please provide a longer idea.")));
-//
-//        //returning to previous screen for test's sake
-//        UiDevice device = UiDevice.getInstance(getInstrumentation());
-//        device.pressBack();
-//        onView(withId(R.id.dialog_btn_yes))
-//                .perform(click());
-    //}
- //ToDo: find out how to test this with new requirements
-/*
     @Test
-    public void D_charCountNegativeValidation_c(){
+    public void negativeCharCountValidation_1(){
         //Boundary value test. Asserts that user can't add idea which does not meet minimal requirements.
         //Steps to add idea
         onView(withId(R.id.add_fab))
                 .perform(click());
         onView(withId(R.id.editText))
-                .perform(click(), typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis sollicitudin ligula, tincidunt tincidunt turpis interdum eget. Etiam magna turpis, elementum vel congue ut, dictum in velit. Integer euismod diam id rutrum sagittis. Aenean massa leo, pulvinar nec laoreet at, aliquam sit amet nibh. Sed vel nisl ante. Nullam rutrum felis at augue ullamcorper, ac pretium mauris euismod. Nam augue leo, blandit sed ipsum eu, aliquet blandit justo. Pellentesque fringilla pretium nisi at maximus."),
-                        closeSoftKeyboard());
+                .perform(click(), typeText("L"))
+                .perform(closeSoftKeyboard());
+
         onView(withId(R.id.fab))
                 .perform(click());
 
-        //it's working
-        onView(withText(R.string.to_long_idea))
-                .inRoot(withDecorView(is(mActivityRule.getActivity().getWindow().getDecorView())))
-                .check(matches(isDisplayed()))
-                .check(matches(withText("The text is too long, please provide a shorter idea.")));
+        //Asserting that the right toast message appears and idea is added
+        onView(withText(R.string.to_short_idea))
+                .inRoot(withDecorView(not(mActivityRule.getActivity().getWindow().getDecorView())))
+                //double assertion to make sure that toast message is displayed and has the right message
+                //.check(matches(isDisplayed()))
+                .check(matches(withText("The text is too short, please provide a longer idea.")));
+
+        //returning to previous screen for test's sake
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        device.pressBack();
+        onView(withId(R.id.dialog_btn_yes))
+                .perform(click());
     }
-*/
+
+    @Test
+    public void negativeCharCountValidation_2(){
+        //Boundary value test. Asserts that user can't add idea which does not meet minimal requirements.
+        //Steps to add idea
+        onView(withId(R.id.add_fab))
+                .perform(click());
+        onView(withId(R.id.editText))
+                .perform(click(), typeText("Lo"), closeSoftKeyboard());
+        onView(withId(R.id.fab))
+                .perform(click());
+
+        //Asserting that the right toast message appears and idea is added
+        onView(withText(R.string.to_short_idea))
+                .inRoot(withDecorView(not(mActivityRule.getActivity().getWindow().getDecorView())))
+                //double assertion to make sure that toast message is displayed and has the right message
+                .check(matches(isDisplayed()))
+                .check(matches(withText("The text is too short, please provide a longer idea.")));
+
+        //returning to previous screen for test's sake
+        UiDevice device = UiDevice.getInstance(getInstrumentation());
+        device.pressBack();
+        onView(withId(R.id.dialog_btn_yes))
+                .perform(click());}
+// //ToDo: find out how to test this with new requirements
+//
+//    @Test
+//    public void D_charCountNegativeValidation_c(){
+//        //Boundary value test. Asserts that user can't add idea which does not meet minimal requirements.
+//        //Steps to add idea
+//        onView(withId(R.id.add_fab))
+//                .perform(click());
+//        onView(withId(R.id.editText))
+//                .perform(click(), typeText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus lobortis sollicitudin ligula, tincidunt tincidunt turpis interdum eget. Etiam magna turpis, elementum vel congue ut, dictum in velit. Integer euismod diam id rutrum sagittis. Aenean massa leo, pulvinar nec laoreet at, aliquam sit amet nibh. Sed vel nisl ante. Nullam rutrum felis at augue ullamcorper, ac pretium mauris euismod. Nam augue leo, blandit sed ipsum eu, aliquet blandit justo. Pellentesque fringilla pretium nisi at maximus."),
+//                        closeSoftKeyboard());
+//        onView(withId(R.id.fab))
+//                .perform(click());
+//        onView(withText(R.string.to_long_idea))
+//                .inRoot(withDecorView(not(mActivityRule.getActivity().getWindow().getDecorView())))
+//                .check(matches(isDisplayed()))
+//                .check(matches(withText("The text is too long, please provide a shorter idea.")));
+//    }
+
 
     @Test
     public void exitWithoutSaving(){
@@ -285,7 +281,9 @@ public class MainActivityTest {
 
         //asserting that user stays on current page
         onView(withId(R.id.editText))
-                .check(matches(isDisplayed()));//returning to previous screen for test's sake
+                .check(matches(isDisplayed()));
+
+        //returning to previous screen for test's sake
         UiDevice phone = UiDevice.getInstance(getInstrumentation());
         phone.pressBack();
         onView(withId(R.id.dialog_btn_yes))
