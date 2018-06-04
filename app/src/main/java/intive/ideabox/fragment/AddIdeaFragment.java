@@ -23,7 +23,6 @@ import io.reactivex.disposables.Disposable;
 
 public class AddIdeaFragment extends android.support.v4.app.Fragment {
 
-    AddIdeaViewModel viewModel;
     Disposable disposable;
     NetworkStatus status = new NetworkStatus();
     FragmentAddIdeaBinding binding;

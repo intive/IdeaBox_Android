@@ -15,7 +15,9 @@ public class IdeaListViewModel extends ViewModel {
     public IdeaListViewModel() {}
 
     public LiveData<List<IdeaData>> getIdeas() {
+        DetailIdeaViewModel.statuses = FirebaseProvider.getInstance().getStatuses();
         return FirebaseProvider.getInstance().getIdeas();
+
     }
 
     public void onFabClick() {
@@ -24,5 +26,9 @@ public class IdeaListViewModel extends ViewModel {
 
     public void addVote(IdeaData ideaData) {
         FirebaseProvider.getInstance().addVoteForIdea(ideaData);
+    }
+    public void goToIdeaDetails(IdeaData choosenIdea){
+        DetailIdeaViewModel.choosenIdea.set(choosenIdea);
+        NavigationUtils.getInstance().setState(FragmentState.DetailIdea);
     }
 }

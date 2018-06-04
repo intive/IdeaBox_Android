@@ -15,7 +15,13 @@ public class IdeaListAdapter extends SingleLayoutAdapter{
 
     @Override
     public int getItemCount() {
-        return ideaData.size();
+        if (ideaData == null){
+            return 0;
+        }
+        else{
+            return ideaData.size();
+        }
+
     }
 
     public void setData(List<IdeaData> data){

@@ -19,7 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="12dp"
-        android:paddingTop="12dp">
+        android:paddingTop="12dp"
+        android:onClick="@{()->listViewModel.goToIdeaDetails(object)}">
 
         <TextView
             android:id="@+id/letter_icon"
@@ -48,8 +49,8 @@
 
         <Button
             android:id="@+id/vote_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
             android:background="@{object.getSingleIdeaVote(object.ideaUser) != true ? @drawable/thumb_novote : @drawable/thumb_vote}"

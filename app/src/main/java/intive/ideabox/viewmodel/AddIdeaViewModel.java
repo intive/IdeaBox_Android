@@ -1,11 +1,9 @@
 package intive.ideabox.viewmodel;
-
 import android.databinding.BaseObservable;
 import android.databinding.ObservableField;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-
 import intive.ideabox.R;
 import intive.ideabox.model.FirebaseProvider;
 import intive.ideabox.utility.FragmentState;
@@ -39,9 +37,7 @@ public class AddIdeaViewModel extends BaseObservable {
 
     public void saveIdea(View view, String userIdea) {
         if (userIdea.length() >= MIN_IDEA_TEXT_LENGTH) {
-
             FirebaseProvider dataProvider = FirebaseProvider.getInstance();
-
             dataProvider.saveIdea(userIdea);
             NavigationUtils.getInstance().setSnackBar(R.string.added_idea);
             NavigationUtils.getInstance().setState(FragmentState.IdeaList);

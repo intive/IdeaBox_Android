@@ -9,11 +9,17 @@
         <import type="android.view.View" />
 
         <variable
-            name="status"
-            type="intive.ideabox.model.NetworkStatus" />
-        <variable
             name="idea"
             type="String" />
+
+        <variable
+            name="ideaUser"
+            type="String" />
+
+        <variable
+            name="status"
+            type="intive.ideabox.model.NetworkStatus" />
+
         <variable
             name="ideaViewModel"
             type="intive.ideabox.viewmodel.AddIdeaViewModel" />
@@ -50,17 +56,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:layout_below="@+id/textView"
             android:layout_marginTop="16dp"
-            android:layout_alignParentStart="true"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
                 android:layout_weight="0.86"
                 android:backgroundTint="@color/colorAccent"
                 android:ems="10"
@@ -89,22 +95,18 @@
                 android:textSize="11sp" />
         </LinearLayout>
 
-
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:layout_gravity="bottom|center_vertical|end"
-            android:layout_marginBottom="16dp"
-            android:elevation="12dp"
-            android:onClick="@{(v)->ideaViewModel.saveIdea(v, idea)}"
-            android:tint="@color/colorAccent"
-            android:src="@drawable/ic_checkmark"
-            app:backgroundTint = "@color/colorPrimary"
+            android:layout_margin="20dp"
             android:clickable="@{status.isConnected}"
-            app:fabSize="normal"/>
+            android:onClick="@{(v)->ideaViewModel.saveIdea(v, idea)}"
+            android:src="@drawable/ic_checkmark"
+            android:tint="@color/colorAccent"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="normal" />
     </RelativeLayout>
 </layout>

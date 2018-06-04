@@ -1,15 +1,19 @@
 package intive.ideabox.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import intive.ideabox.R;
-import intive.ideabox.authentication.UserAuthenticate;
 import intive.ideabox.fragment.AddIdeaFragment;
 import intive.ideabox.fragment.AuthenticationFragment;
 import intive.ideabox.fragment.DetailIdeaFragment;
@@ -17,6 +21,9 @@ import intive.ideabox.fragment.IdeaListFragment;
 import intive.ideabox.fragment.QuitAddIdeaDialogFragment;
 import intive.ideabox.utility.FragmentState;
 import intive.ideabox.utility.NavigationUtils;
+import intive.ideabox.utility.UserDataUtils;
+
+import static intive.ideabox.utility.UserDataUtils.getHashedData;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setSupportActionBar(findViewById(R.id.app_bar));
-
+        UserDataUtils.setUserAndCheckPermissions(this);
         setFragmentStatusObserver();
         setSnackBarObserver();
     }
@@ -81,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fragmentContainer, AuthenticationFragment.newInstance(), "authenticationFragment")
-                        .addToBackStack(null)
                         .commit();
                 break;
         }
@@ -95,11 +101,44 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Fragment addIdeaFragment = getSupportFragmentManager().findFragmentByTag(getString(R.string.add_idea_tag));
+        Fragment detailIdeaFragment = getSupportFragmentManager().findFragmentByTag("detailIdeaFragment");
+        Fragment authFragment = getSupportFragmentManager().findFragmentByTag("authenticationFragment");
         if (addIdeaFragment != null && addIdeaFragment.isVisible()) {
             QuitAddIdeaDialogFragment dialog = new QuitAddIdeaDialogFragment();
             dialog.show(this.getFragmentManager(), getString(R.string.dialog_tag));
-        } else {
+        } else if (detailIdeaFragment != null && detailIdeaFragment.isVisible()) {
+            NavigationUtils.getInstance().setState(FragmentState.IdeaList);
+        }
+        else if (authFragment != null && authFragment.isVisible()) {
+            NavigationUtils.getInstance().setState(FragmentState.IdeaList);
+        }
+
+        else {
             super.onBackPressed();
+        }
+
+    }
+
+    @SuppressLint({"MissingPermission", "HardwareIds"})
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (UserDataUtils.MY_PERMISSIONS_REQUEST_READ_CONTACTS) {
+
+            case 2: {
+
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), R.string.permission_granted, Toast.LENGTH_SHORT).show();
+                    UserDataUtils.isPermissionGranted.setValue(true);
+                    final TelephonyManager ts = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+                    UserDataUtils.imeiUser = getHashedData(ts.getDeviceId());
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.permission_denied, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
         }
     }
 }
