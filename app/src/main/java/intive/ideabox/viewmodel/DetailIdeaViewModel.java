@@ -6,8 +6,12 @@ import android.databinding.ObservableField;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import intive.ideabox.IdeaBoxApplication;
 import intive.ideabox.R;
 import intive.ideabox.authentication.FirebaseUserAuthenticate;
+import intive.ideabox.authentication.UserAuthenticate;
 import intive.ideabox.model.FirebaseProvider;
 import intive.ideabox.model.IdeaData;
 import intive.ideabox.utility.FragmentState;
@@ -19,7 +23,12 @@ public class DetailIdeaViewModel extends ViewModel {
     private ObservableField<String> ideaStatus = new ObservableField<>();
     private ObservableField<Boolean> isUserAdmin = new ObservableField<>();
 
+    @Inject
+    UserAuthenticate userAuthenticate;
+
     public DetailIdeaViewModel() {
+        IdeaBoxApplication.applicationComponent.inject(this);
+
         this.isUserAdmin.set(getUserRole());
     }
 
@@ -34,7 +43,6 @@ public class DetailIdeaViewModel extends ViewModel {
 
     public void setIdeaStatus(String status) {
         ideaStatus.set(choosenIdea.get().getIdeaStatus());
-
     }
 
     public MutableLiveData<IdeaData> getCurrentIdea(String ideaUser, long ideaTime) {
@@ -42,7 +50,7 @@ public class DetailIdeaViewModel extends ViewModel {
     }
 
     public boolean getUserRole() {
-        return FirebaseUserAuthenticate.isUserAdmin;
+        return userAuthenticate.getUserStatus();
     }
 
     public IdeaData getChoosenIdea() {

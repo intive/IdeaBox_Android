@@ -34,4 +34,9 @@ public class FirebaseUserAuthenticate implements UserAuthenticate {
             });
         }
     }
+
+    @Override
+    public boolean getUserStatus() {
+        return (firebaseAuth.getCurrentUser() != null);
+    }
 }
