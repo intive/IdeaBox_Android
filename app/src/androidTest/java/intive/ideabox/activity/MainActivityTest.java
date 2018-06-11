@@ -250,7 +250,6 @@ public class MainActivityTest {
         //returning to previous screen for test's sake
         onView(withId(R.id.dialog_btn_yes))
                 .perform(click());
-
     }
 
     @Test
